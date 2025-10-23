@@ -1,0 +1,50 @@
+import { NextResponse } from 'next/server'
+import type { NextRequest } from 'next/server'
+import { createClient as createServerClient } from '@/lib/supabase/server'
+import webpush from 'web-push'
+
+export async function POST(request: NextRequest) {
+  try {
+    const body = await request.json()
+    const { title, body: message, url } = body
+    if (!title || !message) return NextResponse.json({ error: 'Missing title/body' }, { status: 400 })
+
+    webpush.setVapidDetails(process.env.VAPID_SUBJECT || '', process.env.VAPID_PUBLIC_KEY || '', process.env.VAPID_PRIVATE_KEY || '')
+
+    const supabase = await createServerClient()
+    const { data: subs, error } = await supabase.from('push_subscriptions').select('*')
+    if (error) return NextResponse.json({ error: error.message }, { status: 500 })
+
+    const payload = JSON.stringify({ title, body: message, url })
+
+    const results = await Promise.allSettled(
+      (subs || []).map((s: any) => {
+        const pushSubscription = {
+          endpoint: s.endpoint,
+          keys: {
+            p256dh: s.p256dh,
+            auth: s.auth,
+          },
+        }
+        return webpush.sendNotification(pushSubscription, payload)
+      }),
+    )
+
+    // Optionally remove invalid subscriptions
+    const toRemove: string[] = []
+    results.forEach((r, idx) => {
+      if (r.status === 'rejected') {
+        // collect endpoint to remove
+        toRemove.push((subs || [])[idx]?.endpoint)
+      }
+    })
+
+    if (toRemove.length > 0) {
+      await supabase.from('push_subscriptions').delete().in('endpoint', toRemove)
+    }
+
+    return NextResponse.json({ ok: true })
+  } catch (err) {
+    return NextResponse.json({ error: 'Failed to send' }, { status: 500 })
+  }
+}
