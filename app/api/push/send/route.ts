@@ -9,7 +9,14 @@ export async function POST(request: NextRequest) {
     const { title, body: message, url } = body
     if (!title || !message) return NextResponse.json({ error: 'Missing title/body' }, { status: 400 })
 
-    webpush.setVapidDetails(process.env.VAPID_SUBJECT || '', process.env.VAPID_PUBLIC_KEY || '', process.env.VAPID_PRIVATE_KEY || '')
+    // Set VAPID details at request-time so build/CI doesn't need these env vars at module-eval time
+    const subject = process.env.VAPID_SUBJECT || ''
+    const publicKey = process.env.VAPID_PUBLIC_KEY || ''
+    const privateKey = process.env.VAPID_PRIVATE_KEY || ''
+    if (!publicKey || !privateKey) {
+      return NextResponse.json({ error: 'VAPID keys not configured' }, { status: 500 })
+    }
+    webpush.setVapidDetails(subject, publicKey, privateKey)
 
     const supabase = await createServerClient()
     const { data: subs, error } = await supabase.from('push_subscriptions').select('*')

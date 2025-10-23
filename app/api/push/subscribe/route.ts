@@ -4,8 +4,6 @@ import { createClient as createServerClient } from '@/lib/supabase/server'
 import { createClient as createAnonClient } from '@supabase/supabase-js'
 import webpush from 'web-push'
 
-webpush.setVapidDetails(process.env.VAPID_SUBJECT || 'mailto:admin@example.com', process.env.VAPID_PUBLIC_KEY || '', process.env.VAPID_PRIVATE_KEY || '')
-
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
@@ -58,6 +56,18 @@ export async function POST(request: NextRequest) {
     if (shouldSend) {
       ;(async () => {
         try {
+          // Ensure VAPID details are set at runtime (do not run at module-eval time to avoid CI/build errors)
+          const subject = process.env.VAPID_SUBJECT || 'mailto:admin@example.com'
+          const publicKey = process.env.VAPID_PUBLIC_KEY || ''
+          const privateKey = process.env.VAPID_PRIVATE_KEY || ''
+
+          if (!publicKey || !privateKey) {
+            console.warn('VAPID keys missing; skipping welcome push')
+            return
+          }
+
+          webpush.setVapidDetails(subject, publicKey, privateKey)
+
           const payload = JSON.stringify({ title: 'Welcome', body: 'Thanks for subscribing to Her Circle updates!' })
           await webpush.sendNotification({ endpoint, keys }, payload)
         } catch (sendErr) {
