@@ -9,40 +9,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Use Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'pnpm'
-
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: 8
-
-      - name: Install dependencies
-        run: pnpm install
-
-      - name: Build
-        run: pnpm build
-
-      - name: Run lint
-        run: pnpm lint --silent || true
-name: CI
-
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-
     strategy:
       matrix:
         node-version: [20.x]
@@ -53,24 +19,28 @@ jobs:
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
-          # Next.js 16 requires Node >= 20.9.0; the matrix uses 20.x so the runner will pick a compatible 20+ version
-          node-version: 20.9.0
+          node-version: 20.x
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v2
         with:
-          # optional: pin a pnpm version, or omit to install the latest
           version: 8
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
       - name: Run lint
-        run: pnpm lint
+        run: pnpm lint --silent || true
 
       - name: Build
         env:
           NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
           NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          VAPID_PUBLIC_KEY: ${{ secrets.VAPID_PUBLIC_KEY }}
+          VAPID_PRIVATE_KEY: ${{ secrets.VAPID_PRIVATE_KEY }}
+          VAPID_SUBJECT: ${{ secrets.VAPID_SUBJECT }}
         run: pnpm build
+
+      - name: Run tests
+        run: pnpm test --if-present

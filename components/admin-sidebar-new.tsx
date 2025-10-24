@@ -51,6 +51,11 @@ export function AdminSidebarNew({ children, headerTitle = 'Admin Dashboard' }: A
     setMounted(true)
   }, [])
 
+  // Determine whether we're on admin auth routes. We still call all hooks
+  // unconditionally to preserve hook order, but use this flag to render a
+  // minimal layout for auth pages below.
+  const isAuthRoute = typeof pathname === 'string' && pathname.startsWith('/admin/auth')
+
   useEffect(() => {
     // fetch unread notifications count
     let mounted = true
@@ -152,7 +157,13 @@ export function AdminSidebarNew({ children, headerTitle = 'Admin Dashboard' }: A
 
   return (
     <>
-      <SidebarProvider>
+      {/* Only hide the global header/footer when rendering the full admin chrome */}
+      {!isAuthRoute && <style dangerouslySetInnerHTML={{ __html: '.site-header, .site-footer { display: none !important; }' }} />}
+      {isAuthRoute ? (
+        <>{children}</>
+      ) : (
+        <>
+        <SidebarProvider>
         {/* default width is narrower on mobile (w-56), expands on md/lg */}
         <Sidebar collapsible="icon" className="border-r border-sidebar-border w-32 md:w-64 lg:w-64">
           <SidebarHeader className="border-b border-sidebar-border">
@@ -216,12 +227,14 @@ export function AdminSidebarNew({ children, headerTitle = 'Admin Dashboard' }: A
         <SidebarRail className="hidden lg:block" />
       </SidebarProvider>
 
-      <LogoutConfirmationModal
-        isOpen={showLogoutModal}
-        onConfirm={handleLogout}
-        onCancel={() => setShowLogoutModal(false)}
-        isLoading={isLoggingOut}
-      />
+        <LogoutConfirmationModal
+          isOpen={showLogoutModal}
+          onConfirm={handleLogout}
+          onCancel={() => setShowLogoutModal(false)}
+          isLoading={isLoggingOut}
+        />
+        </>
+      )}
     </>
   )
 }
