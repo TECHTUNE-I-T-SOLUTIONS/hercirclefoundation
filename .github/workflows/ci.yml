@@ -28,6 +28,12 @@ jobs:
         with:
           version: 8
 
+      - name: Ensure pnpm is available (Corepack)
+        # Some runners don't expose pnpm; use corepack to prepare/activate pnpm as a fallback
+        run: |
+          corepack enable
+          corepack prepare pnpm@8.8.0 --activate
+
       - name: Install dependencies
         # CI runners sometimes don't preserve the lockfile; allow install to proceed.
         run: pnpm install --no-frozen-lockfile
