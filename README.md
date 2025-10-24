@@ -1,6 +1,6 @@
-# Her Circle Foundation — Website
+# HerCircle Foundation — Website
 
-This repository contains the Next.js (App Router) website for Her Circle Foundation. It includes an admin UI for uploading gallery items and a public site to view photos and videos. The project uses Supabase for database and storage, and pnpm for package management.
+This repository contains the Next.js (App Router) website for HerCircle Foundation. It includes an admin UI for uploading gallery items and a public site to view photos and videos. The project uses Supabase for database and storage, and pnpm for package management.
 
 ## Features
 - Next.js App Router with server and client components
@@ -54,4 +54,4 @@ This repo includes a GitHub Actions workflow that runs `pnpm install` and `pnpm 
 Add your license here (e.g., MIT) or change as needed.
 
 ---
-Generated and maintained by the Her Circle Foundation development team.
+Generated and maintained by the HerCircle Foundation development team.

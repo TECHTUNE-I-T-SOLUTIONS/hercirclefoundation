@@ -27,7 +27,12 @@ interface AdminSidebarNewProps {
   children?: React.ReactNode
 }
 
-export function AdminSidebarNew({ children }: AdminSidebarNewProps) {
+interface AdminSidebarNewProps {
+  children?: React.ReactNode
+  headerTitle?: string
+}
+
+export function AdminSidebarNew({ children, headerTitle = 'Admin Dashboard' }: AdminSidebarNewProps) {
   const pathname = usePathname()
   const router = useRouter()
   const isMobile = useIsMobile()
@@ -35,12 +40,15 @@ export function AdminSidebarNew({ children }: AdminSidebarNewProps) {
   const [isLoggingOut, setIsLoggingOut] = useState(false)
   const [theme, setTheme] = useState<"light" | "dark">("light")
   const [unreadCount, setUnreadCount] = useState<number>(0)
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem("theme") as "light" | "dark" | null
+          const savedTheme = localStorage.getItem("theme") as "light" | "dark" | null
     const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches
     const initialTheme = savedTheme || (prefersDark ? "dark" : "light")
     setTheme(initialTheme)
+    // mark mounted so we can avoid rendering client-only active states during SSR
+    setMounted(true)
   }, [])
 
   useEffect(() => {
@@ -80,10 +88,16 @@ export function AdminSidebarNew({ children }: AdminSidebarNewProps) {
 
   const menuItems = [
     { href: "/admin/dashboard", label: "Dashboard", icon: LayoutDashboard },
+    { href: "/admin/profile", label: "Profile", icon: Users },
     { href: "/admin/volunteers", label: "Volunteers", icon: Users },
     { href: "/admin/donors", label: "Donors", icon: Heart },
     { href: "/admin/events", label: "Events", icon: Calendar },
+    { href: "/admin/blogs", label: "Blogs", icon: ImageIcon },
+    { href: "/admin/blogs/comments", label: "Blog Comments", icon: Bell },
+    { href: "/admin/blogs/reactions", label: "Blog Reactions", icon: Heart },
+    { href: "/admin/blogs/shares", label: "Blog Shares", icon: ImageIcon },
     { href: "/admin/gallery", label: "Gallery", icon: ImageIcon },
+  { href: "/admin/partner-requests", label: "Partner Requests", icon: Bell },
     // Notifications moved into main menu so it's visible on smaller screens
     { href: "/admin/notifications", label: "Notifications", icon: Bell, isNotifications: true },
     // Add Push Subscriptions management link
@@ -143,7 +157,7 @@ export function AdminSidebarNew({ children }: AdminSidebarNewProps) {
         <Sidebar collapsible="icon" className="border-r border-sidebar-border w-32 md:w-64 lg:w-64">
           <SidebarHeader className="border-b border-sidebar-border">
             <Link href="/admin/dashboard" className="flex items-center gap-2 group">
-              <img src="/logo.png" alt="Her Circle" className="h-16 w-12 md:h-14 md:w-10" />
+              <img src="/logo.png" alt="HerCircle" className="h-16 w-12 md:h-14 md:w-10" />
               <span className="font-bold text-sidebar-foreground text-base md:text-md text-lg group-data-[state=collapsed]:hidden">Admin</span>
             </Link>
           </SidebarHeader>
@@ -153,7 +167,9 @@ export function AdminSidebarNew({ children }: AdminSidebarNewProps) {
             <SidebarMenu className="gap-4 md:gap-2">
               {menuItems.map((item) => {
                 const Icon = item.icon
-                const isActive = pathname === item.href
+                // avoid using pathname for active highlighting until after mount to
+                // prevent hydration mismatches between server and client
+                const isActive = mounted && pathname === item.href
                 return (
                   <SidebarMenuItem key={item.href}>
                     <SidebarMenuButton
@@ -195,13 +211,8 @@ export function AdminSidebarNew({ children }: AdminSidebarNewProps) {
           </SidebarFooter>
         </Sidebar>
 
-        <main className="flex-1 overflow-auto">
-          <div className="p-4 border-b border-border flex items-center gap-2">
-            <SidebarTrigger />
-            <h1 className="font-semibold">Admin Dashboard</h1>
-          </div>
-          {children}
-        </main>
+  {/* Fixed top header so it stays visible while scrolling */}
+  <InnerHeaderAndMain title={headerTitle}>{children}</InnerHeaderAndMain>
         <SidebarRail className="hidden lg:block" />
       </SidebarProvider>
 
@@ -212,5 +223,38 @@ export function AdminSidebarNew({ children }: AdminSidebarNewProps) {
         isLoading={isLoggingOut}
       />
     </>
+  )
+}
+
+function InnerHeaderAndMain({ children, title }: { children?: React.ReactNode; title?: string }) {
+  // This component must be rendered inside SidebarProvider so useSidebar
+  // is available and we can read the `state` and `isMobile` values.
+  const { state, isMobile } = useSidebar()
+
+  // When expanded we want the header to start after the full sidebar
+  // width; when collapsed (icon-only) we start after the icon width.
+  // The sidebar component exposes CSS variables we can reference here.
+  const leftClass = isMobile
+    ? 'left-0 right-0'
+    : state === 'expanded'
+    ? 'left-[var(--sidebar-width)] right-0'
+    : 'left-[var(--sidebar-width-icon)] right-0'
+
+  // Provide matching spacer height for the fixed header so content below
+  // doesn't get hidden. Use CSS to ensure responsive alignment.
+  return (
+    <main className="flex-1 overflow-auto">
+      <div
+        className={`fixed top-0 z-50 p-4 border-b border-border flex items-center gap-2 bg-card backdrop-blur-sm shadow-sm transition-all duration-200 ${leftClass}`}
+      >
+        <SidebarTrigger />
+        <h1 className="font-semibold">{title ?? 'Admin Dashboard'}</h1>
+      </div>
+
+      {/* spacer ensures children aren't hidden behind the fixed header */}
+      <div className="h-16" />
+
+      <div className="px-4">{children}</div>
+    </main>
   )
 }

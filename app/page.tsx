@@ -39,7 +39,7 @@ export default function Home() {
                   Breaking Period Poverty, Empowering Women
                 </h1>
                 <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-                  Her Circle Foundation is dedicated to providing free sanitary pads, promoting safe menstrual
+                  HerCircle Foundation is dedicated to providing free sanitary pads, promoting safe menstrual
                   practices, and educating communities about menstrual health.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
@@ -63,7 +63,7 @@ export default function Home() {
                   <div className="absolute inset-0 bg-primary/20 rounded-full blur-3xl" />
                   <img
                     src="/logo.png"
-                    alt="Her Circle Foundation"
+                    alt="HerCircle Foundation"
                     className="relative w-full max-w-md mx-auto drop-shadow-lg"
                   />
                 </div>

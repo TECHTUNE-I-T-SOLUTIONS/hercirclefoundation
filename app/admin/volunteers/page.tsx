@@ -1,6 +1,7 @@
 "use client"
 
-import { AdminSidebarNew } from "@/components/admin-sidebar-new"
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog'
+import { useToast } from '@/hooks/use-toast'
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { useEffect, useState } from "react"
@@ -21,6 +22,9 @@ interface Volunteer {
 export default function VolunteersPage() {
   const [volunteers, setVolunteers] = useState<Volunteer[]>([])
   const [loading, setLoading] = useState(true)
+  const { toast } = useToast()
+  const [showConfirm, setShowConfirm] = useState(false)
+  const [selectedId, setSelectedId] = useState<string | null>(null)
 
   useEffect(() => {
     const fetchVolunteers = async () => {
@@ -40,17 +44,27 @@ export default function VolunteersPage() {
     fetchVolunteers()
   }, [])
 
-  const handleDelete = async (id: string) => {
-    if (!confirm("Are you sure you want to delete this volunteer?")) return
+  const handleDelete = (id: string) => {
+    setSelectedId(id)
+    setShowConfirm(true)
+  }
 
+  const confirmDelete = async () => {
+    const id = selectedId
+    if (!id) return
+    setShowConfirm(false)
     try {
       const supabase = createClient()
       const { error } = await supabase.from("volunteers").delete().eq("id", id)
 
       if (error) throw error
-      setVolunteers(volunteers.filter((v) => v.id !== id))
+      setVolunteers((prev) => prev.filter((v) => v.id !== id))
+      toast({ title: 'Deleted', description: 'Volunteer removed' })
     } catch (error) {
       console.error("Error deleting volunteer:", error)
+      toast({ title: 'Delete failed', description: String(error) })
+    } finally {
+      setSelectedId(null)
     }
   }
 
@@ -79,7 +93,7 @@ export default function VolunteersPage() {
   }
 
   return (
-    <AdminSidebarNew>
+    <>
       <div className="p-8">
         <div className="flex items-center justify-between mb-8">
           <div>
@@ -164,6 +178,18 @@ export default function VolunteersPage() {
           </div>
         )}
       </div>
-    </AdminSidebarNew>
+      <Dialog open={showConfirm} onOpenChange={(open) => setShowConfirm(open)}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Confirm delete</DialogTitle>
+          </DialogHeader>
+          <div className="py-2">Are you sure you want to delete this volunteer?</div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setShowConfirm(false)}>Cancel</Button>
+            <Button className="bg-destructive text-white" onClick={confirmDelete}>Delete</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    </>
   )
 }

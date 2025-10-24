@@ -45,9 +45,9 @@ export default function AdminLoginPage() {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary/10 to-transparent p-4">
       <div className="w-full max-w-md">
         <div className="mb-8 text-center">
-          <img src="/logo.png" alt="Her Circle" className="h-16 w-16 mx-auto mb-4" />
+          <img src="/logo.png" alt="HerCircle" className="h-16 w-16 mx-auto mb-4" />
           <h1 className="text-3xl font-bold">Admin Portal</h1>
-          <p className="text-muted-foreground mt-2">Her Circle Foundation</p>
+          <p className="text-muted-foreground mt-2">HerCircle Foundation</p>
         </div>
 
         <Card>

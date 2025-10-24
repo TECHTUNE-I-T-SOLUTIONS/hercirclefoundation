@@ -15,6 +15,7 @@ export function AdminSidebar() {
     { href: "/admin/dashboard", label: "Dashboard", icon: LayoutDashboard },
     { href: "/admin/volunteers", label: "Volunteers", icon: Users },
     { href: "/admin/donors", label: "Donors", icon: Heart },
+    { href: "/admin/blogs", label: "Blogs", icon: ImageIcon },
     { href: "/admin/events", label: "Events", icon: Calendar },
     { href: "/admin/gallery", label: "Gallery", icon: ImageIcon },
   ]
@@ -30,7 +31,7 @@ export function AdminSidebar() {
       {/* Logo */}
       <div className="p-6 border-b border-sidebar-border">
         <Link href="/admin/dashboard" className="flex items-center gap-2 group">
-          <img src="/logo.png" alt="Her Circle" className="h-8 w-8" />
+          <img src="/logo.png" alt="HerCircle" className="h-8 w-8" />
           <span className="font-bold text-sidebar-foreground">Admin</span>
         </Link>
       </div>

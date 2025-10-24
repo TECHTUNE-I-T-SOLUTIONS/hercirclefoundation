@@ -36,14 +36,14 @@ export default function PartnerPage() {
     setError(null)
 
     try {
-      const res = await fetch('/api/donors/submit', {
+      const res = await fetch('/api/partner-requests', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          full_name: formData.contactPerson,
+          name: formData.contactPerson,
           email: formData.email,
-          phone: formData.phone,
-          message: `Partnership Inquiry - ${formData.organizationName}: ${formData.message}`,
+          organization: formData.organizationName,
+          message: formData.message,
         }),
       })
 
@@ -96,7 +96,7 @@ export default function PartnerPage() {
           <div className="container mx-auto px-4">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">Partner With Us</h1>
             <p className="text-lg text-muted-foreground max-w-2xl">
-              Together, we can create a greater impact. Join Her Circle Foundation in our mission to break period
+              Together, we can create a greater impact. Join HerCircle Foundation in our mission to break period
               poverty and empower women.
             </p>
           </div>

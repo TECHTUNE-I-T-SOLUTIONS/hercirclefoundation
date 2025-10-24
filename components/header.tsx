@@ -28,6 +28,7 @@ export function Header() {
 
   const navLinks = [
     { href: "/", label: "Home" },
+    { href: "/blog", label: "Blog" },
     { href: "/about", label: "About" },
     { href: "/events", label: "Events" },
     { href: "/gallery", label: "Gallery" },
@@ -38,17 +39,17 @@ export function Header() {
   if (!mounted) return null
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+  <header className="site-header sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 group">
             <img
               src="/logo.png"
-              alt="Her Circle Foundation"
+              alt="HerCircle Foundation"
               className="h-12 w-10 transition-transform group-hover:scale-110"
             />
-            <span className="font-bold text-lg text-primary hidden sm:inline">Her Circle</span>
+            <span className="font-bold text-lg text-primary hidden sm:inline">HerCircle</span>
           </Link>
 
           {/* Desktop Navigation */}

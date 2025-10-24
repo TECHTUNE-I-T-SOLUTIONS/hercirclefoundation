@@ -7,9 +7,11 @@ const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY!
 
 const serverClient = createServerClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY)
 
-export async function PATCH(req: Request, { params }: { params: { id: string } }) {
+export async function PATCH(req: Request, ctx: any) {
   try {
-    const id = params.id
+    let params = ctx?.params
+    if (params && typeof params.then === 'function') params = await params
+    const id = params?.id
     const authClient = await createServerHelper()
     const { data: { user }, error: userErr } = await authClient.auth.getUser()
     if (userErr || !user) return NextResponse.json({ error: 'invalid token' }, { status: 401 })
@@ -53,9 +55,11 @@ export async function PATCH(req: Request, { params }: { params: { id: string } }
   }
 }
 
-export async function DELETE(req: Request, { params }: { params: { id: string } }) {
+export async function DELETE(req: Request, ctx: any) {
   try {
-    const id = params.id
+    let params = ctx?.params
+    if (params && typeof params.then === 'function') params = await params
+    const id = params?.id
     const authClient = await createServerHelper()
     const { data: { user }, error: userErr } = await authClient.auth.getUser()
     if (userErr || !user) return NextResponse.json({ error: 'invalid token' }, { status: 401 })

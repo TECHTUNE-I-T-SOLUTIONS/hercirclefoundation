@@ -3,13 +3,17 @@
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { createClient } from "@/lib/supabase/client"
-import { AdminSidebarNew } from "@/components/admin-sidebar-new"
 import { Button } from "@/components/ui/button"
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog'
+import { useToast } from '@/hooks/use-toast'
 
 export default function PushSubscriptionsAdminPage() {
   const [subs, setSubs] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
   const router = useRouter()
+  const { toast } = useToast()
+  const [showConfirm, setShowConfirm] = useState(false)
+  const [selectedId, setSelectedId] = useState<string | null>(null)
 
   useEffect(() => {
     // client-side auth guard
@@ -22,7 +26,7 @@ export default function PushSubscriptionsAdminPage() {
       }
       fetchList()
     })()
-  }, [])
+  }, [router])
 
   async function fetchList() {
     setLoading(true)
@@ -39,39 +43,68 @@ export default function PushSubscriptionsAdminPage() {
     }
   }
 
-  async function remove(id: string) {
-    if (!confirm('Delete this subscription?')) return
+  function remove(id: string) {
+    setSelectedId(id)
+    setShowConfirm(true)
+  }
+
+  async function confirmRemove() {
+    const id = selectedId
+    if (!id) return
+    setShowConfirm(false)
     try {
       const res = await fetch(`/api/push/subscriptions/${id}`, { method: 'DELETE' })
       if (res.ok) {
         setSubs((s) => s.filter((x) => x.id !== id))
+        toast({ title: 'Deleted', description: 'Subscription removed' })
       } else {
-        alert('Failed to delete')
+        toast({ title: 'Delete failed', description: 'Failed to delete subscription' })
       }
     } catch (err) {
       console.error(err)
+      toast({ title: 'Delete failed', description: String(err) })
     }
+    setSelectedId(null)
   }
 
   return (
-    <AdminSidebarNew>
-      <div className="p-8">
+    <>
+      <div className="p-6 md:p-8 max-w-5xl mx-auto">
         <h1 className="text-2xl font-bold mb-4">Push Subscriptions</h1>
         {loading && <p>Loading...</p>}
+
         <div className="space-y-3">
           {subs.map((s) => (
-            <div key={s.id} className="p-3 rounded border flex items-start justify-between">
-              <div>
-                <div className="text-sm font-medium">{s.endpoint}</div>
+            <div
+              key={s.id}
+              className="p-3 rounded border flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3"
+            >
+              <div className="min-w-0 flex-1">
+                <div className="text-sm font-medium break-words whitespace-normal">{s.endpoint}</div>
                 <div className="text-xs text-muted-foreground">Created: {new Date(s.created_at).toLocaleString()}</div>
               </div>
-              <div>
-                <Button size="sm" variant="destructive" onClick={() => remove(s.id)}>Delete</Button>
+
+              <div className="shrink-0">
+                <Button size="sm" variant="destructive" onClick={() => remove(s.id)}>
+                  Delete
+                </Button>
               </div>
             </div>
           ))}
         </div>
-      </div>
-    </AdminSidebarNew>
+  </div>
+      <Dialog open={showConfirm} onOpenChange={(open) => setShowConfirm(open)}>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Confirm delete</DialogTitle>
+        </DialogHeader>
+        <div className="py-2">Delete this subscription?</div>
+        <DialogFooter>
+          <Button variant="outline" onClick={() => setShowConfirm(false)}>Cancel</Button>
+          <Button className="bg-destructive text-white" onClick={confirmRemove}>Delete</Button>
+        </DialogFooter>
+      </DialogContent>
+      </Dialog>
+    </>
   )
 }

@@ -7,7 +7,7 @@ self.addEventListener('push', function (event) {
     data = { title: 'Notification', body: event.data ? event.data.text() : '' }
   }
 
-  const title = data.title || 'Her Circle'
+  const title = data.title || 'HerCircle'
   const options = {
     body: data.body || '',
     data: data.url || '/',

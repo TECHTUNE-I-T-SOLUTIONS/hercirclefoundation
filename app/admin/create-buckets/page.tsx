@@ -1,7 +1,6 @@
 "use client"
 
 import React, { useState } from "react"
-import { AdminSidebarNew } from "@/components/admin-sidebar-new"
 import { Button } from "@/components/ui/button"
 import { createClient } from "@/lib/supabase/client"
 
@@ -61,7 +60,7 @@ export default function CreateBucketsPage() {
   }
 
   return (
-    <AdminSidebarNew>
+    <>
       <div className="p-8">
         <h1 className="text-2xl font-bold mb-4">Create Storage Buckets</h1>
 
@@ -95,6 +94,6 @@ export default function CreateBucketsPage() {
           <div className="p-3 bg-green-50 rounded">{uploadResult}</div>
         )}
       </div>
-    </AdminSidebarNew>
+    </>
   )
 }

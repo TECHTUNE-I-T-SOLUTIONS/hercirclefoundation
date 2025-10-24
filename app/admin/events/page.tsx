@@ -2,7 +2,9 @@
 
 import type React from "react"
 
-import { AdminSidebarNew } from "@/components/admin-sidebar-new"
+// Admin layout provides wrapper; pages should not re-render the admin sidebar
+import { Dialog as AdminDialog, DialogContent as AdminDialogContent, DialogTitle as AdminDialogTitle, DialogFooter as AdminDialogFooter, DialogHeader as AdminDialogHeader } from '@/components/ui/dialog'
+import { useToast } from '@/hooks/use-toast'
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -43,6 +45,9 @@ export default function EventsPage() {
   const [editingEvent, setEditingEvent] = useState<Event | null>(null)
   const [editingId, setEditingId] = useState<string | null>(null)
   const [editForm, setEditForm] = useState<any>(null)
+  const { toast } = useToast()
+  const [showConfirm, setShowConfirm] = useState(false)
+  const [selectedId, setSelectedId] = useState<string | null>(null)
 
   useEffect(() => {
     fetchEvents()
@@ -119,22 +124,31 @@ export default function EventsPage() {
     }
   }
 
-  const handleDelete = async (id: string) => {
-    if (!confirm("Are you sure you want to delete this event?")) return
+  const handleDelete = (id: string) => {
+    setSelectedId(id)
+    setShowConfirm(true)
+  }
 
+  const confirmDelete = async () => {
+    const id = selectedId
+    if (!id) return
+    setShowConfirm(false)
     try {
       const supabase = createClient()
       const { error } = await supabase.from("events").delete().eq("id", id)
-
       if (error) throw error
-      setEvents(events.filter((e) => e.id !== id))
+      setEvents((prev) => prev.filter((e) => e.id !== id))
+      toast({ title: 'Deleted', description: 'Event removed' })
     } catch (error) {
       console.error("Error deleting event:", error)
+      toast({ title: 'Delete failed', description: String(error) })
+    } finally {
+      setSelectedId(null)
     }
   }
 
   return (
-    <AdminSidebarNew>
+    <>
       <div className="p-8">
         <div className="flex items-center justify-between mb-8">
           <div>
@@ -441,6 +455,18 @@ export default function EventsPage() {
         </DialogContent>
       </Dialog>
       </div>
-    </AdminSidebarNew>
+      <AdminDialog open={showConfirm} onOpenChange={(open) => setShowConfirm(open)}>
+        <AdminDialogContent>
+          <AdminDialogHeader>
+            <AdminDialogTitle>Confirm delete</AdminDialogTitle>
+          </AdminDialogHeader>
+          <div className="py-2">Are you sure you want to delete this event?</div>
+          <AdminDialogFooter>
+            <Button variant="outline" onClick={() => setShowConfirm(false)}>Cancel</Button>
+            <Button className="bg-destructive text-white" onClick={confirmDelete}>Delete</Button>
+          </AdminDialogFooter>
+        </AdminDialogContent>
+      </AdminDialog>
+    </>
   )
 }

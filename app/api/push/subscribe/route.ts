@@ -68,7 +68,7 @@ export async function POST(request: NextRequest) {
 
           webpush.setVapidDetails(subject, publicKey, privateKey)
 
-          const payload = JSON.stringify({ title: 'Welcome', body: 'Thanks for subscribing to Her Circle updates!' })
+          const payload = JSON.stringify({ title: 'Welcome', body: 'Thanks for subscribing to HerCircle updates!' })
           await webpush.sendNotification({ endpoint, keys }, payload)
         } catch (sendErr) {
           // Log but don't block

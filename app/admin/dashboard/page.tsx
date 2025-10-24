@@ -1,11 +1,10 @@
 "use client"
 
-import { AdminSidebarNew } from "@/components/admin-sidebar-new"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { createClient } from "@/lib/supabase/client"
-import { Users, Heart, Calendar, ImageIcon } from "lucide-react"
+import { Users, Heart, Calendar, ImageIcon, FileText, Bell } from "lucide-react"
 
 interface Stats {
   volunteers: number
@@ -55,11 +54,11 @@ export default function AdminDashboard() {
   ]
 
   return (
-    <AdminSidebarNew>
+    <>
       <div className="p-8">
         <div className="mb-8">
           <h1 className="text-3xl font-bold">Dashboard</h1>
-          <p className="text-muted-foreground">Welcome to the Her Circle Foundation admin panel</p>
+          <p className="text-muted-foreground">Welcome to the HerCircle Foundation admin panel</p>
         </div>
 
         {/* Stats Grid */}
@@ -90,7 +89,7 @@ export default function AdminDashboard() {
             <CardDescription>Quick access to admin functions</CardDescription>
           </CardHeader>
             <CardContent>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 <div
                   role="button"
                   tabIndex={0}
@@ -98,9 +97,13 @@ export default function AdminDashboard() {
                   onKeyDown={(e) => e.key === 'Enter' && router.push('/admin/volunteers')}
                   className="p-6 border border-border rounded-lg hover:bg-secondary/50 transition-colors cursor-pointer"
                 >
-                  <h3 className="font-semibold mb-2">Manage Volunteers</h3>
+                  <div className="flex items-center gap-3">
+                    <Users className="h-5 w-5 text-primary" />
+                    <h3 className="font-semibold mb-2">Manage Volunteers</h3>
+                  </div>
                   <p className="text-sm text-muted-foreground">View and manage volunteer applications</p>
                 </div>
+
                 <div
                   role="button"
                   tabIndex={0}
@@ -108,9 +111,13 @@ export default function AdminDashboard() {
                   onKeyDown={(e) => e.key === 'Enter' && router.push('/admin/donors')}
                   className="p-6 border border-border rounded-lg hover:bg-secondary/50 transition-colors cursor-pointer"
                 >
-                  <h3 className="font-semibold mb-2">Manage Donors</h3>
+                  <div className="flex items-center gap-3">
+                    <Heart className="h-5 w-5 text-primary" />
+                    <h3 className="font-semibold mb-2">Manage Donors</h3>
+                  </div>
                   <p className="text-sm text-muted-foreground">Track and manage donor information</p>
                 </div>
+
                 <div
                   role="button"
                   tabIndex={0}
@@ -118,9 +125,13 @@ export default function AdminDashboard() {
                   onKeyDown={(e) => e.key === 'Enter' && router.push('/admin/events')}
                   className="p-6 border border-border rounded-lg hover:bg-secondary/50 transition-colors cursor-pointer"
                 >
-                  <h3 className="font-semibold mb-2">Create Events</h3>
+                  <div className="flex items-center gap-3">
+                    <Calendar className="h-5 w-5 text-primary" />
+                    <h3 className="font-semibold mb-2">Create Events</h3>
+                  </div>
                   <p className="text-sm text-muted-foreground">Add and manage upcoming events</p>
                 </div>
+
                 <div
                   role="button"
                   tabIndex={0}
@@ -128,13 +139,58 @@ export default function AdminDashboard() {
                   onKeyDown={(e) => e.key === 'Enter' && router.push('/admin/gallery')}
                   className="p-6 border border-border rounded-lg hover:bg-secondary/50 transition-colors cursor-pointer"
                 >
-                  <h3 className="font-semibold mb-2">Upload Gallery</h3>
+                  <div className="flex items-center gap-3">
+                    <ImageIcon className="h-5 w-5 text-primary" />
+                    <h3 className="font-semibold mb-2">Upload Gallery</h3>
+                  </div>
                   <p className="text-sm text-muted-foreground">Manage photos and videos</p>
+                </div>
+
+                <div
+                  role="button"
+                  tabIndex={0}
+                  onClick={() => router.push('/admin/blogs')}
+                  onKeyDown={(e) => e.key === 'Enter' && router.push('/admin/blogs')}
+                  className="p-6 border border-border rounded-lg hover:bg-secondary/50 transition-colors cursor-pointer"
+                >
+                  <div className="flex items-center gap-3">
+                    <FileText className="h-5 w-5 text-primary" />
+                    <h3 className="font-semibold mb-2">Create Blog</h3>
+                  </div>
+                  <p className="text-sm text-muted-foreground">Write and publish blog posts</p>
+                </div>
+
+                <div
+                  role="button"
+                  tabIndex={0}
+                  onClick={() => router.push('/admin/partner-requests')}
+                  onKeyDown={(e) => e.key === 'Enter' && router.push('/admin/partner-requests')}
+                  className="p-6 border border-border rounded-lg hover:bg-secondary/50 transition-colors cursor-pointer"
+                >
+                  <div className="flex items-center gap-3">
+                    <ImageIcon className="h-5 w-5 text-primary" />
+                    <h3 className="font-semibold mb-2">Partner Requests</h3>
+                  </div>
+                  <p className="text-sm text-muted-foreground">Review partnership inquiries</p>
+                </div>
+
+                <div
+                  role="button"
+                  tabIndex={0}
+                  onClick={() => router.push('/admin/notifications')}
+                  onKeyDown={(e) => e.key === 'Enter' && router.push('/admin/notifications')}
+                  className="p-6 border border-border rounded-lg hover:bg-secondary/50 transition-colors cursor-pointer"
+                >
+                  <div className="flex items-center gap-3">
+                    <Bell className="h-5 w-5 text-primary" />
+                    <h3 className="font-semibold mb-2">Notifications</h3>
+                  </div>
+                  <p className="text-sm text-muted-foreground">View recent system notifications</p>
                 </div>
               </div>
             </CardContent>
         </Card>
       </div>
-    </AdminSidebarNew>
+    </>
   )
 }

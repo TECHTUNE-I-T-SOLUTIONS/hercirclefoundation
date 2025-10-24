@@ -2,7 +2,6 @@
 
 import type React from "react"
 
-import { AdminSidebarNew } from "@/components/admin-sidebar-new"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -11,7 +10,8 @@ import { useEffect, useState } from "react"
 import { createClient } from "@/lib/supabase/client"
 import { Trash2, Plus, ImageIcon } from "lucide-react"
 import { FileUploadInput } from "@/components/file-upload-input"
-import { Dialog, DialogContent, DialogTitle, DialogDescription, DialogClose } from '@/components/ui/dialog'
+import { Dialog, DialogContent, DialogTitle, DialogDescription, DialogClose, DialogHeader, DialogFooter } from '@/components/ui/dialog'
+import { useToast } from '@/hooks/use-toast'
 
 interface GalleryItem {
   id: string
@@ -46,6 +46,9 @@ export default function AdminGalleryClient({ createAction, updateAction, deleteA
   const [authError, setAuthError] = useState<string | null>(null)
   const [editingId, setEditingId] = useState<string | null>(null)
   const [editForm, setEditForm] = useState<any>(null)
+  const { toast } = useToast()
+  const [showConfirm, setShowConfirm] = useState(false)
+  const [selectedDeleteId, setSelectedDeleteId] = useState<string | null>(null)
 
   useEffect(() => {
     fetchGallery()
@@ -145,12 +148,16 @@ export default function AdminGalleryClient({ createAction, updateAction, deleteA
     }
   }
 
-  const handleDelete = async (id: string) => {
-    if (!confirm("Are you sure you want to delete this item?")) return
+  const handleDelete = (id: string) => {
+    setSelectedDeleteId(id)
+    setShowConfirm(true)
+  }
 
+  const confirmDelete = async () => {
+    const id = selectedDeleteId
+    if (!id) return
+    setShowConfirm(false)
     try {
-      const supabase = createClient()
-      // call server route that verifies session from cookies
       if (deleteAction) {
         await deleteAction(id)
       } else {
@@ -161,13 +168,17 @@ export default function AdminGalleryClient({ createAction, updateAction, deleteA
         }
       }
       setItems(items.filter((i) => i.id !== id))
+      toast({ title: 'Deleted', description: 'Gallery item removed' })
     } catch (error) {
       console.error("Error deleting gallery item:", error)
+      toast({ title: 'Delete failed', description: String(error) })
+    } finally {
+      setSelectedDeleteId(null)
     }
   }
 
   return (
-    <AdminSidebarNew>
+    <>
   <div className="p-8">
         <div className="flex items-center justify-between mb-8">
           <div>
@@ -472,7 +483,19 @@ export default function AdminGalleryClient({ createAction, updateAction, deleteA
           </div>
         </DialogContent>
       </Dialog>
+        <Dialog open={showConfirm} onOpenChange={(open) => setShowConfirm(open)}>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Confirm delete</DialogTitle>
+            </DialogHeader>
+            <div className="py-2">Are you sure you want to delete this gallery item?</div>
+            <DialogFooter>
+              <Button variant="outline" onClick={() => setShowConfirm(false)}>Cancel</Button>
+              <Button className="bg-destructive text-white" onClick={confirmDelete}>Delete</Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
       
-    </AdminSidebarNew>
+    </>
   )
 }

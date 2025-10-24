@@ -3,12 +3,12 @@ import { Mail, Phone, MapPin, Facebook, Instagram, Twitter } from "lucide-react"
 
 export function Footer() {
   return (
-    <footer className="bg-secondary text-secondary-foreground border-t border-border">
+  <footer className="site-footer bg-secondary text-secondary-foreground border-t border-border">
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           {/* About */}
           <div>
-            <h3 className="font-bold text-lg mb-4">Her Circle Foundation</h3>
+            <h3 className="font-bold text-lg mb-4">HerCircle Foundation</h3>
             <p className="text-sm opacity-90">
               Breaking period poverty and empowering young women through menstrual health education.
             </p>
@@ -31,6 +31,11 @@ export function Footer() {
               <li>
                 <Link href="/gallery" className="hover:text-primary transition-colors">
                   Gallery
+                </Link>
+              </li>
+              <li>
+                <Link href="/blog" className="hover:text-primary transition-colors">
+                  Blog
                 </Link>
               </li>
               <li>
@@ -89,13 +94,15 @@ export function Footer() {
 
         {/* Social Links */}
         <div className="border-t border-border pt-8 flex flex-col md:flex-row items-center justify-between">
-          <p className="text-sm opacity-75 mb-4 md:mb-0">© 2025 Her Circle Foundation. All rights reserved.</p>
+          <p className="text-sm opacity-75 mb-4 md:mb-0">© 2025 HerCircle Foundation. All rights reserved.</p>
           <div className="flex gap-4">
             <a
               href="https://instagram.com/hercirclefoundation"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-primary transition-colors"
+              aria-label="Instagram (opens in a new tab)"
+              title="Instagram"
             >
               <Instagram className="h-5 w-5" />
             </a>
@@ -104,6 +111,8 @@ export function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-primary transition-colors"
+              aria-label="Facebook (opens in a new tab)"
+              title="Facebook"
             >
               <Facebook className="h-5 w-5" />
             </a>
@@ -112,6 +121,8 @@ export function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-primary transition-colors"
+              aria-label="Twitter (opens in a new tab)"
+              title="Twitter"
             >
               <Twitter className="h-5 w-5" />
             </a>
