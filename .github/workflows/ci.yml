@@ -34,6 +34,10 @@ jobs:
           corepack enable
           corepack prepare pnpm@8.8.0 --activate
 
+      - name: Install pnpm globally (fallback)
+        # Install pnpm via npm to guarantee pnpm exists on PATH on all runners
+        run: npm install -g pnpm@8 || true
+
       - name: Install dependencies
         # CI runners sometimes don't preserve the lockfile; allow install to proceed.
         run: pnpm install --no-frozen-lockfile
