@@ -10,6 +10,7 @@ import HelpModal from "@/components/help-modal"
 // import { Footer } from '@/components/footer'
 import { Toaster } from '@/components/ui/toaster'
 import "./globals.css"
+import LunaChatWrapper from '@/components/luna-chat-wrapper'
 
 const _geist = Geist({ subsets: ["latin"] })
 const _geistMono = Geist_Mono({ subsets: ["latin"] })
@@ -38,6 +39,7 @@ export default function RootLayout({
           <HelpModal />
           <Toaster />
           <ScrollToTop />
+          <LunaChatWrapper />
           <Analytics />
         </ThemeProvider>
       </body>

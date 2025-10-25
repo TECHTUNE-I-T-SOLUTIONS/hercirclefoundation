@@ -38,7 +38,7 @@ export default function AdminSharesClient() {
         if (ids.length > 0) {
           const { data: blogs } = await supabase.from('blogs').select('id, title').in('id', ids)
           const map: Record<string, string> = {}
-          (blogs || []).forEach((b: any) => { map[String(b.id)] = b.title })
+          ;(blogs || []).forEach((b: any) => { map[String(b.id)] = b.title })
           setBlogTitles(map)
         }
       } catch (e) { console.warn('failed to fetch blog titles', e) }

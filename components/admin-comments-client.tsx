@@ -68,9 +68,14 @@ export default function AdminCommentsClient() {
       try {
         const id = (payload.new as any)?.blog_id
         if (id && !blogTitles[String(id)]) {
-          supabase.from('blogs').select('id,title').eq('id', id).then(({ data }) => {
-            if (data && data[0]) setBlogTitles((m) => ({ ...m, [String(id)]: data[0].title }))
-          }).catch(() => {})
+          (async () => {
+            try {
+              const { data } = await supabase.from('blogs').select('id,title').eq('id', id)
+              if (data && data[0]) setBlogTitles((m) => ({ ...m, [String(id)]: data[0].title }))
+            } catch (e) {
+              // ignore
+            }
+          })()
         }
       } catch {}
     })
@@ -106,7 +111,8 @@ export default function AdminCommentsClient() {
         body: JSON.stringify({ content: replyContent, parent_id: comment.id }),
       })
       if (!res.ok) {
-        const txt = await res.text().catch(() => '')
+        let txt = ''
+        try { txt = await res.text() } catch {}
         throw new Error(txt || `reply failed (${res.status})`)
       }
       setReplyingTo(null)
@@ -162,20 +168,16 @@ export default function AdminCommentsClient() {
             setTimeout(() => {
                 // double-check still missing (avoid duplicate fetches)
                 if (blogTitles[key]) return
-                supabase
-                    .from('blogs')
-                    .select('title')
-                    .eq('id', node.blog_id)
-                    .limit(1)
-                    .maybeSingle()
-                    .then(({ data }) => {
-                        const t = data?.title || String(node.blog_id)
+                (async () => {
+                    try {
+                        const { data } = await supabase.from('blogs').select('title').eq('id', node.blog_id).limit(1).maybeSingle()
+                        const t = (data as any)?.title || String(node.blog_id)
                         setBlogTitles((m) => ({ ...m, [key]: t }))
-                    })
-                    .catch(() => {
+                    } catch (e) {
                         setBlogTitles((m) => ({ ...m, [key]: String(node.blog_id) }))
-                    })
-            }, 0)
+                    }
+                })()
+             }, 0)
 
       return <div className="text-xs text-gray-900 dark:text-gray-100 mt-2">Blog: Loading… • User: {node.user_name || 'Anonymous'}</div>
         })()}
