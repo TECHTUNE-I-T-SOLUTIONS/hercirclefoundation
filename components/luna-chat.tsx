@@ -29,10 +29,10 @@ export default function LunaChat() {
 
   // available lightweight gradient options
   const gradients: { id: string; css: string; label: string }[] = [
-    { id: 'g1', css: 'linear-gradient(135deg,#FFDEE9 0%,#B5FFFC 100%)', label: 'Soft Pink → Aqua' },
-    { id: 'g2', css: 'linear-gradient(135deg,#E0C3FC 0%,#8EC5FC 100%)', label: 'Lilac → Sky' },
-    { id: 'g3', css: 'linear-gradient(135deg,#FDEB71 0%,#F8D800 100%)', label: 'Sunshine' },
-    { id: 'g4', css: 'linear-gradient(135deg,#C9FFBF 0%,#FFAFBD 100%)', label: 'Mint → Rose' },
+    { id: 'g1', css: 'linear-gradient(135deg,#a11a92 50%,#9f0500 100%)', label: 'Soft Pink → Aqua' },
+    { id: 'g2', css: 'linear-gradient(135deg,#00aeef 0%,#00425f 100%)', label: 'Lilac → Sky' },
+    { id: 'g3', css: 'linear-gradient(135deg,#662d91 0%,#00a7e1 100%)', label: 'Sunshine' },
+    { id: 'g4', css: 'linear-gradient(135deg,#009444 0%,#006838 100%)', label: 'Mint → Rose' },
   ]
 
   // load saved gradient (localStorage)
@@ -281,30 +281,30 @@ export default function LunaChat() {
       {collapsed ? (
         <button
           onClick={() => openChat()}
-          className="flex items-center gap-2 px-4 py-3 rounded-full bg-primary text-white shadow-lg hover:scale-[1.02] transition-transform"
+          className="flex items-center gap-2 px-4 py-3 rounded-full bg-primary text-white dark:text-gray-900 shadow-lg hover:scale-[1.02] transition-transform"
           aria-label="Open Luna chat"
         >
           <MessageCircle className="h-5 w-5" />
           <span className="hidden sm:inline">Luna</span>
         </button>
       ) : (
-        <div className="w-[340px] sm:w-[420px] max-h-[70vh] border border-border rounded-lg shadow-xl overflow-hidden flex flex-col" style={panelStyle}>
+        <div className="w-[340px] sm:w-[420px] max-h-[70vh] bg-white dark:bg-black border border-border rounded-lg shadow-xl overflow-hidden flex flex-col" style={panelStyle}>
           <div className="flex items-center justify-between px-4 py-3 border-b border-border" style={headerStyle}>
              <div className="flex items-center gap-3">
               <div className="h-9 w-9 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold">L</div>
               <div>
-                <div className="font-semibold">Luna</div>
-                <div className="text-xs text-muted-foreground">Empathetic menstrual health companion</div>
+                <div className="font-semibold text-black dark:text-gray-100">Luna</div>
+                <div className="text-xs text-black dark:text-gray-100">Your menstrual health companion</div>
               </div>
              </div>
              <div className="flex items-center gap-2">
-               <button onClick={() => setSettingsOpen((s) => !s)} className="p-2 rounded-md hover:bg-secondary" aria-label="Settings">
+               <button onClick={() => setSettingsOpen((s) => !s)} className="p-2 rounded-md text-gray-900 dark:text-gray-100 hover:bg-secondary" aria-label="Settings">
                  <Settings className="h-4 w-4" />
                </button>
-               <button onClick={() => { setCollapsed(true); setRecommendations([]) }} className="p-2 rounded-md hover:bg-secondary" aria-label="Minimize">
+               <button onClick={() => { setCollapsed(true); setRecommendations([]) }} className="p-2 rounded-md text-gray-900 dark:text-white hover:bg-secondary" aria-label="Minimize">
                  <ChevronsUp className="h-4 w-4" />
                </button>
-               <button onClick={() => setVisible(false)} className="p-2 rounded-md hover:bg-secondary" aria-label="Close">
+               <button onClick={() => setVisible(false)} className="p-2 rounded-md hover:bg-secondary text-gray-900 dark:text-gray-100" aria-label="Close">
                  <X className="h-4 w-4" />
                </button>
              </div>
@@ -326,7 +326,7 @@ export default function LunaChat() {
 
            <div ref={scrollRef} className="flex-1 p-4 overflow-y-auto space-y-3">
             {messages.length === 0 && !onboarding && (
-              <div className="text-sm text-muted-foreground">
+              <div className="text-sm text-white dark:text-white">
                 <p>Hi! I'm Luna — an educational AI. I can help with period questions, hygiene tips, and recommend articles.</p>
                 <p className="mt-2 text-xs">Reminder: I'm not a medical professional. For health concerns, consult a doctor.</p>
               </div>
@@ -334,14 +334,14 @@ export default function LunaChat() {
 
             {onboarding && (
               <form onSubmit={submitOnboarding} className="space-y-3">
-                <div className="text-sm">Let's get to know you — this helps me personalize my replies.</div>
-                <input placeholder="Preferred name" value={profile.name} onChange={(e) => setProfile((p: any) => ({ ...p, name: e.target.value }))} className="w-full px-3 py-2 border rounded" />
-                <input placeholder="Age range (e.g., 8-12, 13-16, 17+)" value={profile.age_range} onChange={(e) => setProfile((p: any) => ({ ...p, age_range: e.target.value }))} className="w-full px-3 py-2 border rounded" />
-                <input placeholder="Language (e.g., en, hi)" value={profile.language} onChange={(e) => setProfile((p: any) => ({ ...p, language: e.target.value }))} className="w-full px-3 py-2 border rounded" />
-                <input placeholder="Optional email" value={profile.email} onChange={(e) => setProfile((p: any) => ({ ...p, email: e.target.value }))} className="w-full px-3 py-2 border rounded" />
+                <div className="text-sm text-red-400 dark:text-red-100">Let's get to know you — this helps me personalize my replies.</div>
+                <input placeholder="Preferred name" value={profile.name} onChange={(e) => setProfile((p: any) => ({ ...p, name: e.target.value }))} className="w-full px-3 py-2 border rounded text-black dark:text-red-100" />
+                <input placeholder="Age range (e.g., 8-12, 13-16, 17+)" value={profile.age_range} onChange={(e) => setProfile((p: any) => ({ ...p, age_range: e.target.value }))} className="w-full px-3 py-2 border rounded text-black dark:text-red-100" />
+                <input placeholder="Language (e.g., en, hi)" value={profile.language} onChange={(e) => setProfile((p: any) => ({ ...p, language: e.target.value }))} className="w-full px-3 py-2 border rounded text-black dark:text-red-100" />
+                <input placeholder="Optional email" value={profile.email} onChange={(e) => setProfile((p: any) => ({ ...p, email: e.target.value }))} className="w-full px-3 py-2 border rounded text-black dark:text-red-100" />
                 <div className="flex gap-2">
-                  <button type="submit" disabled={loading} className="flex-1 bg-primary text-white px-3 py-2 rounded">Start Chat</button>
-                  <button type="button" onClick={() => { setOnboarding(false); setMessages((m) => [...m, { role: "assistant", message: "No problem — you can chat anonymously." }]) }} className="px-3 py-2 border rounded">Skip</button>
+                  <button type="submit" disabled={loading} className="flex-1 bg-primary text-white dark:text-red-900 px-3 py-2 rounded">Start Chat</button>
+                  <button type="button" onClick={() => { setOnboarding(false); setMessages((m) => [...m, { role: "assistant", message: "No problem — you can chat anonymously." }]) }} className="px-3 py-2 border rounded text-black dark:text-white">Skip</button>
                 </div>
               </form>
             )}
@@ -399,7 +399,7 @@ export default function LunaChat() {
 
           <div className="p-3 border-t border-border">
             <div className="flex items-center gap-2">
-              <input ref={inputRef} value={input} onChange={(e) => setInput(e.target.value)} onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); sendMessage() }}} placeholder="Ask Luna something..." className="flex-1 px-3 py-2 border rounded" />
+              <input ref={inputRef} value={input} onChange={(e) => setInput(e.target.value)} onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); sendMessage() }}} placeholder="Ask Luna something..." className="flex-1 px-3 py-2 border rounded text-gray-900 dark:text-red-200" />
               <button onClick={sendMessage} disabled={loading} className="p-2 rounded bg-primary text-white" aria-label="Send">
                 <Send className="h-4 w-4" />
               </button>

@@ -93,8 +93,8 @@ export default function PartnerPage() {
       <main className="flex-1">
         {/* Hero */}
         <section className="py-16 md:py-24 bg-gradient-to-br from-primary/10 to-transparent">
-          <div className="container mx-auto px-4">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Partner With Us</h1>
+          <div className="container mx-auto px-4 text-center">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 justify-center">Partner With Us</h1>
             <p className="text-lg text-muted-foreground max-w-2xl">
               Together, we can create a greater impact. Join HerCircle Foundation in our mission to break period
               poverty and empower women.
@@ -128,10 +128,10 @@ export default function PartnerPage() {
         </section>
 
         {/* Form Section */}
-        <section className="py-16 md:py-24">
-          <div className="container mx-auto px-4 max-w-2xl">
+        <section className="py-16 md:py-24 min-w-auto">
+          <div className="container mx-auto px-4 w-auto">
             <div className="bg-card rounded-lg border border-border p-8">
-              <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
+              <h2 className="text-2xl font-bold mb-6 flex items-center justify-center gap-2">
                 <Handshake className="h-6 w-6 text-primary" />
                 Get in Touch
               </h2>

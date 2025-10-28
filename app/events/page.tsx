@@ -57,9 +57,9 @@ export default function EventsPage() {
       <main className="flex-1">
         {/* Hero */}
         <section className="py-16 md:py-24 bg-gradient-to-br from-primary/10 to-transparent">
-          <div className="container mx-auto px-4">
+          <div className="container mx-auto px-4 text-center justify-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">Our Events</h1>
-            <p className="text-lg text-muted-foreground max-w-2xl">
+            <p className="text-lg text-muted-foreground max-w-2xl text-center">
               Join us for workshops, awareness campaigns, and community gatherings dedicated to menstrual health
               education and empowerment.
             </p>
