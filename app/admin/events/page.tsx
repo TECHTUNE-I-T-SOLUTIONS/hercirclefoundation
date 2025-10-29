@@ -42,12 +42,13 @@ export default function EventsPage() {
     event_type: "workshop",
   })
 
-  const [editingEvent, setEditingEvent] = useState<Event | null>(null)
   const [editingId, setEditingId] = useState<string | null>(null)
   const [editForm, setEditForm] = useState<any>(null)
   const { toast } = useToast()
   const [showConfirm, setShowConfirm] = useState(false)
   const [selectedId, setSelectedId] = useState<string | null>(null)
+  const [selectedIds, setSelectedIds] = useState<string[]>([])
+  const [showBulkConfirm, setShowBulkConfirm] = useState(false)
 
   useEffect(() => {
     fetchEvents()
@@ -58,10 +59,15 @@ export default function EventsPage() {
       const supabase = createClient()
       const { data, error } = await supabase.from("events").select("*").order("date", { ascending: true })
 
-      if (error) throw error
+      if (error) {
+        console.error('Error fetching events:', error)
+        toast({ title: 'Failed to load events', description: String(error) })
+        return
+      }
       setEvents(data || [])
     } catch (error) {
       console.error("Error fetching events:", error)
+      toast({ title: 'Failed to load events', description: String(error) })
     } finally {
       setLoading(false)
     }
@@ -92,7 +98,8 @@ export default function EventsPage() {
 
       if (!res.ok) {
         const err = await res.json().catch(() => null)
-        throw new Error(err?.error || 'create failed')
+        toast({ title: 'Create failed', description: err?.error || 'create failed' })
+        return
       }
 
       setFormData({
@@ -135,8 +142,14 @@ export default function EventsPage() {
     setShowConfirm(false)
     try {
       const supabase = createClient()
-      const { error } = await supabase.from("events").delete().eq("id", id)
-      if (error) throw error
+      const { data: { session } } = await supabase.auth.getSession()
+      const token = session?.access_token
+      const res = await fetch(`/api/admin/events/${id}`, { method: 'DELETE', headers: token ? { Authorization: `Bearer ${token}` } : undefined })
+      if (!res.ok) {
+        const err = await res.json().catch(() => null)
+        toast({ title: 'Delete failed', description: err?.error || 'delete failed' })
+        return
+      }
       setEvents((prev) => prev.filter((e) => e.id !== id))
       toast({ title: 'Deleted', description: 'Event removed' })
     } catch (error) {
@@ -144,6 +157,38 @@ export default function EventsPage() {
       toast({ title: 'Delete failed', description: String(error) })
     } finally {
       setSelectedId(null)
+    }
+  }
+
+  const toggleSelect = (id: string) => {
+    setSelectedIds((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]))
+  }
+
+  const confirmBulkDelete = async () => {
+    if (selectedIds.length === 0) return
+    setShowBulkConfirm(false)
+    try {
+      // call delete endpoint for each id; include session token so server auth works
+      const supabase = createClient()
+      const { data: { session } } = await supabase.auth.getSession()
+      const token = session?.access_token
+      const results = await Promise.all(selectedIds.map((id) => fetch(`/api/admin/events/${id}`, { method: 'DELETE', headers: token ? { Authorization: `Bearer ${token}` } : undefined })))
+      const failed = [] as string[]
+      for (let i = 0; i < results.length; i++) {
+        const r = results[i]
+        if (!r.ok) {
+          try { const j = await r.json(); failed.push(selectedIds[i] + ': ' + (j?.error || r.statusText)) } catch (e) { failed.push(selectedIds[i]) }
+        }
+      }
+      if (failed.length > 0) {
+        toast({ title: 'Some deletions failed', description: failed.join('; ') })
+      }
+      setEvents((prev) => prev.filter((e) => !selectedIds.includes(e.id)))
+      setSelectedIds([])
+      toast({ title: 'Deleted', description: 'Selected events removed' })
+    } catch (error) {
+      console.error('Bulk delete failed', error)
+      toast({ title: 'Bulk delete failed', description: String(error) })
     }
   }
 
@@ -289,6 +334,11 @@ export default function EventsPage() {
           </Card>
         ) : (
           <div className="space-y-4">
+            <div className="flex items-center justify-end gap-2 mb-2">
+              {selectedIds.length > 0 && (
+                <Button onClick={() => setShowBulkConfirm(true)} className="bg-destructive text-white">Delete selected ({selectedIds.length})</Button>
+              )}
+            </div>
             {events.map((event, index) => (
               <Card
                 key={event.id}
@@ -440,7 +490,11 @@ export default function EventsPage() {
                       body: form,
                       headers: token ? { Authorization: `Bearer ${token}` } : undefined,
                     })
-                    if (!res.ok) throw new Error('update failed')
+                    if (!res.ok) {
+                      const err = await res.json().catch(() => null)
+                      toast({ title: 'Update failed', description: err?.error || 'update failed' })
+                      return
+                    }
                     setEditingId(null)
                     setEditForm(null)
                     fetchEvents()
@@ -464,6 +518,18 @@ export default function EventsPage() {
           <AdminDialogFooter>
             <Button variant="outline" onClick={() => setShowConfirm(false)}>Cancel</Button>
             <Button className="bg-destructive text-white" onClick={confirmDelete}>Delete</Button>
+          </AdminDialogFooter>
+        </AdminDialogContent>
+      </AdminDialog>
+      <AdminDialog open={showBulkConfirm} onOpenChange={(open) => setShowBulkConfirm(open)}>
+        <AdminDialogContent>
+          <AdminDialogHeader>
+            <AdminDialogTitle>Confirm delete</AdminDialogTitle>
+          </AdminDialogHeader>
+          <div className="py-2">Are you sure you want to delete the selected events? This action cannot be undone.</div>
+          <AdminDialogFooter>
+            <Button variant="outline" onClick={() => setShowBulkConfirm(false)}>Cancel</Button>
+            <Button className="bg-destructive text-white" onClick={confirmBulkDelete}>Delete selected ({selectedIds.length})</Button>
           </AdminDialogFooter>
         </AdminDialogContent>
       </AdminDialog>

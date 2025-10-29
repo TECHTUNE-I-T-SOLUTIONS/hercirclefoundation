@@ -27,13 +27,15 @@ export function FileUploadInput({
   multiple = false,
 }: FileUploadInputProps) {
   const [uploading, setUploading] = useState(false)
+  const [progress, setProgress] = useState<number>(0)
   const [uploadedFile, setUploadedFile] = useState<{ name: string; url: string } | null>(null)
   const [uploadedFiles, setUploadedFiles] = useState<Array<{ name: string; url: string }>>([])
   const [error, setError] = useState<string | null>(null)
   const [externalUrl, setExternalUrl] = useState("")
+  const [isDragOver, setIsDragOver] = useState(false)
 
-  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement> | FileList | null) => {
+    const files = (e && 'target' in e) ? (e.target.files as FileList | null) : (e as FileList | null)
     if (!files || files.length === 0) return
 
     // If multiple files were selected, upload them sequentially
@@ -80,7 +82,12 @@ export function FileUploadInput({
               })
 
               const body = await res.json()
-              if (!res.ok) throw new Error(JSON.stringify(body))
+              if (!res.ok) {
+                const msg = body?.error || JSON.stringify(body)
+                setError(String(msg))
+                setUploading(false)
+                continue
+              }
               const newItem = { name: file.name, url: body.publicUrl }
               if (multiple) {
                 setUploadedFiles((s) => [...s, newItem])
@@ -98,17 +105,23 @@ export function FileUploadInput({
         }
 
         const filePath = `${fileName}`
+        // reset progress
+        setProgress(5)
 
         // First attempt: upload to the requested bucket name.
         let uploadError = null
         let uploadData = null
         try {
+          // supabase-js doesn't provide upload progress natively in the browser
+          // We'll show an indeterminate progress then set to 90% before finalizing.
+          setProgress(30)
           const res = await supabase.storage.from(bucket).upload(filePath, file, {
             cacheControl: "3600",
             upsert: false,
           })
           uploadError = res.error
           uploadData = res.data
+          setProgress(85)
         } catch (e) {
           uploadError = e
         }
@@ -128,11 +141,17 @@ export function FileUploadInput({
           uploadData = res2.data
         }
 
-        if (uploadError) throw uploadError
+        if (uploadError) {
+          setError(String(uploadError))
+          setProgress(0)
+          setUploading(false)
+          continue
+        }
 
         const { data: publicUrlData } = supabase.storage.from(usedBucket).getPublicUrl(usedFilePath)
 
         const publicUrl = publicUrlData.publicUrl
+        setProgress(100)
         const newItem = { name: file.name, url: publicUrl }
         if (multiple) {
           setUploadedFiles((s) => [...s, newItem])
@@ -161,7 +180,11 @@ export function FileUploadInput({
             })
 
             const body = await res.json()
-            if (!res.ok) throw new Error(JSON.stringify(body))
+            if (!res.ok) {
+              setError(String(body?.error || JSON.stringify(body)))
+              setUploading(false)
+              continue
+            }
             const newItem = { name: file.name, url: body.publicUrl }
             if (multiple) {
               setUploadedFiles((s) => [...s, newItem])
@@ -178,6 +201,7 @@ export function FileUploadInput({
         }
 
         setError(err instanceof Error ? err.message : "Upload failed")
+        setProgress(0)
       } finally {
         setUploading(false)
       }
@@ -188,108 +212,113 @@ export function FileUploadInput({
 
   return (
     <div className="space-y-2">
-      <Label>{label}</Label>
-      <div className="space-y-3">
-        {uploadedFile ? (
-          <div className="p-3 bg-green-50 dark:bg-green-950 border border-green-200 dark:border-green-800 rounded-lg flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <CheckCircle className="h-5 w-5 text-green-600 dark:text-green-400" />
-              <span className="text-sm font-medium text-green-900 dark:text-green-100">{uploadedFile.name}</span>
-            </div>
-            <button
-              type="button"
-              aria-label="Remove uploaded file"
-              onClick={() => {
-                setUploadedFile(null)
-                onFileUrlChange("")
-              }}
-              className="text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300"
-            >
-              <X className="h-4 w-4" />
-            </button>
+      {uploadedFile ? (
+        <div className="p-3 bg-green-50 dark:bg-green-950 border border-green-200 dark:border-green-800 rounded-lg flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <CheckCircle className="h-5 w-5 text-green-600 dark:text-green-400" />
+            <span className="text-sm font-medium text-green-900 dark:text-green-100">{uploadedFile.name}</span>
           </div>
-        ) : (
-          <div className="relative">
+          <button
+            type="button"
+            aria-label="Remove uploaded file"
+            onClick={() => {
+              setUploadedFile(null)
+              onFileUrlChange("")
+            }}
+            className="text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300"
+          >
+            <X className="h-4 w-4" />
+          </button>
+        </div>
+      ) : (
+        <div className="relative">
+          <div
+            onDragOver={(ev) => { ev.preventDefault(); setIsDragOver(true) }}
+            onDragLeave={() => setIsDragOver(false)}
+            onDrop={(ev) => {
+              ev.preventDefault(); setIsDragOver(false)
+              const dt = ev.dataTransfer
+              if (dt && dt.files && dt.files.length > 0) handleFileChange(dt.files)
+            }}
+            className={`p-4 rounded border border-dashed ${isDragOver ? 'border-primary bg-primary/5' : 'border-border'}`}
+          >
             <Input
               type="file"
               accept={accept}
-              onChange={handleFileChange}
+              onChange={(e) => handleFileChange(e)}
               disabled={uploading}
               className="hidden"
               id={`file-upload-${label}`}
               multiple={multiple}
             />
-            <label htmlFor={`file-upload-${label}`}>
-              <Button
-                type="button"
-                variant="outline"
-                className="w-full cursor-pointer bg-transparent"
-                disabled={uploading}
-                asChild
-              >
-                <span>
-                  <Upload className="h-4 w-4 mr-2" />
-                  {uploading ? "Uploading..." : "Choose File"}
-                </span>
-              </Button>
+            <label htmlFor={`file-upload-${label}`} className="cursor-pointer w-full block">
+              <div className="flex items-center justify-center gap-3">
+                <Upload className="h-4 w-4 mr-2" />
+                <span>{uploading ? 'Uploading...' : 'Choose File or drag it here'}</span>
+              </div>
             </label>
-          </div>
-        )}
-
-        <div className="pt-2">
-          <Label>Or provide an external URL (Google Drive link or other public URL)</Label>
-          <div className="flex gap-2 mt-2">
-            <Input
-              placeholder="https://..."
-              value={externalUrl}
-              onChange={(e) => setExternalUrl(e.target.value)}
-            />
-            <Button
-              type="button"
-              onClick={() => {
-                setError(null)
-                if (!externalUrl) return setError("Please provide a valid URL")
-                const newItem = { name: externalUrl.split('/').pop() || externalUrl, url: externalUrl }
-                if (multiple) {
-                  setUploadedFiles((s) => [...s, newItem])
-                } else {
-                  setUploadedFile(newItem)
-                }
-                onFileUrlChange(externalUrl)
-                setExternalUrl("")
-              }}
-            >
-              Use URL
-            </Button>
+            {uploading && (
+              <div className="mt-3 h-2 bg-muted rounded overflow-hidden">
+                <div style={{ width: `${progress}%` }} className="h-full bg-primary transition-all" />
+              </div>
+            )}
           </div>
         </div>
+      )}
 
-        {multiple && uploadedFiles.length > 0 && (
-          <div className="space-y-2">
-            {uploadedFiles.map((f, i) => (
-              <div key={i} className="p-2 bg-green-50 dark:bg-green-950 border border-green-200 dark:border-green-800 rounded-lg flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <CheckCircle className="h-5 w-5 text-green-600 dark:text-green-400" />
-                  <span className="text-sm font-medium text-green-900 dark:text-green-100">{f.name}</span>
-                </div>
-                <button
-                  type="button"
-                  aria-label={`Remove uploaded file ${i + 1}`}
-                  onClick={() => {
-                    setUploadedFiles((s) => s.filter((_, idx) => idx !== i))
-                    // if needed, caller can manage removal from their list
-                  }}
-                  className="text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300"
-                >
-                  <X className="h-4 w-4" />
-                </button>
-              </div>
-            ))}
-          </div>
-        )}
-
-        {error && <p className="text-sm text-destructive">{error}</p>}
+      <div className="pt-2">
+        <Label>Or provide an external URL (Google Drive link or other public URL)</Label>
+        <div className="flex gap-2 mt-2">
+          <Input
+            placeholder="https://..."
+            value={externalUrl}
+            onChange={(e) => setExternalUrl(e.target.value)}
+          />
+          <Button
+            type="button"
+            onClick={() => {
+              setError(null)
+              if (!externalUrl) return setError("Please provide a valid URL")
+              const newItem = { name: externalUrl.split('/').pop() || externalUrl, url: externalUrl }
+              if (multiple) {
+                setUploadedFiles((s) => [...s, newItem])
+              } else {
+                setUploadedFile(newItem)
+              }
+              onFileUrlChange(externalUrl)
+              setExternalUrl("")
+            }}
+          >
+            Use URL
+          </Button>
+        </div>
       </div>
+
+      {multiple && uploadedFiles.length > 0 && (
+        <div className="space-y-2">
+          {uploadedFiles.map((f, i) => (
+            <div key={i} className="p-2 bg-green-50 dark:bg-green-950 border border-green-200 dark:border-green-800 rounded-lg flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <CheckCircle className="h-5 w-5 text-green-600 dark:text-green-400" />
+                <span className="text-sm font-medium text-green-900 dark:text-green-100">{f.name}</span>
+              </div>
+              <button
+                type="button"
+                aria-label={`Remove uploaded file ${i + 1}`}
+                onClick={() => {
+                  setUploadedFiles((s) => s.filter((_, idx) => idx !== i))
+                  // if needed, caller can manage removal from their list
+                }}
+                className="text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {error && <p className="text-sm text-destructive">{error}</p>}
     </div>
   )
 }

@@ -7,6 +7,7 @@ import Link from "next/link"
 import { Heart, Users, BookOpen, TrendingUp } from "lucide-react"
 import { useEffect, useState } from "react"
 import { CountUpNumber } from "@/components/count-up-number"
+import StoriesPreview from '@/components/stories-preview'
 
 export default function Home() {
   const [isVisible, setIsVisible] = useState(false)
@@ -170,6 +171,9 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        {/* Stories preview (animated marquee) */}
+        <StoriesPreview limit={8} />
 
         {/* CTA Section */}
         <section className="py-20 md:py-32 bg-primary text-primary-foreground">

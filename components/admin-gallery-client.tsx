@@ -33,6 +33,8 @@ type Props = {
 export default function AdminGalleryClient({ createAction, updateAction, deleteAction }: Props) {
   const [items, setItems] = useState<GalleryItem[]>([])
   const [loading, setLoading] = useState(true)
+  const [selectedIds, setSelectedIds] = useState<string[]>([])
+  const [showBulkConfirm, setShowBulkConfirm] = useState(false)
   const [showForm, setShowForm] = useState(false)
   const [formData, setFormData] = useState({
     title: "",
@@ -42,7 +44,6 @@ export default function AdminGalleryClient({ createAction, updateAction, deleteA
     category: "workshops",
   })
   const [uploadedUrls, setUploadedUrls] = useState<string[]>([])
-  const [createError, setCreateError] = useState<string | null>(null)
   const [authError, setAuthError] = useState<string | null>(null)
   const [editingId, setEditingId] = useState<string | null>(null)
   const [editForm, setEditForm] = useState<any>(null)
@@ -59,10 +60,15 @@ export default function AdminGalleryClient({ createAction, updateAction, deleteA
       const supabase = createClient()
       const { data, error } = await supabase.from("gallery").select("*").order("created_at", { ascending: false })
 
-      if (error) throw error
+      if (error) {
+        console.error("Error fetching gallery:", error)
+        toast({ title: 'Failed to load gallery', description: String(error) })
+        return
+      }
       setItems(data || [])
     } catch (error) {
       console.error("Error fetching gallery:", error)
+      toast({ title: 'Failed to load gallery', description: String(error) })
     } finally {
       setLoading(false)
     }
@@ -70,19 +76,17 @@ export default function AdminGalleryClient({ createAction, updateAction, deleteA
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setCreateError(null)
     setAuthError(null)
     try {
       // use server-side create to avoid RLS
       const supabase = createClient()
       const { data: { session } } = await supabase.auth.getSession()
-      const token = session?.access_token
 
       // determine whether to create one record or multiple (one per uploaded URL)
       const urlsToCreate = uploadedUrls.length > 0 ? uploadedUrls : (formData.media_url ? [formData.media_url] : [])
 
       if (urlsToCreate.length === 0) {
-        setCreateError('Please upload a file or provide an external URL')
+        toast({ title: 'Upload or URL required', description: 'Please upload a file or provide an external URL' })
         return
       }
 
@@ -112,7 +116,8 @@ export default function AdminGalleryClient({ createAction, updateAction, deleteA
             setAuthError(err?.error || 'Session expired or sign-in required. Please sign in again.')
             return
           }
-          throw new Error(err?.error || 'create failed')
+          toast({ title: 'Create failed', description: err?.error || 'create failed' })
+          return
         }
       }
 
@@ -144,7 +149,7 @@ export default function AdminGalleryClient({ createAction, updateAction, deleteA
       }
     } catch (error) {
       console.error("Error creating gallery item:", error)
-      setCreateError(error instanceof Error ? error.message : String(error))
+      toast({ title: 'Create failed', description: error instanceof Error ? error.message : String(error) })
     }
   }
 
@@ -161,10 +166,14 @@ export default function AdminGalleryClient({ createAction, updateAction, deleteA
       if (deleteAction) {
         await deleteAction(id)
       } else {
-        const res = await fetch(`/api/admin/gallery/${id}`, { method: 'DELETE' })
+        const supabase = createClient()
+        const { data: { session } } = await supabase.auth.getSession()
+        const token = session?.access_token
+        const res = await fetch(`/api/admin/gallery/${id}`, { method: 'DELETE', headers: token ? { Authorization: `Bearer ${token}` } : undefined })
         if (!res.ok) {
           const err = await res.json().catch(() => null)
-          throw new Error(err?.error || 'delete failed')
+          toast({ title: 'Delete failed', description: err?.error || 'delete failed' })
+          return
         }
       }
       setItems(items.filter((i) => i.id !== id))
@@ -174,6 +183,36 @@ export default function AdminGalleryClient({ createAction, updateAction, deleteA
       toast({ title: 'Delete failed', description: String(error) })
     } finally {
       setSelectedDeleteId(null)
+    }
+  }
+
+  const toggleSelect = (id: string) => {
+    setSelectedIds((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]))
+  }
+
+  const confirmBulkDelete = async () => {
+    if (selectedIds.length === 0) return
+    setShowConfirm(false)
+    setShowBulkConfirm(false)
+    try {
+      const supabase = createClient()
+      const { data: { session } } = await supabase.auth.getSession()
+      const token = session?.access_token
+      const results = await Promise.all(selectedIds.map((id) => fetch(`/api/admin/gallery/${id}`, { method: 'DELETE', headers: token ? { Authorization: `Bearer ${token}` } : undefined })))
+      const failed: string[] = []
+      for (let i = 0; i < results.length; i++) {
+        const r = results[i]
+        if (!r.ok) {
+          try { const j = await r.json(); failed.push(selectedIds[i] + ': ' + (j?.error || r.statusText)) } catch (e) { failed.push(selectedIds[i]) }
+        }
+      }
+      if (failed.length > 0) toast({ title: 'Some deletions failed', description: failed.join('; ') })
+      setItems((prev) => prev.filter((it) => !selectedIds.includes(it.id)))
+      setSelectedIds([])
+      toast({ title: 'Deleted', description: 'Selected items removed' })
+    } catch (error) {
+      console.error('Bulk delete failed', error)
+      toast({ title: 'Bulk delete failed', description: String(error) })
     }
   }
 
@@ -325,6 +364,12 @@ export default function AdminGalleryClient({ createAction, updateAction, deleteA
                 className="overflow-hidden hover:shadow-md transition-all duration-300 animate-slide-up"
                 style={{ animationDelay: `${index * 50}ms` }}
               >
+                <div className="p-3">
+                  <label className="inline-flex items-center">
+                    <input type="checkbox" checked={selectedIds.includes(item.id)} onChange={() => toggleSelect(item.id)} className="mr-2" />
+                    <span className="text-sm">Select</span>
+                  </label>
+                </div>
                 {(() => {
                   const primary = (item.media_urls && item.media_urls.length > 0) ? item.media_urls[0] : item.media_url
                   const isImage = primary && /\.(jpg|jpeg|png|gif|webp)$/i.test(primary)
@@ -468,7 +513,8 @@ export default function AdminGalleryClient({ createAction, updateAction, deleteA
                           setAuthError(err?.error || 'Session expired or sign-in required. Please sign in again.')
                           return
                         }
-                        throw new Error(err?.error || 'update failed')
+                        toast({ title: 'Update failed', description: err?.error || 'update failed' })
+                        return
                       }
                     }
                     setEditingId(null)
@@ -495,7 +541,18 @@ export default function AdminGalleryClient({ createAction, updateAction, deleteA
             </DialogFooter>
           </DialogContent>
         </Dialog>
-      
+      <Dialog open={showBulkConfirm} onOpenChange={(open) => setShowBulkConfirm(open)}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Confirm delete</DialogTitle>
+          </DialogHeader>
+          <div className="py-2">Are you sure you want to delete the selected items?</div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setShowBulkConfirm(false)}>Cancel</Button>
+            <Button className="bg-destructive text-white" onClick={confirmBulkDelete}>Delete selected ({selectedIds.length})</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </>
   )
 }

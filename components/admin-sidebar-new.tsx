@@ -3,10 +3,10 @@
 import React, { useEffect, useState } from "react"
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
-import { LayoutDashboard, Users, Heart, Calendar, ImageIcon, LogOut, Moon, Sun, Bell } from "lucide-react"
+import { LayoutDashboard, Users, Heart, Calendar, ImageIcon, LogOut, Moon, Sun, Bell, BookOpen } from "lucide-react"
 import { createClient } from "@/lib/supabase/client"
 import { LogoutConfirmationModal } from "@/components/logout-confirmation-modal"
-import { useIsMobile } from "@/hooks/use-mobile"
+
 import {
   Sidebar,
   SidebarContent,
@@ -31,12 +31,12 @@ export function AdminSidebarNew({ children, headerTitle = "Admin Dashboard" }: A
   // (derived from `usePathname`) but do not return early before all hooks run.
   const pathname = usePathname()
   const router = useRouter()
-  const isMobile = useIsMobile()
 
   const [showLogoutModal, setShowLogoutModal] = useState(false)
   const [isLoggingOut, setIsLoggingOut] = useState(false)
   const [theme, setTheme] = useState<"light" | "dark">("light")
   const [unreadCount, setUnreadCount] = useState<number>(0)
+  const [pendingStoriesCount, setPendingStoriesCount] = useState<number>(0)
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
@@ -50,7 +50,7 @@ export function AdminSidebarNew({ children, headerTitle = "Admin Dashboard" }: A
   // Determine whether we're on admin auth routes. We still call hooks
   // unconditionally to preserve hook order, but use this flag to render a
   // minimal layout for auth pages below.
-  const isAuthRoute = typeof pathname === "string" && pathname.startsWith("/admin/auth")
+  const isAuthRoute = pathname.startsWith("/admin/auth")
 
   useEffect(() => {
     let mountedLocal = true
@@ -70,10 +70,23 @@ export function AdminSidebarNew({ children, headerTitle = "Admin Dashboard" }: A
     }
 
     fetchUnread()
+    // fetch pending stories count for sidebar badge
+    const fetchPendingStories = async () => {
+      try {
+        const res = await fetch('/api/admin/stories?status=pending')
+        if (!res.ok) return
+        const json = await res.json()
+        const list = Array.isArray(json?.data) ? json.data : []
+        if (mountedLocal) setPendingStoriesCount(list.length)
+      } catch (e) { /* ignore */ }
+    }
+    fetchPendingStories()
     const t = setInterval(fetchUnread, 20000)
+    const t2 = setInterval(fetchPendingStories, 30000)
     return () => {
       mountedLocal = false
       clearInterval(t)
+      clearInterval(t2)
     }
   }, [])
 
@@ -89,6 +102,7 @@ export function AdminSidebarNew({ children, headerTitle = "Admin Dashboard" }: A
     { href: "/admin/profile", label: "Profile", icon: Users },
     { href: "/admin/volunteers", label: "Volunteers", icon: Users },
     { href: "/admin/donors", label: "Donors", icon: Heart },
+    { href: "/admin/stories", label: "Stories", icon: BookOpen },
     { href: "/admin/events", label: "Events", icon: Calendar },
     { href: "/admin/blogs", label: "Blogs", icon: ImageIcon },
     { href: "/admin/blogs/comments", label: "Blog Comments", icon: Bell },
@@ -152,7 +166,7 @@ export function AdminSidebarNew({ children, headerTitle = "Admin Dashboard" }: A
           <SidebarHeader className="border-b border-sidebar-border">
             <Link href="/admin/dashboard" className="flex items-center gap-2 group">
               <img src="/logo.png" alt="HerCircle" className="h-16 w-12 md:h-14 md:w-10" />
-              <span className="font-bold text-sidebar-foreground text-base md:text-md text-lg group-data-[state=collapsed]:hidden">Admin</span>
+              <span className="font-bold text-sidebar-foreground text-base md:text-lg group-data-[state=collapsed]:hidden">Admin</span>
             </Link>
           </SidebarHeader>
 
@@ -169,6 +183,9 @@ export function AdminSidebarNew({ children, headerTitle = "Admin Dashboard" }: A
                         <span className="text-lg md:text-sm font-medium">{item.label}</span>
                         {item.isNotifications && unreadCount > 0 && (
                           <span className="ml-auto inline-flex items-center justify-center rounded-full bg-destructive px-2 py-0.5 text-xs text-white">{unreadCount}</span>
+                        )}
+                        {item.href === '/admin/stories' && pendingStoriesCount > 0 && (
+                          <span className="ml-auto inline-flex items-center justify-center rounded-full bg-destructive px-2 py-0.5 text-xs text-white">{pendingStoriesCount > 99 ? '99+' : pendingStoriesCount}</span>
                         )}
                       </Link>
                     </SidebarMenuButton>

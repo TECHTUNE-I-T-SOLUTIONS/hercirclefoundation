@@ -80,3 +80,40 @@ export async function PATCH(req: Request, ctx: any) {
     return NextResponse.json({ error: err.message || String(err) }, { status: 500 })
   }
 }
+
+export async function DELETE(req: Request, ctx: any) {
+  try {
+    let params = ctx?.params
+    if (params && typeof params.then === 'function') params = await params
+    const id = params?.id
+
+    // authenticate (cookie-aware then bearer)
+    let user: any = null
+    try {
+      const authClient = await createServerHelper()
+      const { data: userData, error: userErr } = await authClient.auth.getUser()
+      if (!userErr && userData?.user) user = userData.user
+    } catch (e) {}
+
+    if (!user) {
+      const authHeader = req.headers.get('authorization') || ''
+      const token = authHeader.replace(/^Bearer\s+/i, '')
+      if (!token) return NextResponse.json({ error: 'missing token' }, { status: 401 })
+      const resp = await fetch(`${SUPABASE_URL}/auth/v1/user`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      if (!resp.ok) return NextResponse.json({ error: 'invalid token' }, { status: 401 })
+      user = await resp.json()
+    }
+
+    const { data: admins } = await serverClient.from('admin_users').select('id').eq('id', user.id).limit(1)
+    if (!admins || admins.length === 0) return NextResponse.json({ error: 'not admin' }, { status: 403 })
+
+    const { error } = await serverClient.from('blogs').delete().eq('id', id)
+    if (error) return NextResponse.json({ error: error.message }, { status: 500 })
+
+    return NextResponse.json({ success: true })
+  } catch (err: any) {
+    return NextResponse.json({ error: err.message || String(err) }, { status: 500 })
+  }
+}

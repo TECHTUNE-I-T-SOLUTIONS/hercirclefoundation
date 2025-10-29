@@ -1,70 +1,71 @@
 import { NextResponse } from 'next/server'
-import { createClient } from '@supabase/supabase-js'
+import { createClient as createServerClient } from '@supabase/supabase-js'
+
+const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL!
+const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY!
+
+const serverClient = createServerClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY)
 
 export async function POST(req: Request) {
-  const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL
-  const SERVICE_ROLE = process.env.SUPABASE_SERVICE_ROLE_KEY
-
-  if (!SUPABASE_URL || !SERVICE_ROLE) {
-    return NextResponse.json({ error: 'Missing SUPABASE_SERVICE_ROLE_KEY or NEXT_PUBLIC_SUPABASE_URL' }, { status: 500 })
-  }
-
-  // Expect Authorization: Bearer <access_token>
-  const authHeader = req.headers.get('authorization') || ''
-  const token = authHeader.replace(/^Bearer\s*/i, '')
-
-  if (!token) {
-    return NextResponse.json({ error: 'Missing Authorization bearer token' }, { status: 401 })
-  }
-
-  const serverSupabase = createClient(SUPABASE_URL, SERVICE_ROLE)
-
-  // Verify token -> get user
-  const { data: userData, error: userErr } = await serverSupabase.auth.getUser(token)
-  if (userErr || !userData?.user) {
-    return NextResponse.json({ error: 'Invalid token' }, { status: 401 })
-  }
-
-  const user = userData.user
-
-  // Confirm user is an admin in admin_users
-  const { data: adminRow, error: adminErr } = await serverSupabase
-    .from('admin_users')
-    .select('id')
-    .eq('id', user.id)
-    .limit(1)
-    .single()
-
-  if (adminErr || !adminRow) {
-    return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
-  }
-
-  // Parse multipart body
-  const formData = await req.formData()
-  const file = formData.get('file') as File | null
-  const bucket = (formData.get('bucket') as string) || 'media'
-  const filename = (formData.get('filename') as string) || `upload-${Date.now()}`
-
-  if (!file) {
-    return NextResponse.json({ error: 'No file provided' }, { status: 400 })
-  }
-
   try {
-    // upload using service role
-    const arrayBuffer = await file.arrayBuffer()
-    const res = await serverSupabase.storage.from(bucket).upload(filename, new Uint8Array(arrayBuffer), {
-      cacheControl: '3600',
-      upsert: false,
-    })
+    // Accept form-data with fields: file (File), bucket (string), filename (string, optional)
+    // accept any content type; we'll use file.type if provided
+    const form = await req.formData().catch(() => null)
+    if (!form) return NextResponse.json({ error: 'Invalid form data' }, { status: 400 })
 
-    if (res.error) {
-      return NextResponse.json({ error: res.error }, { status: 500 })
+    const file = form.get('file') as any
+    const bucketField = form.get('bucket') as any
+    const filenameField = form.get('filename') as any
+
+    if (!file) return NextResponse.json({ error: 'file is required' }, { status: 400 })
+
+    const bucket = typeof bucketField === 'string' && bucketField ? bucketField : 'stories'
+    // default filename: provided, or file.name, or timestamp
+    const filename = typeof filenameField === 'string' && filenameField ? filenameField : (file?.name || `upload-${Date.now()}`)
+
+    // ensure bucket exists (create if missing)
+    try {
+      // try create; if it already exists, Supabase will return an error we can ignore
+      await serverClient.storage.createBucket(bucket, { public: true })
+    } catch (e: any) {
+      const msg = String(e?.message || e)
+      if (!/already exists/i.test(msg) && !/duplicate/i.test(msg)) {
+        // ignore only the duplicate/bucket exists errors
+        console.warn('createBucket warning:', msg)
+      }
     }
 
-    const { data: pub } = serverSupabase.storage.from(bucket).getPublicUrl(filename)
+    // Read file as Buffer
+    let arrayBuffer: ArrayBuffer
+    try {
+      arrayBuffer = await file.arrayBuffer()
+    } catch (e) {
+      return NextResponse.json({ error: 'Failed to read file content' }, { status: 400 })
+    }
 
-    return NextResponse.json({ publicUrl: pub.publicUrl, data: res.data })
-  } catch (e) {
-    return NextResponse.json({ error: String(e) }, { status: 500 })
+    const buffer = Buffer.from(arrayBuffer)
+
+    // sanitize filename: remove directory traversal
+    const path = filename.replace(/[\\\/]/g, '_')
+
+    // Upload
+    const contentTypeHeader = file.type || undefined
+
+    const uploadRes = await serverClient.storage.from(bucket).upload(path, buffer, {
+      cacheControl: '3600',
+      upsert: false,
+      contentType: contentTypeHeader,
+    })
+
+    if (uploadRes.error) {
+      return NextResponse.json({ error: uploadRes.error.message || uploadRes.error }, { status: 500 })
+    }
+
+    const { data: publicUrlData } = serverClient.storage.from(bucket).getPublicUrl(path)
+    const publicUrl = publicUrlData?.publicUrl || null
+
+    return NextResponse.json({ publicUrl, path })
+  } catch (err: any) {
+    return NextResponse.json({ error: err.message || String(err) }, { status: 500 })
   }
 }

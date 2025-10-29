@@ -1,6 +1,5 @@
 "use client"
 import React, { useEffect, useState } from 'react'
-import { createClient } from '@/lib/supabase/client'
 import { Button } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog'
 import RichTextEditor from '@/components/rich-text-editor'
@@ -21,6 +20,9 @@ type Blog = {
 export default function AdminBlogList() {
   const [items, setItems] = useState<Blog[]>([])
   const [loading, setLoading] = useState(true)
+  const [selectedIds, setSelectedIds] = useState<string[]>([])
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false)
+  const [deleteTargetId, setDeleteTargetId] = useState<string | null>(null)
   const [editing, setEditing] = useState<Blog | null>(null)
   const [form, setForm] = useState<any>({})
   const { toast } = useToast()
@@ -49,7 +51,11 @@ export default function AdminBlogList() {
     setLoading(true)
     try {
       const res = await fetch('/api/admin/blogs')
-      if (!res.ok) throw new Error('Failed to load')
+      if (!res.ok) {
+        const j = await res.json().catch(() => null)
+        toast({ title: 'Failed to load blogs', description: j?.error || 'Failed to load' })
+        return
+      }
       const json = await res.json()
       setItems(json.data || [])
     } catch (err) {
@@ -71,7 +77,8 @@ export default function AdminBlogList() {
       const res = await fetch(`/api/admin/blogs/${editing.id}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(form) })
       if (!res.ok) {
         const err = await res.json().catch(() => null)
-        throw new Error(err?.error || 'update failed')
+        toast({ title: 'Update failed', description: err?.error || 'update failed' })
+        return
       }
       const j = await res.json()
       const updated = j.data
@@ -86,25 +93,89 @@ export default function AdminBlogList() {
     }
   }
 
+  const toggleSelect = (id: string) => setSelectedIds((s) => (s.includes(id) ? s.filter(x => x !== id) : [...s, id]))
+
+  const confirmDelete = async (id?: string) => {
+    const target = id || deleteTargetId
+    if (!target) return
+    setShowDeleteConfirm(false)
+    try {
+      // include session token so server endpoint accepts the request
+      const { createClient } = await import('@/lib/supabase/client')
+      const supabase = createClient()
+      const { data: { session } } = await supabase.auth.getSession()
+      const token = session?.access_token
+      const res = await fetch(`/api/admin/blogs/${target}`, { method: 'DELETE', headers: token ? { Authorization: `Bearer ${token}` } : undefined })
+      if (!res.ok) {
+        const j = await res.json().catch(() => null)
+        toast({ title: 'Delete failed', description: j?.error || 'delete failed' })
+        return
+      }
+      setItems((s) => s.filter(b => b.id !== target))
+      setSelectedIds((s) => s.filter(x => x !== target))
+      toast({ title: 'Deleted', description: 'Blog removed' })
+    } catch (err) {
+      console.error('Delete failed', err)
+      toast({ title: 'Delete failed', description: String(err) })
+    }
+  }
+
+  const bulkDelete = async () => {
+    if (selectedIds.length === 0) return
+    setShowDeleteConfirm(false)
+    try {
+      const supabase = (await import('@/lib/supabase/client')).createClient()
+      const { data: { session } } = await supabase.auth.getSession()
+      const token = session?.access_token
+      const results = await Promise.all(selectedIds.map(id => fetch(`/api/admin/blogs/${id}`, { method: 'DELETE', headers: token ? { Authorization: `Bearer ${token}` } : undefined })))
+      const failed: string[] = []
+      for (let i = 0; i < results.length; i++) {
+        if (!results[i].ok) {
+          try { const j = await results[i].json(); failed.push(selectedIds[i] + ':' + (j?.error || results[i].statusText)) } catch(e) { failed.push(selectedIds[i]) }
+        }
+      }
+      if (failed.length > 0) toast({ title: 'Some deletions failed', description: failed.join('; ') })
+      setItems((s) => s.filter(b => !selectedIds.includes(b.id)))
+      setSelectedIds([])
+      toast({ title: 'Deleted', description: 'Selected blogs removed' })
+    } catch (err) {
+      console.error('Bulk delete error', err)
+      toast({ title: 'Bulk delete failed', description: String(err) })
+    }
+  }
+
   return (
     <div className="mt-8">
       <h2 className="text-xl font-semibold mb-4">Posts</h2>
       {loading ? (
         <div>Loading…</div>
       ) : (
-        <div className="space-y-3">
-          {items.map((b) => (
-            <div key={b.id} className="p-3 border rounded flex items-start justify-between">
-              <div>
-                <div className="font-medium">{b.title} <span className="text-xs text-muted-foreground">{b.status}</span></div>
-                <div className="text-xs text-muted-foreground">{b.excerpt}</div>
-                <div className="text-xs text-muted-foreground">{b.published_at ? new Date(b.published_at).toLocaleString() : ''}</div>
+        <div>
+          <div className="mb-3 flex justify-end gap-2">
+            {selectedIds.length > 0 && (
+              <Button className="bg-destructive text-white" onClick={() => setShowDeleteConfirm(true)}>Delete selected ({selectedIds.length})</Button>
+            )}
+          </div>
+          <div className="space-y-3">
+            {items.map((b) => (
+              <div key={b.id} className="p-3 border rounded flex items-start justify-between">
+                <div className="flex-1">
+                  <label className="inline-flex items-center mr-3">
+                    <input type="checkbox" className="mr-2" checked={selectedIds.includes(b.id)} onChange={() => toggleSelect(b.id)} />
+                    <div>
+                      <div className="font-medium">{b.title} <span className="text-xs text-muted-foreground">{b.status}</span></div>
+                      <div className="text-xs text-muted-foreground">{b.excerpt}</div>
+                      <div className="text-xs text-muted-foreground">{b.published_at ? new Date(b.published_at).toLocaleString() : ''}</div>
+                    </div>
+                  </label>
+                </div>
+                <div className="flex gap-2">
+                  <Button variant="outline" size="sm" onClick={() => openEdit(b)}>Edit</Button>
+                  <Button variant="ghost" size="sm" className="text-destructive hover:text-destructive" onClick={() => { setDeleteTargetId(b.id); setShowDeleteConfirm(true) }}>Delete</Button>
+                </div>
               </div>
-              <div className="flex gap-2">
-                <Button variant="outline" size="sm" onClick={() => openEdit(b)}>Edit</Button>
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       )}
 
@@ -147,6 +218,18 @@ export default function AdminBlogList() {
           <DialogFooter>
             <Button variant="outline" onClick={() => setEditing(null)}>Cancel</Button>
             <Button className="bg-primary" onClick={saveEdit}>Save</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+      <Dialog open={showDeleteConfirm} onOpenChange={(open) => setShowDeleteConfirm(open)}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Confirm delete</DialogTitle>
+          </DialogHeader>
+          <div className="py-2">Are you sure you want to delete the selected item(s)? This action cannot be undone.</div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setShowDeleteConfirm(false)}>Cancel</Button>
+            <Button className="bg-destructive text-white" onClick={() => { if (selectedIds.length > 0) bulkDelete(); else confirmDelete(deleteTargetId || undefined) }}>Delete</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
