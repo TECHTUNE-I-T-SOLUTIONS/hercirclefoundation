@@ -1,0 +1,2779 @@
+[
+  {
+    "id": "tip-001",
+    "title": "Welcome — Better Menstrual & Female Health",
+    "summary": "Small daily changes can support menstrual comfort and overall female health.",
+    "details": "This guide collects practical, evidence-informed tips covering nutrition, lifestyle, self-care, when to seek care, and emotional wellbeing. Use them as supportive ideas, and consult a clinician for medical concerns.",
+    "tags": [
+      "nutrition"
+    ],
+    "gradient": "linear-gradient(135deg,#ffd1e8 0%,#ff9fc3 100%)",
+    "gradientLight": "linear-gradient(135deg,#ffd1e8 0%,#ff9fc3 100%)",
+    "gradientDark": "linear-gradient(135deg,#7a3042 0%,#502232 100%)"
+  },
+  {
+    "id": "tip-002",
+    "title": "Stay Hydrated",
+    "summary": "Drink enough water to reduce bloating and help circulation.",
+    "details": "Aim for consistent hydration throughout the day. Water helps reduce water retention and assists nutrient transport. Add lemon or cucumber for variety.",
+    "tags": [
+      "hydration"
+    ],
+    "gradient": "linear-gradient(135deg,#ffe9c6 0%,#ffb3a7 100%)",
+    "gradientLight": "linear-gradient(135deg,#ffe9c6 0%,#ffb3a7 100%)",
+    "gradientDark": "linear-gradient(135deg,#6b3e2b 0%,#3f2a20 100%)"
+  },
+  {
+    "id": "tip-003",
+    "title": "Eat Iron-rich Foods",
+    "summary": "Help prevent fatigue and support blood levels.",
+    "details": "Include heme iron (lean red meat, fish, poultry) and non-heme iron (legumes, tofu, spinach). Pair non-heme iron with vitamin C (citrus, bell peppers) to boost absorption.",
+    "tags": [
+      "nutrition"
+    ],
+    "gradient": "linear-gradient(135deg,#e0f7fa 0%,#b3e5fc 100%)",
+    "gradientLight": "linear-gradient(135deg,#e0f7fa 0%,#b3e5fc 100%)",
+    "gradientDark": "linear-gradient(135deg,#0b5260 0%,#063a45 100%)"
+  },
+  {
+    "id": "tip-004",
+    "title": "Fiber for Gut & Hormones",
+    "summary": "A fiber-rich diet supports healthy digestion and hormone balance.",
+    "details": "Whole grains, vegetables, fruits, beans, and seeds help regulate estrogen metabolism and support a healthy microbiome.",
+    "tags": [
+      "gut"
+    ],
+    "gradient": "linear-gradient(135deg,#f3e8ff 0%,#d6bcff 100%)",
+    "gradientLight": "linear-gradient(135deg,#f3e8ff 0%,#d6bcff 100%)",
+    "gradientDark": "linear-gradient(135deg,#5d3b66 0%,#3b2947 100%)"
+  },
+  {
+    "id": "tip-005",
+    "title": "Limit Excess Salt",
+    "summary": "Reduce bloating and water retention by watching sodium intake.",
+    "details": "Cut back on processed and packaged foods high in salt. Use herbs, lemon, and spices for flavor instead.",
+    "tags": [
+      "hydration"
+    ],
+    "gradient": "linear-gradient(135deg,#e8ffe5 0%,#b7ffdb 100%)",
+    "gradientLight": "linear-gradient(135deg,#e8ffe5 0%,#b7ffdb 100%)",
+    "gradientDark": "linear-gradient(135deg,#184f2f 0%,#0f3622 100%)"
+  },
+  {
+    "id": "tip-006",
+    "title": "Reduce Refined Sugar",
+    "summary": "High sugar can worsen inflammation and mood swings.",
+    "details": "Prefer whole fruits for sweetness, choose less-processed snacks, and limit sugary drinks which can spike blood sugar and inflammation.",
+    "tags": [
+      "mental"
+    ],
+    "gradient": "linear-gradient(135deg,#fff4e6 0%,#ffd8a8 100%)",
+    "gradientLight": "linear-gradient(135deg,#fff4e6 0%,#ffd8a8 100%)",
+    "gradientDark": "linear-gradient(135deg,#6b4a2d 0%,#47321f 100%)"
+  },
+  {
+    "id": "tip-007",
+    "title": "Include Healthy Fats",
+    "summary": "Support hormone production with omega-3 and monounsaturated fats.",
+    "details": "Fatty fish, walnuts, chia, flaxseed, avocado and olive oil can reduce menstrual pain and support overall hormone health.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#fce7f3 0%,#f8d7ef 100%)",
+    "gradientLight": "linear-gradient(135deg,#fce7f3 0%,#f8d7ef 100%)",
+    "gradientDark": "linear-gradient(135deg,#6a3754 0%,#3e2639 100%)"
+  },
+  {
+    "id": "tip-008",
+    "title": "Moderate Caffeine",
+    "summary": "Caffeine can increase breast tenderness and worsen anxiety for some people.",
+    "details": "Try limiting coffee or switch to lower-caffeine options around the luteal/period days if you notice sensitivity.",
+    "tags": [
+      "mental"
+    ],
+    "gradient": "linear-gradient(135deg,#e8f0ff 0%,#cfe0ff 100%)",
+    "gradientLight": "linear-gradient(135deg,#e8f0ff 0%,#cfe0ff 100%)",
+    "gradientDark": "linear-gradient(135deg,#1d3b66 0%,#122744 100%)"
+  },
+  {
+    "id": "tip-009",
+    "title": "Limit Alcohol",
+    "summary": "Alcohol can disrupt sleep and increase PMS symptoms for some people.",
+    "details": "Reducing alcohol intake, especially in the premenstrual and menstrual phase, often helps mood and sleep quality.",
+    "tags": [
+      "sleep",
+      "mental"
+    ],
+    "gradient": "linear-gradient(135deg,#ffd1e8 0%,#ff9fc3 100%)",
+    "gradientLight": "linear-gradient(135deg,#ffd1e8 0%,#ff9fc3 100%)",
+    "gradientDark": "linear-gradient(135deg,#7a3042 0%,#502232 100%)"
+  },
+  {
+    "id": "tip-010",
+    "title": "Regular Gentle Exercise",
+    "summary": "Movement reduces cramps and improves mood.",
+    "details": "Walking, yoga, light strength work or gentle cardio help circulation and ease menstrual discomfort. Tailor intensity by cycle phase.",
+    "tags": [
+      "exercise",
+      "pain",
+      "mental"
+    ],
+    "gradient": "linear-gradient(135deg,#ffe9c6 0%,#ffb3a7 100%)",
+    "gradientLight": "linear-gradient(135deg,#ffe9c6 0%,#ffb3a7 100%)",
+    "gradientDark": "linear-gradient(135deg,#6b3e2b 0%,#3f2a20 100%)"
+  },
+  {
+    "id": "tip-011",
+    "title": "Prioritize Sleep",
+    "summary": "Good sleep supports hormonal balance and mood.",
+    "details": "Aim for consistent sleep schedules, a cool dark room, and wind-down routines. Poor sleep worsens cravings and symptoms.",
+    "tags": [
+      "sleep",
+      "mental"
+    ],
+    "gradient": "linear-gradient(135deg,#e0f7fa 0%,#b3e5fc 100%)",
+    "gradientLight": "linear-gradient(135deg,#e0f7fa 0%,#b3e5fc 100%)",
+    "gradientDark": "linear-gradient(135deg,#0b5260 0%,#063a45 100%)"
+  },
+  {
+    "id": "tip-012",
+    "title": "Support Gut Health",
+    "summary": "A healthy microbiome supports hormone processing.",
+    "details": "Fermented foods (yogurt, kefir, sauerkraut) and a fiber-rich diet help maintain beneficial gut bacteria.",
+    "tags": [
+      "gut"
+    ],
+    "gradient": "linear-gradient(135deg,#f3e8ff 0%,#d6bcff 100%)",
+    "gradientLight": "linear-gradient(135deg,#f3e8ff 0%,#d6bcff 100%)",
+    "gradientDark": "linear-gradient(135deg,#5d3b66 0%,#3b2947 100%)"
+  },
+  {
+    "id": "tip-013",
+    "title": "When to Seek Care",
+    "summary": "See a clinician if symptoms are severe or changing.",
+    "details": "If menstrual pain is disabling, bleeding is very heavy, cycles change suddenly, or other symptoms are concerning, consult a healthcare professional.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#e8ffe5 0%,#b7ffdb 100%)",
+    "gradientLight": "linear-gradient(135deg,#e8ffe5 0%,#b7ffdb 100%)",
+    "gradientDark": "linear-gradient(135deg,#184f2f 0%,#0f3622 100%)"
+  },
+  {
+    "id": "tip-014",
+    "title": "Track Your Cycle",
+    "summary": "Understanding your cycle helps predict symptoms and identify changes.",
+    "details": "Use a simple calendar, app, or journal to log bleeding, moods, cramps, sleep, and energy. Patterns help you prepare and speak with clinicians.",
+    "tags": [
+      "sleep",
+      "pain",
+      "mental"
+    ],
+    "gradient": "linear-gradient(135deg,#fff4e6 0%,#ffd8a8 100%)",
+    "gradientLight": "linear-gradient(135deg,#fff4e6 0%,#ffd8a8 100%)",
+    "gradientDark": "linear-gradient(135deg,#6b4a2d 0%,#47321f 100%)"
+  },
+  {
+    "id": "tip-015",
+    "title": "Warmth Eases Cramps",
+    "summary": "A warm compress can relieve menstrual cramping.",
+    "details": "Apply a heat pack or warm water bottle to the lower abdomen for 15–20 minutes. Gentle abdominal massage can also help.",
+    "tags": [
+      "hydration",
+      "pain",
+      "self-care"
+    ],
+    "gradient": "linear-gradient(135deg,#fce7f3 0%,#f8d7ef 100%)",
+    "gradientLight": "linear-gradient(135deg,#fce7f3 0%,#f8d7ef 100%)",
+    "gradientDark": "linear-gradient(135deg,#6a3754 0%,#3e2639 100%)"
+  },
+  {
+    "id": "tip-016",
+    "title": "Gentle Stretching",
+    "summary": "Stretching helps release pelvic tension.",
+    "details": "Yoga poses like child's pose, cat-cow, and gentle twists improve circulation and reduce discomfort during your period.",
+    "tags": [
+      "exercise"
+    ],
+    "gradient": "linear-gradient(135deg,#e8f0ff 0%,#cfe0ff 100%)",
+    "gradientLight": "linear-gradient(135deg,#e8f0ff 0%,#cfe0ff 100%)",
+    "gradientDark": "linear-gradient(135deg,#1d3b66 0%,#122744 100%)"
+  },
+  {
+    "id": "tip-017",
+    "title": "Mindful Breathing",
+    "summary": "Controlled breathing reduces pain perception and anxiety.",
+    "details": "Practice a 4-4-6 breathing pattern: inhale 4s, hold 4s, exhale 6s for several minutes when you feel tense or in pain.",
+    "tags": [
+      "mental"
+    ],
+    "gradient": "linear-gradient(135deg,#ffd1e8 0%,#ff9fc3 100%)",
+    "gradientLight": "linear-gradient(135deg,#ffd1e8 0%,#ff9fc3 100%)",
+    "gradientDark": "linear-gradient(135deg,#7a3042 0%,#502232 100%)"
+  },
+  {
+    "id": "tip-018",
+    "title": "Omega-3 Supplements",
+    "summary": "Omega-3s may reduce menstrual pain for some people.",
+    "details": "Discuss adding a fish oil or algal omega-3 supplement with a clinician if you have heavy cramps or inflammation concerns.",
+    "tags": [
+      "pain"
+    ],
+    "gradient": "linear-gradient(135deg,#ffe9c6 0%,#ffb3a7 100%)",
+    "gradientLight": "linear-gradient(135deg,#ffe9c6 0%,#ffb3a7 100%)",
+    "gradientDark": "linear-gradient(135deg,#6b3e2b 0%,#3f2a20 100%)"
+  },
+  {
+    "id": "tip-019",
+    "title": "Magnesium for Muscle Relaxation",
+    "summary": "Magnesium can ease cramps and improve mood.",
+    "details": "Foods rich in magnesium include spinach, nuts, seeds, and whole grains. Oral magnesium supplements can help but check dose and safety first.",
+    "tags": [
+      "pain",
+      "mental"
+    ],
+    "gradient": "linear-gradient(135deg,#e0f7fa 0%,#b3e5fc 100%)",
+    "gradientLight": "linear-gradient(135deg,#e0f7fa 0%,#b3e5fc 100%)",
+    "gradientDark": "linear-gradient(135deg,#0b5260 0%,#063a45 100%)"
+  },
+  {
+    "id": "tip-020",
+    "title": "Maintain a Balanced Plate",
+    "summary": "A mix of protein, fiber, and good fats stabilizes energy and mood.",
+    "details": "Build meals with protein (eggs, legumes), fiber (vegetables, whole grains), and healthy fats (avocado, olive oil) for steadier energy across your cycle.",
+    "tags": [
+      "mental"
+    ],
+    "gradient": "linear-gradient(135deg,#f3e8ff 0%,#d6bcff 100%)",
+    "gradientLight": "linear-gradient(135deg,#f3e8ff 0%,#d6bcff 100%)",
+    "gradientDark": "linear-gradient(135deg,#5d3b66 0%,#3b2947 100%)"
+  },
+  {
+    "id": "tip-021",
+    "title": "Plan for Period Days",
+    "summary": "Prepare a small kit for comfort and emergencies.",
+    "details": "Include favorite products, spare underwear, pain relief if appropriate, a heating patch, and a small snack to stay comfortable away from home.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#e8ffe5 0%,#b7ffdb 100%)",
+    "gradientLight": "linear-gradient(135deg,#e8ffe5 0%,#b7ffdb 100%)",
+    "gradientDark": "linear-gradient(135deg,#184f2f 0%,#0f3622 100%)"
+  },
+  {
+    "id": "tip-022",
+    "title": "Eat Small, Frequent Meals",
+    "summary": "Smaller meals help reduce nausea and cravings.",
+    "details": "If you experience digestive upset or low energy, try eating balanced snacks and small meals throughout the day rather than big heavy meals.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#fff4e6 0%,#ffd8a8 100%)",
+    "gradientLight": "linear-gradient(135deg,#fff4e6 0%,#ffd8a8 100%)",
+    "gradientDark": "linear-gradient(135deg,#6b4a2d 0%,#47321f 100%)"
+  },
+  {
+    "id": "tip-023",
+    "title": "Include Probiotic-rich Foods",
+    "summary": "Support gut flora to aid digestion and hormone metabolism.",
+    "details": "Yogurt, kefir, sauerkraut, and miso introduce beneficial bacteria that support gut health and may help with bloating.",
+    "tags": [
+      "gut"
+    ],
+    "gradient": "linear-gradient(135deg,#fce7f3 0%,#f8d7ef 100%)",
+    "gradientLight": "linear-gradient(135deg,#fce7f3 0%,#f8d7ef 100%)",
+    "gradientDark": "linear-gradient(135deg,#6a3754 0%,#3e2639 100%)"
+  },
+  {
+    "id": "tip-024",
+    "title": "Use Gentle Core Strengthening",
+    "summary": "Build support to ease back pain.",
+    "details": "Low-impact core exercises performed regularly improve posture and reduce lower back strain during periods.",
+    "tags": [
+      "exercise"
+    ],
+    "gradient": "linear-gradient(135deg,#e8f0ff 0%,#cfe0ff 100%)",
+    "gradientLight": "linear-gradient(135deg,#e8f0ff 0%,#cfe0ff 100%)",
+    "gradientDark": "linear-gradient(135deg,#1d3b66 0%,#122744 100%)"
+  },
+  {
+    "id": "tip-025",
+    "title": "Try Ginger for Nausea",
+    "summary": "Ginger helps reduce period-related nausea and indigestion.",
+    "details": "Sip ginger tea or chew a small piece of candied ginger when you feel queasy; it's a natural anti-nausea aid.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#ffd1e8 0%,#ff9fc3 100%)",
+    "gradientLight": "linear-gradient(135deg,#ffd1e8 0%,#ff9fc3 100%)",
+    "gradientDark": "linear-gradient(135deg,#7a3042 0%,#502232 100%)"
+  },
+  {
+    "id": "tip-026",
+    "title": "Practice Pelvic Floor Relaxation",
+    "summary": "Tension in the pelvic floor can worsen pain.",
+    "details": "Learn pelvic floor breathing and gentle relaxation from a physiotherapist to relieve pelvic pain related to menstrual cycles.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#ffe9c6 0%,#ffb3a7 100%)",
+    "gradientLight": "linear-gradient(135deg,#ffe9c6 0%,#ffb3a7 100%)",
+    "gradientDark": "linear-gradient(135deg,#6b3e2b 0%,#3f2a20 100%)"
+  },
+  {
+    "id": "tip-027",
+    "title": "Avoid Excessive Salt Before Your Period",
+    "summary": "Lowering salt intake can reduce premenstrual bloating.",
+    "details": "Reducing canned and processed foods a week before your period may help with bloating and water retention.",
+    "tags": [
+      "hydration"
+    ],
+    "gradient": "linear-gradient(135deg,#e0f7fa 0%,#b3e5fc 100%)",
+    "gradientLight": "linear-gradient(135deg,#e0f7fa 0%,#b3e5fc 100%)",
+    "gradientDark": "linear-gradient(135deg,#0b5260 0%,#063a45 100%)"
+  },
+  {
+    "id": "tip-028",
+    "title": "Use Heat for Lower Back Pain",
+    "summary": "Heat applied to the back can relieve muscular tension.",
+    "details": "A warm compress placed on the lower back reduces cramping and can be used intermittently for relief.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#f3e8ff 0%,#d6bcff 100%)",
+    "gradientLight": "linear-gradient(135deg,#f3e8ff 0%,#d6bcff 100%)",
+    "gradientDark": "linear-gradient(135deg,#5d3b66 0%,#3b2947 100%)"
+  },
+  {
+    "id": "tip-029",
+    "title": "Include Foods High in Vitamin C",
+    "summary": "Vitamin C helps iron absorption and immunity.",
+    "details": "Citrus fruits, bell peppers, and strawberries improve iron uptake when paired with iron-rich meals.",
+    "tags": [
+      "nutrition"
+    ],
+    "gradient": "linear-gradient(135deg,#e8ffe5 0%,#b7ffdb 100%)",
+    "gradientLight": "linear-gradient(135deg,#e8ffe5 0%,#b7ffdb 100%)",
+    "gradientDark": "linear-gradient(135deg,#184f2f 0%,#0f3622 100%)"
+  },
+  {
+    "id": "tip-030",
+    "title": "Avoid Smoking",
+    "summary": "Smoking worsens vascular and reproductive health.",
+    "details": "If you smoke, seek cessation resources as smoking increases risk for many menstrual and health issues.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#fff4e6 0%,#ffd8a8 100%)",
+    "gradientLight": "linear-gradient(135deg,#fff4e6 0%,#ffd8a8 100%)",
+    "gradientDark": "linear-gradient(135deg,#6b4a2d 0%,#47321f 100%)"
+  },
+  {
+    "id": "tip-031",
+    "title": "Practice Mindful Movement",
+    "summary": "Gentle movement reduces tension and improves mood.",
+    "details": "Walking, tai chi, and restorative yoga help circulation and emotional wellbeing without straining.",
+    "tags": [
+      "exercise",
+      "mental"
+    ],
+    "gradient": "linear-gradient(135deg,#fce7f3 0%,#f8d7ef 100%)",
+    "gradientLight": "linear-gradient(135deg,#fce7f3 0%,#f8d7ef 100%)",
+    "gradientDark": "linear-gradient(135deg,#6a3754 0%,#3e2639 100%)"
+  },
+  {
+    "id": "tip-032",
+    "title": "Stay Warm in Cold Weather",
+    "summary": "Cold can increase muscle tension and discomfort.",
+    "details": "Dress warmly and use heat therapy when outside in cold temperatures to reduce muscle cramps and discomfort.",
+    "tags": [
+      "pain"
+    ],
+    "gradient": "linear-gradient(135deg,#e8f0ff 0%,#cfe0ff 100%)",
+    "gradientLight": "linear-gradient(135deg,#e8f0ff 0%,#cfe0ff 100%)",
+    "gradientDark": "linear-gradient(135deg,#1d3b66 0%,#122744 100%)"
+  },
+  {
+    "id": "tip-033",
+    "title": "Include Potassium-rich Foods",
+    "summary": "Potassium supports fluid balance and reduces bloating.",
+    "details": "Bananas, sweet potatoes, and leafy greens help maintain electrolyte balance and reduce water retention.",
+    "tags": [
+      "hydration"
+    ],
+    "gradient": "linear-gradient(135deg,#ffd1e8 0%,#ff9fc3 100%)",
+    "gradientLight": "linear-gradient(135deg,#ffd1e8 0%,#ff9fc3 100%)",
+    "gradientDark": "linear-gradient(135deg,#7a3042 0%,#502232 100%)"
+  },
+  {
+    "id": "tip-034",
+    "title": "Use Stress-Reduction Techniques",
+    "summary": "Lowering stress reduces PMS intensity.",
+    "details": "Meditation, progressive muscle relaxation, or guided imagery can lower stress hormones that amplify symptoms.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#ffe9c6 0%,#ffb3a7 100%)",
+    "gradientLight": "linear-gradient(135deg,#ffe9c6 0%,#ffb3a7 100%)",
+    "gradientDark": "linear-gradient(135deg,#6b3e2b 0%,#3f2a20 100%)"
+  },
+  {
+    "id": "tip-035",
+    "title": "Prioritize Iron-rich Plant Meals",
+    "summary": "Plant-based iron works with vitamin C.",
+    "details": "Combine lentils, spinach, or tofu with citrus or peppers to make plant iron more bioavailable.",
+    "tags": [
+      "nutrition"
+    ],
+    "gradient": "linear-gradient(135deg,#e0f7fa 0%,#b3e5fc 100%)",
+    "gradientLight": "linear-gradient(135deg,#e0f7fa 0%,#b3e5fc 100%)",
+    "gradientDark": "linear-gradient(135deg,#0b5260 0%,#063a45 100%)"
+  },
+  {
+    "id": "tip-036",
+    "title": "Avoid Excessive Exercise on Heavy Flow Days",
+    "summary": "Heavy exertion can worsen fatigue during heavy bleeding.",
+    "details": "Opt for light walking or stretching during heavy flow; save high-intensity sessions for higher-energy phases.",
+    "tags": [
+      "exercise"
+    ],
+    "gradient": "linear-gradient(135deg,#f3e8ff 0%,#d6bcff 100%)",
+    "gradientLight": "linear-gradient(135deg,#f3e8ff 0%,#d6bcff 100%)",
+    "gradientDark": "linear-gradient(135deg,#5d3b66 0%,#3b2947 100%)"
+  },
+  {
+    "id": "tip-037",
+    "title": "Use Gentle Lower-abdominal Massage",
+    "summary": "Massage can ease muscle tension and reduce cramps.",
+    "details": "Circular, gentle massage towards the pelvis combined with heat improves circulation and relieves pain.",
+    "tags": [
+      "pain",
+      "self-care"
+    ],
+    "gradient": "linear-gradient(135deg,#e8ffe5 0%,#b7ffdb 100%)",
+    "gradientLight": "linear-gradient(135deg,#e8ffe5 0%,#b7ffdb 100%)",
+    "gradientDark": "linear-gradient(135deg,#184f2f 0%,#0f3622 100%)"
+  },
+  {
+    "id": "tip-038",
+    "title": "Include Whole Grains",
+    "summary": "Fiber-rich grains support digestion and steady energy.",
+    "details": "Oats, quinoa, and brown rice provide sustained energy and support hormone metabolism through fiber.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#fff4e6 0%,#ffd8a8 100%)",
+    "gradientLight": "linear-gradient(135deg,#fff4e6 0%,#ffd8a8 100%)",
+    "gradientDark": "linear-gradient(135deg,#6b4a2d 0%,#47321f 100%)"
+  },
+  {
+    "id": "tip-039",
+    "title": "Limit Highly Processed Foods",
+    "summary": "Processed foods can increase inflammation and symptoms.",
+    "details": "Focus on whole, minimally processed foods for better inflammation control and stable energy.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#fce7f3 0%,#f8d7ef 100%)",
+    "gradientLight": "linear-gradient(135deg,#fce7f3 0%,#f8d7ef 100%)",
+    "gradientDark": "linear-gradient(135deg,#6a3754 0%,#3e2639 100%)"
+  },
+  {
+    "id": "tip-040",
+    "title": "Use Aromatherapy for Relaxation",
+    "summary": "Certain scents help calm the nervous system.",
+    "details": "Lavender and chamomile oils in a diffuser or a washcloth can ease anxiety and promote sleep—test for sensitivity.",
+    "tags": [
+      "sleep",
+      "mental"
+    ],
+    "gradient": "linear-gradient(135deg,#e8f0ff 0%,#cfe0ff 100%)",
+    "gradientLight": "linear-gradient(135deg,#e8f0ff 0%,#cfe0ff 100%)",
+    "gradientDark": "linear-gradient(135deg,#1d3b66 0%,#122744 100%)"
+  },
+  {
+    "id": "tip-041",
+    "title": "Practice Gratitude",
+    "summary": "Gratitude improves mood and resilience.",
+    "details": "Daily gratitude journaling—even short entries—can reduce stress and improve emotional wellbeing during your cycle.",
+    "tags": [
+      "mental"
+    ],
+    "gradient": "linear-gradient(135deg,#ffd1e8 0%,#ff9fc3 100%)",
+    "gradientLight": "linear-gradient(135deg,#ffd1e8 0%,#ff9fc3 100%)",
+    "gradientDark": "linear-gradient(135deg,#7a3042 0%,#502232 100%)"
+  },
+  {
+    "id": "tip-042",
+    "title": "Include Anti-inflammatory Spices",
+    "summary": "Spices like turmeric and ginger can help lower inflammation.",
+    "details": "Add turmeric to soups and ginger to teas or meals to harness natural anti-inflammatory effects.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#ffe9c6 0%,#ffb3a7 100%)",
+    "gradientLight": "linear-gradient(135deg,#ffe9c6 0%,#ffb3a7 100%)",
+    "gradientDark": "linear-gradient(135deg,#6b3e2b 0%,#3f2a20 100%)"
+  },
+  {
+    "id": "tip-043",
+    "title": "Avoid Overuse of Caffeine",
+    "summary": "Too much caffeine worsens anxiety and breast tenderness.",
+    "details": "Limit caffeine and switch to lower-caffeine or caffeine-free drinks if you notice sensitivity around your period.",
+    "tags": [
+      "mental"
+    ],
+    "gradient": "linear-gradient(135deg,#e0f7fa 0%,#b3e5fc 100%)",
+    "gradientLight": "linear-gradient(135deg,#e0f7fa 0%,#b3e5fc 100%)",
+    "gradientDark": "linear-gradient(135deg,#0b5260 0%,#063a45 100%)"
+  },
+  {
+    "id": "tip-044",
+    "title": "Choose Nourishing Snacks",
+    "summary": "Pair protein with fiber for steady energy.",
+    "details": "Examples: yogurt with berries, hummus and carrots, or apple slices with nut butter to prevent blood sugar dips.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#f3e8ff 0%,#d6bcff 100%)",
+    "gradientLight": "linear-gradient(135deg,#f3e8ff 0%,#d6bcff 100%)",
+    "gradientDark": "linear-gradient(135deg,#5d3b66 0%,#3b2947 100%)"
+  },
+  {
+    "id": "tip-045",
+    "title": "Prioritize Rest During Intensive Symptoms",
+    "summary": "Rest supports recovery and mental health.",
+    "details": "Allow yourself to slow down—resting is productive when symptoms are severe and helps speed recovery.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#e8ffe5 0%,#b7ffdb 100%)",
+    "gradientLight": "linear-gradient(135deg,#e8ffe5 0%,#b7ffdb 100%)",
+    "gradientDark": "linear-gradient(135deg,#184f2f 0%,#0f3622 100%)"
+  },
+  {
+    "id": "tip-046",
+    "title": "Track Sleep to Spot Patterns",
+    "summary": "Poor sleep worsens PMS and fatigue.",
+    "details": "Use a sleep tracker or notes to find trends and improve sleep hygiene accordingly.",
+    "tags": [
+      "sleep",
+      "hygiene"
+    ],
+    "gradient": "linear-gradient(135deg,#fff4e6 0%,#ffd8a8 100%)",
+    "gradientLight": "linear-gradient(135deg,#fff4e6 0%,#ffd8a8 100%)",
+    "gradientDark": "linear-gradient(135deg,#6b4a2d 0%,#47321f 100%)"
+  },
+  {
+    "id": "tip-047",
+    "title": "Consider Supplements Carefully",
+    "summary": "Supplements can help but should be personalized.",
+    "details": "Discuss supplements like iron, magnesium, or B vitamins with a clinician and base use on testing and symptoms.",
+    "tags": [
+      "nutrition"
+    ],
+    "gradient": "linear-gradient(135deg,#fce7f3 0%,#f8d7ef 100%)",
+    "gradientLight": "linear-gradient(135deg,#fce7f3 0%,#f8d7ef 100%)",
+    "gradientDark": "linear-gradient(135deg,#6a3754 0%,#3e2639 100%)"
+  },
+  {
+    "id": "tip-048",
+    "title": "Practice Short Mindfulness Breaks",
+    "summary": "Micro-mindfulness reduces stress rapidly.",
+    "details": "1–3 minutes of focused breathing or body scanning can reset stress responses and reduce symptom intensity.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#e8f0ff 0%,#cfe0ff 100%)",
+    "gradientLight": "linear-gradient(135deg,#e8f0ff 0%,#cfe0ff 100%)",
+    "gradientDark": "linear-gradient(135deg,#1d3b66 0%,#122744 100%)"
+  },
+  {
+    "id": "tip-049",
+    "title": "Keep a Period Calendar with Symptoms",
+    "summary": "Documenting symptoms helps conversations with clinicians.",
+    "details": "Log pain levels, mood, sleep, and medication use to identify patterns and share useful data during medical visits.",
+    "tags": [
+      "sleep",
+      "mental"
+    ],
+    "gradient": "linear-gradient(135deg,#ffd1e8 0%,#ff9fc3 100%)",
+    "gradientLight": "linear-gradient(135deg,#ffd1e8 0%,#ff9fc3 100%)",
+    "gradientDark": "linear-gradient(135deg,#7a3042 0%,#502232 100%)"
+  },
+  {
+    "id": "tip-050",
+    "title": "Use Cooling for Breast Tenderness",
+    "summary": "Cooling reduces swelling and discomfort.",
+    "details": "A cool compress for short intervals soothes breast tenderness; avoid extreme cold directly on skin.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#ffe9c6 0%,#ffb3a7 100%)",
+    "gradientLight": "linear-gradient(135deg,#ffe9c6 0%,#ffb3a7 100%)",
+    "gradientDark": "linear-gradient(135deg,#6b3e2b 0%,#3f2a20 100%)"
+  },
+  {
+    "id": "tip-051",
+    "title": "Plan Meals Around Energy Levels",
+    "summary": "Adjust meal complexity by cycle phase.",
+    "details": "Make lighter, easier-to-prepare meals during low-energy days and more complex meals when you have more vitality.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#e0f7fa 0%,#b3e5fc 100%)",
+    "gradientLight": "linear-gradient(135deg,#e0f7fa 0%,#b3e5fc 100%)",
+    "gradientDark": "linear-gradient(135deg,#0b5260 0%,#063a45 100%)"
+  },
+  {
+    "id": "tip-052",
+    "title": "Avoid Excessive Salt During PMS",
+    "summary": "Salt increases bloating and discomfort.",
+    "details": "Reduce salty snacks and canned soups in the week before your period to minimize bloating.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#f3e8ff 0%,#d6bcff 100%)",
+    "gradientLight": "linear-gradient(135deg,#f3e8ff 0%,#d6bcff 100%)",
+    "gradientDark": "linear-gradient(135deg,#5d3b66 0%,#3b2947 100%)"
+  },
+  {
+    "id": "tip-053",
+    "title": "Practice Self-compassion",
+    "summary": "Be gentle with yourself during symptomatic days.",
+    "details": "Acknowledge limits, set realistic expectations, and practice kind self-talk to reduce secondary distress.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#e8ffe5 0%,#b7ffdb 100%)",
+    "gradientLight": "linear-gradient(135deg,#e8ffe5 0%,#b7ffdb 100%)",
+    "gradientDark": "linear-gradient(135deg,#184f2f 0%,#0f3622 100%)"
+  },
+  {
+    "id": "tip-054",
+    "title": "Include Lean Proteins",
+    "summary": "Protein stabilizes blood sugar and supports recovery.",
+    "details": "Fish, poultry, beans, and tofu are excellent protein sources to include every day for steady energy.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#fff4e6 0%,#ffd8a8 100%)",
+    "gradientLight": "linear-gradient(135deg,#fff4e6 0%,#ffd8a8 100%)",
+    "gradientDark": "linear-gradient(135deg,#6b4a2d 0%,#47321f 100%)"
+  },
+  {
+    "id": "tip-055",
+    "title": "Use Gentle Heat and Movement Together",
+    "summary": "Combining heat with light movement enhances relief.",
+    "details": "Apply heat and do gentle stretches or a short walk for better circulation and pain reduction.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#fce7f3 0%,#f8d7ef 100%)",
+    "gradientLight": "linear-gradient(135deg,#fce7f3 0%,#f8d7ef 100%)",
+    "gradientDark": "linear-gradient(135deg,#6a3754 0%,#3e2639 100%)"
+  },
+  {
+    "id": "tip-056",
+    "title": "Avoid Extreme Dieting",
+    "summary": "Very low-calorie diets can disrupt hormones.",
+    "details": "Ensure you consume enough calories and nutrients to maintain normal cycles and energy.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#e8f0ff 0%,#cfe0ff 100%)",
+    "gradientLight": "linear-gradient(135deg,#e8f0ff 0%,#cfe0ff 100%)",
+    "gradientDark": "linear-gradient(135deg,#1d3b66 0%,#122744 100%)"
+  },
+  {
+    "id": "tip-057",
+    "title": "Use Structured Relaxation Techniques",
+    "summary": "Techniques like PMR or guided imagery lower tension.",
+    "details": "Practice progressive muscle relaxation or guided visualization to reduce autonomic arousal and improve well-being.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#ffd1e8 0%,#ff9fc3 100%)",
+    "gradientLight": "linear-gradient(135deg,#ffd1e8 0%,#ff9fc3 100%)",
+    "gradientDark": "linear-gradient(135deg,#7a3042 0%,#502232 100%)"
+  },
+  {
+    "id": "tip-058",
+    "title": "Limit Late-night Eating",
+    "summary": "Late meals can disrupt sleep and digestion.",
+    "details": "Finish larger meals 2–3 hours before bedtime and choose lighter evening snacks to support sleep quality.",
+    "tags": [
+      "sleep"
+    ],
+    "gradient": "linear-gradient(135deg,#ffe9c6 0%,#ffb3a7 100%)",
+    "gradientLight": "linear-gradient(135deg,#ffe9c6 0%,#ffb3a7 100%)",
+    "gradientDark": "linear-gradient(135deg,#6b3e2b 0%,#3f2a20 100%)"
+  },
+  {
+    "id": "tip-059",
+    "title": "Include Hydrating Foods",
+    "summary": "Fruits and broths help maintain fluids and electrolytes.",
+    "details": "Soups, watermelon, oranges, and cucumbers help keep you hydrated and are gentle on the stomach.",
+    "tags": [
+      "hydration"
+    ],
+    "gradient": "linear-gradient(135deg,#e0f7fa 0%,#b3e5fc 100%)",
+    "gradientLight": "linear-gradient(135deg,#e0f7fa 0%,#b3e5fc 100%)",
+    "gradientDark": "linear-gradient(135deg,#0b5260 0%,#063a45 100%)"
+  },
+  {
+    "id": "tip-060",
+    "title": "Plan Light Social Activities",
+    "summary": "Low-energy socializing reduces isolation without exhaustion.",
+    "details": "Choose calming activities like a short coffee with a friend or a relaxing movie night rather than highly social events.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#f3e8ff 0%,#d6bcff 100%)",
+    "gradientLight": "linear-gradient(135deg,#f3e8ff 0%,#d6bcff 100%)",
+    "gradientDark": "linear-gradient(135deg,#5d3b66 0%,#3b2947 100%)"
+  },
+  {
+    "id": "tip-061",
+    "title": "Try Mindful Eating to Reduce Bloating",
+    "summary": "Slow eating aids digestion and reduces air swallowing.",
+    "details": "Chew thoroughly, pause between bites, and avoid talking while chewing to reduce bloating.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#e8ffe5 0%,#b7ffdb 100%)",
+    "gradientLight": "linear-gradient(135deg,#e8ffe5 0%,#b7ffdb 100%)",
+    "gradientDark": "linear-gradient(135deg,#184f2f 0%,#0f3622 100%)"
+  },
+  {
+    "id": "tip-062",
+    "title": "Include Iron-rich Snacks",
+    "summary": "Snacks can help maintain iron between meals.",
+    "details": "Hummus with veggies, roasted chickpeas, or a small serving of nuts support iron intake and steady energy.",
+    "tags": [
+      "nutrition"
+    ],
+    "gradient": "linear-gradient(135deg,#fff4e6 0%,#ffd8a8 100%)",
+    "gradientLight": "linear-gradient(135deg,#fff4e6 0%,#ffd8a8 100%)",
+    "gradientDark": "linear-gradient(135deg,#6b4a2d 0%,#47321f 100%)"
+  },
+  {
+    "id": "tip-063",
+    "title": "Use Apps to Track Patterns",
+    "summary": "Technology can reveal long-term trends.",
+    "details": "Menstrual apps that track symptoms, mood, and sleep help identify triggers and good management strategies.",
+    "tags": [
+      "sleep",
+      "mental"
+    ],
+    "gradient": "linear-gradient(135deg,#fce7f3 0%,#f8d7ef 100%)",
+    "gradientLight": "linear-gradient(135deg,#fce7f3 0%,#f8d7ef 100%)",
+    "gradientDark": "linear-gradient(135deg,#6a3754 0%,#3e2639 100%)"
+  },
+  {
+    "id": "tip-064",
+    "title": "Try Gentle Resistance for Strength",
+    "summary": "Light resistance maintains muscle without overtaxing energy.",
+    "details": "Low-load resistance training supports metabolism and posture while being gentle on low-energy days.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#e8f0ff 0%,#cfe0ff 100%)",
+    "gradientLight": "linear-gradient(135deg,#e8f0ff 0%,#cfe0ff 100%)",
+    "gradientDark": "linear-gradient(135deg,#1d3b66 0%,#122744 100%)"
+  },
+  {
+    "id": "tip-065",
+    "title": "Practice Diaphragmatic Breathing",
+    "summary": "Deep belly breaths calm the nervous system.",
+    "details": "Inhale deeply into the belly for 4–5 seconds, exhale slowly to reduce pain sensitivity and anxiety.",
+    "tags": [
+      "mental"
+    ],
+    "gradient": "linear-gradient(135deg,#ffd1e8 0%,#ff9fc3 100%)",
+    "gradientLight": "linear-gradient(135deg,#ffd1e8 0%,#ff9fc3 100%)",
+    "gradientDark": "linear-gradient(135deg,#7a3042 0%,#502232 100%)"
+  },
+  {
+    "id": "tip-066",
+    "title": "Use Cooling Gel for Sore Breasts",
+    "summary": "A cooling gel or compress soothes soreness.",
+    "details": "Apply a gentle cool compress for short durations to relieve swelling and tenderness.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#ffe9c6 0%,#ffb3a7 100%)",
+    "gradientLight": "linear-gradient(135deg,#ffe9c6 0%,#ffb3a7 100%)",
+    "gradientDark": "linear-gradient(135deg,#6b3e2b 0%,#3f2a20 100%)"
+  },
+  {
+    "id": "tip-067",
+    "title": "Avoid Overuse of Painkillers Without Review",
+    "summary": "Frequent painkiller use deserves evaluation.",
+    "details": "If you rely on OTC medications several times per cycle, consult a clinician to find safer long-term strategies.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#e0f7fa 0%,#b3e5fc 100%)",
+    "gradientLight": "linear-gradient(135deg,#e0f7fa 0%,#b3e5fc 100%)",
+    "gradientDark": "linear-gradient(135deg,#0b5260 0%,#063a45 100%)"
+  },
+  {
+    "id": "tip-068",
+    "title": "Try Light Aerobic Activity for Mood",
+    "summary": "Short cardio improves circulation and endorphins.",
+    "details": "A short bike ride or brisk walk can reduce cramps and improve mood for many people.",
+    "tags": [
+      "pain",
+      "mental"
+    ],
+    "gradient": "linear-gradient(135deg,#f3e8ff 0%,#d6bcff 100%)",
+    "gradientLight": "linear-gradient(135deg,#f3e8ff 0%,#d6bcff 100%)",
+    "gradientDark": "linear-gradient(135deg,#5d3b66 0%,#3b2947 100%)"
+  },
+  {
+    "id": "tip-069",
+    "title": "Include Antioxidant-rich Foods",
+    "summary": "Antioxidants lower oxidative stress and support recovery.",
+    "details": "Berries, nuts, and dark leafy greens provide antioxidants that support general health during cycles.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#e8ffe5 0%,#b7ffdb 100%)",
+    "gradientLight": "linear-gradient(135deg,#e8ffe5 0%,#b7ffdb 100%)",
+    "gradientDark": "linear-gradient(135deg,#184f2f 0%,#0f3622 100%)"
+  },
+  {
+    "id": "tip-070",
+    "title": "Use Gentle Evening Routines",
+    "summary": "Calming routines support sleep and recovery.",
+    "details": "Lower lights, calming music, and a warm non-caffeinated drink help transition to restful sleep.",
+    "tags": [
+      "sleep"
+    ],
+    "gradient": "linear-gradient(135deg,#fff4e6 0%,#ffd8a8 100%)",
+    "gradientLight": "linear-gradient(135deg,#fff4e6 0%,#ffd8a8 100%)",
+    "gradientDark": "linear-gradient(135deg,#6b4a2d 0%,#47321f 100%)"
+  },
+  {
+    "id": "tip-071",
+    "title": "Wear Breathable Fabrics",
+    "summary": "Breathable underwear and clothes reduce irritation.",
+    "details": "Cotton and moisture-wicking fabrics reduce skin irritation and support comfort during periods.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#fce7f3 0%,#f8d7ef 100%)",
+    "gradientLight": "linear-gradient(135deg,#fce7f3 0%,#f8d7ef 100%)",
+    "gradientDark": "linear-gradient(135deg,#6a3754 0%,#3e2639 100%)"
+  },
+  {
+    "id": "tip-072",
+    "title": "Use Simple Stretch Routines in the Morning",
+    "summary": "Morning stretches improve blood flow and reduce stiffness.",
+    "details": "A 5–10 minute stretch routine after waking helps circulation and reduces morning cramps.",
+    "tags": [
+      "pain"
+    ],
+    "gradient": "linear-gradient(135deg,#e8f0ff 0%,#cfe0ff 100%)",
+    "gradientLight": "linear-gradient(135deg,#e8f0ff 0%,#cfe0ff 100%)",
+    "gradientDark": "linear-gradient(135deg,#1d3b66 0%,#122744 100%)"
+  },
+  {
+    "id": "tip-073",
+    "title": "Include Hydrating Beverages",
+    "summary": "Electrolyte-balanced drinks help if you feel faint.",
+    "details": "Coconut water or electrolyte drinks during heavy exertion or dizziness help maintain balance—use as needed.",
+    "tags": [
+      "hydration"
+    ],
+    "gradient": "linear-gradient(135deg,#ffd1e8 0%,#ff9fc3 100%)",
+    "gradientLight": "linear-gradient(135deg,#ffd1e8 0%,#ff9fc3 100%)",
+    "gradientDark": "linear-gradient(135deg,#7a3042 0%,#502232 100%)"
+  },
+  {
+    "id": "tip-074",
+    "title": "Avoid Over-sanitizing Menstrual Products",
+    "summary": "Excessive cleaning routines can disrupt natural flora with cups.",
+    "details": "Follow manufacturer instructions for cups and tampons; avoid harsh soaps that can irritate the vagina or disrupt flora.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#ffe9c6 0%,#ffb3a7 100%)",
+    "gradientLight": "linear-gradient(135deg,#ffe9c6 0%,#ffb3a7 100%)",
+    "gradientDark": "linear-gradient(135deg,#6b3e2b 0%,#3f2a20 100%)"
+  },
+  {
+    "id": "tip-075",
+    "title": "Try Creative Activities for Mood Regulation",
+    "summary": "Art, music, and crafting reduce rumination.",
+    "details": "Creative hobbies provide meaningful distraction and emotional expression during low mood days.",
+    "tags": [
+      "mental"
+    ],
+    "gradient": "linear-gradient(135deg,#e0f7fa 0%,#b3e5fc 100%)",
+    "gradientLight": "linear-gradient(135deg,#e0f7fa 0%,#b3e5fc 100%)",
+    "gradientDark": "linear-gradient(135deg,#0b5260 0%,#063a45 100%)"
+  },
+  {
+    "id": "tip-076",
+    "title": "Prioritize Iron-rich Breakfasts",
+    "summary": "Breakfast can help restore energy post-menses.",
+    "details": "An iron-rich breakfast like eggs or spinach smoothie with vitamin C helps replenish stores after heavy flow.",
+    "tags": [
+      "nutrition"
+    ],
+    "gradient": "linear-gradient(135deg,#f3e8ff 0%,#d6bcff 100%)",
+    "gradientLight": "linear-gradient(135deg,#f3e8ff 0%,#d6bcff 100%)",
+    "gradientDark": "linear-gradient(135deg,#5d3b66 0%,#3b2947 100%)"
+  },
+  {
+    "id": "tip-077",
+    "title": "Limit Processed Sugary Snacks",
+    "summary": "Processed sugars can spike mood and energy swings.",
+    "details": "Choose whole foods and protein combos to stabilize blood sugar and mood through the day.",
+    "tags": [
+      "mental"
+    ],
+    "gradient": "linear-gradient(135deg,#e8ffe5 0%,#b7ffdb 100%)",
+    "gradientLight": "linear-gradient(135deg,#e8ffe5 0%,#b7ffdb 100%)",
+    "gradientDark": "linear-gradient(135deg,#184f2f 0%,#0f3622 100%)"
+  },
+  {
+    "id": "tip-078",
+    "title": "Use Mindful Breaks at Work",
+    "summary": "Short breaks reduce accumulated stress and physical tension.",
+    "details": "Step away for a 3–5 minute breathing or stretch break each hour to lower tension and improve focus.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#fff4e6 0%,#ffd8a8 100%)",
+    "gradientLight": "linear-gradient(135deg,#fff4e6 0%,#ffd8a8 100%)",
+    "gradientDark": "linear-gradient(135deg,#6b4a2d 0%,#47321f 100%)"
+  },
+  {
+    "id": "tip-079",
+    "title": "Include Healthy Snacks for Stable Energy",
+    "summary": "Smart snacking prevents energy crashes.",
+    "details": "Nuts, yogurt, fruit with protein, and whole-grain crackers are good options to balance blood sugar.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#fce7f3 0%,#f8d7ef 100%)",
+    "gradientLight": "linear-gradient(135deg,#fce7f3 0%,#f8d7ef 100%)",
+    "gradientDark": "linear-gradient(135deg,#6a3754 0%,#3e2639 100%)"
+  },
+  {
+    "id": "tip-080",
+    "title": "Consider Pelvic Physical Therapy for Chronic Issues",
+    "summary": "Specialized therapy helps long-term pelvic pain.",
+    "details": "A pelvic health physiotherapist can treat pelvic floor dysfunction, which can contribute to menstruation-related pain.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#e8f0ff 0%,#cfe0ff 100%)",
+    "gradientLight": "linear-gradient(135deg,#e8f0ff 0%,#cfe0ff 100%)",
+    "gradientDark": "linear-gradient(135deg,#1d3b66 0%,#122744 100%)"
+  },
+  {
+    "id": "tip-081",
+    "title": "Practice Regular Sleep Routine",
+    "summary": "Consistent sleep times support hormonal balance.",
+    "details": "Aim for regular bed and wake times, even on weekends, to maintain rhythm and improve mood.",
+    "tags": [
+      "sleep",
+      "mental"
+    ],
+    "gradient": "linear-gradient(135deg,#ffd1e8 0%,#ff9fc3 100%)",
+    "gradientLight": "linear-gradient(135deg,#ffd1e8 0%,#ff9fc3 100%)",
+    "gradientDark": "linear-gradient(135deg,#7a3042 0%,#502232 100%)"
+  },
+  {
+    "id": "tip-082",
+    "title": "Use Gentle Movement for Headache Relief",
+    "summary": "Neck and shoulder stretches ease tension headaches.",
+    "details": "Simple neck rolls and shoulder stretches reduce muscle tension that contributes to menstrual headaches.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#ffe9c6 0%,#ffb3a7 100%)",
+    "gradientLight": "linear-gradient(135deg,#ffe9c6 0%,#ffb3a7 100%)",
+    "gradientDark": "linear-gradient(135deg,#6b3e2b 0%,#3f2a20 100%)"
+  },
+  {
+    "id": "tip-083",
+    "title": "Keep Emergency Contacts and Clinic Info Handy",
+    "summary": "Know where to seek care if symptoms worsen suddenly.",
+    "details": "Save clinic numbers and emergency contacts so you can seek help promptly for severe bleeding or pain.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#e0f7fa 0%,#b3e5fc 100%)",
+    "gradientLight": "linear-gradient(135deg,#e0f7fa 0%,#b3e5fc 100%)",
+    "gradientDark": "linear-gradient(135deg,#0b5260 0%,#063a45 100%)"
+  },
+  {
+    "id": "tip-084",
+    "title": "Include Anti-inflammatory Oils",
+    "summary": "Use olive and avocado oil instead of industrial seed oils.",
+    "details": "Prefer olive or avocado oil for cooking and dressings to reduce omega-6 overload and inflammation.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#f3e8ff 0%,#d6bcff 100%)",
+    "gradientLight": "linear-gradient(135deg,#f3e8ff 0%,#d6bcff 100%)",
+    "gradientDark": "linear-gradient(135deg,#5d3b66 0%,#3b2947 100%)"
+  },
+  {
+    "id": "tip-085",
+    "title": "Practice Gratitude and Reflection",
+    "summary": "Positive reflection improves long-term resilience.",
+    "details": "Spend a few minutes daily noting small positive things to shift focus away from pain and stress.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#e8ffe5 0%,#b7ffdb 100%)",
+    "gradientLight": "linear-gradient(135deg,#e8ffe5 0%,#b7ffdb 100%)",
+    "gradientDark": "linear-gradient(135deg,#184f2f 0%,#0f3622 100%)"
+  },
+  {
+    "id": "tip-086",
+    "title": "Limit Alcohol Before Sleep",
+    "summary": "Alcohol disrupts sleep architecture and mood.",
+    "details": "If you drink, keep it moderate and avoid close to bedtime to support restful sleep and next-day energy.",
+    "tags": [
+      "sleep",
+      "mental"
+    ],
+    "gradient": "linear-gradient(135deg,#fff4e6 0%,#ffd8a8 100%)",
+    "gradientLight": "linear-gradient(135deg,#fff4e6 0%,#ffd8a8 100%)",
+    "gradientDark": "linear-gradient(135deg,#6b4a2d 0%,#47321f 100%)"
+  },
+  {
+    "id": "tip-087",
+    "title": "Try Restorative Yoga for Deep Relaxation",
+    "summary": "Restorative poses support nervous system balance.",
+    "details": "Use supported reclining poses, legs-up-the-wall, and gentle restorative sequences for relaxation and circulation.",
+    "tags": [
+      "exercise"
+    ],
+    "gradient": "linear-gradient(135deg,#fce7f3 0%,#f8d7ef 100%)",
+    "gradientLight": "linear-gradient(135deg,#fce7f3 0%,#f8d7ef 100%)",
+    "gradientDark": "linear-gradient(135deg,#6a3754 0%,#3e2639 100%)"
+  },
+  {
+    "id": "tip-088",
+    "title": "Stay Connected with Trusted Friends",
+    "summary": "Social support reduces stress and isolation.",
+    "details": "Share experiences and ask for practical help when needed—social support boosts resilience.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#e8f0ff 0%,#cfe0ff 100%)",
+    "gradientLight": "linear-gradient(135deg,#e8f0ff 0%,#cfe0ff 100%)",
+    "gradientDark": "linear-gradient(135deg,#1d3b66 0%,#122744 100%)"
+  },
+  {
+    "id": "tip-089",
+    "title": "Monitor for Heavy Bleeding Signs",
+    "summary": "Very heavy bleeding may require medical evaluation.",
+    "details": "If you need to change protection every hour or pass large clots, seek medical advice for possible treatment.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#ffd1e8 0%,#ff9fc3 100%)",
+    "gradientLight": "linear-gradient(135deg,#ffd1e8 0%,#ff9fc3 100%)",
+    "gradientDark": "linear-gradient(135deg,#7a3042 0%,#502232 100%)"
+  },
+  {
+    "id": "tip-090",
+    "title": "Use Gentle Compression for Support",
+    "summary": "Light abdominal support can ease cramping discomfort.",
+    "details": "A soft abdominal wrap or supportive clothing can reduce strain, but avoid excessive tightness that restricts breathing.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#ffe9c6 0%,#ffb3a7 100%)",
+    "gradientLight": "linear-gradient(135deg,#ffe9c6 0%,#ffb3a7 100%)",
+    "gradientDark": "linear-gradient(135deg,#6b3e2b 0%,#3f2a20 100%)"
+  },
+  {
+    "id": "tip-091",
+    "title": "Practice Brief Mindfulness Before Stressful Tasks",
+    "summary": "Short mindfulness reduces anticipatory anxiety.",
+    "details": "Pause for one minute of focused breathing before stressful events to lower anxiety and improve coping.",
+    "tags": [
+      "mental"
+    ],
+    "gradient": "linear-gradient(135deg,#e0f7fa 0%,#b3e5fc 100%)",
+    "gradientLight": "linear-gradient(135deg,#e0f7fa 0%,#b3e5fc 100%)",
+    "gradientDark": "linear-gradient(135deg,#0b5260 0%,#063a45 100%)"
+  },
+  {
+    "id": "tip-092",
+    "title": "Use Cooling Compresses for Migraines",
+    "summary": "Cooling can relieve menstrual migraines.",
+    "details": "A cool cloth on the forehead or neck often reduces migraine intensity—rest in a dark, quiet room when possible.",
+    "tags": [
+      "pain"
+    ],
+    "gradient": "linear-gradient(135deg,#f3e8ff 0%,#d6bcff 100%)",
+    "gradientLight": "linear-gradient(135deg,#f3e8ff 0%,#d6bcff 100%)",
+    "gradientDark": "linear-gradient(135deg,#5d3b66 0%,#3b2947 100%)"
+  },
+  {
+    "id": "tip-093",
+    "title": "Avoid Excessive Salt in Processed Foods",
+    "summary": "Processed meals often hide high sodium.",
+    "details": "Choose fresh meals and ask for sauces on the side when eating out to manage sodium intake.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#e8ffe5 0%,#b7ffdb 100%)",
+    "gradientLight": "linear-gradient(135deg,#e8ffe5 0%,#b7ffdb 100%)",
+    "gradientDark": "linear-gradient(135deg,#184f2f 0%,#0f3622 100%)"
+  },
+  {
+    "id": "tip-094",
+    "title": "Practice Short Evening Wind-downs",
+    "summary": "Calm rituals improve sleep and recovery.",
+    "details": "A warm drink, dim lights, and brief reading or journaling help your mind and body prepare for restful sleep.",
+    "tags": [
+      "sleep"
+    ],
+    "gradient": "linear-gradient(135deg,#fff4e6 0%,#ffd8a8 100%)",
+    "gradientLight": "linear-gradient(135deg,#fff4e6 0%,#ffd8a8 100%)",
+    "gradientDark": "linear-gradient(135deg,#6b4a2d 0%,#47321f 100%)"
+  },
+  {
+    "id": "tip-095",
+    "title": "Include Sources of Zinc in Diet",
+    "summary": "Zinc supports immune function and recovery.",
+    "details": "Pumpkin seeds, legumes, and shellfish are zinc-rich and support overall health during heavy or symptomatic times.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#fce7f3 0%,#f8d7ef 100%)",
+    "gradientLight": "linear-gradient(135deg,#fce7f3 0%,#f8d7ef 100%)",
+    "gradientDark": "linear-gradient(135deg,#6a3754 0%,#3e2639 100%)"
+  },
+  {
+    "id": "tip-096",
+    "title": "Try Breathing and Visualization for Pain",
+    "summary": "Combining breath with visual imagery reduces pain perception.",
+    "details": "Imagine warmth or light flowing into painful areas while breathing slowly to shift attention and reduce discomfort.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#e8f0ff 0%,#cfe0ff 100%)",
+    "gradientLight": "linear-gradient(135deg,#e8f0ff 0%,#cfe0ff 100%)",
+    "gradientDark": "linear-gradient(135deg,#1d3b66 0%,#122744 100%)"
+  },
+  {
+    "id": "tip-097",
+    "title": "Use Simple Posture Adjustments",
+    "summary": "Good posture lowers back strain.",
+    "details": "Sit with a supported lower back and avoid slouching to reduce pelvic and back pain during periods.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#ffd1e8 0%,#ff9fc3 100%)",
+    "gradientLight": "linear-gradient(135deg,#ffd1e8 0%,#ff9fc3 100%)",
+    "gradientDark": "linear-gradient(135deg,#7a3042 0%,#502232 100%)"
+  },
+  {
+    "id": "tip-098",
+    "title": "Avoid Using New Products Without Testing",
+    "summary": "New menstrual products may cause irritation for some people.",
+    "details": "Try a small patch test for new topical products and introduce cup use gradually to ensure tolerance and correct fit.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#ffe9c6 0%,#ffb3a7 100%)",
+    "gradientLight": "linear-gradient(135deg,#ffe9c6 0%,#ffb3a7 100%)",
+    "gradientDark": "linear-gradient(135deg,#6b3e2b 0%,#3f2a20 100%)"
+  },
+  {
+    "id": "tip-099",
+    "title": "Plan Sleep-supportive Environments",
+    "summary": "A cool, dark room improves sleep quality.",
+    "details": "Use blackout curtains, lower room temperature, and reduce noise to improve restorative sleep during symptomatic days.",
+    "tags": [
+      "nutrition",
+      "sleep"
+    ],
+    "gradient": "linear-gradient(135deg,#e0f7fa 0%,#b3e5fc 100%)",
+    "gradientLight": "linear-gradient(135deg,#e0f7fa 0%,#b3e5fc 100%)",
+    "gradientDark": "linear-gradient(135deg,#0b5260 0%,#063a45 100%)"
+  },
+  {
+    "id": "tip-100",
+    "title": "Find a Health Partner or Clinician",
+    "summary": "Ongoing clinical support improves long-term outcomes.",
+    "details": "Build a relationship with a clinician who understands your cycle and listens to concerns for personalized care plans.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#f3e8ff 0%,#d6bcff 100%)",
+    "gradientLight": "linear-gradient(135deg,#f3e8ff 0%,#d6bcff 100%)",
+    "gradientDark": "linear-gradient(135deg,#5d3b66 0%,#3b2947 100%)"
+  },
+  {
+    "id": "tip-101",
+    "title": "Use Low-impact Cardio for Energy",
+    "summary": "Short cardio improves circulation and mood.",
+    "details": "A 20-minute walk or gentle bike ride can boost endorphins and reduce pain without overtaxing energy reserves.",
+    "tags": [
+      "mental"
+    ],
+    "gradient": "linear-gradient(135deg,#e8ffe5 0%,#b7ffdb 100%)",
+    "gradientLight": "linear-gradient(135deg,#e8ffe5 0%,#b7ffdb 100%)",
+    "gradientDark": "linear-gradient(135deg,#184f2f 0%,#0f3622 100%)"
+  },
+  {
+    "id": "tip-102",
+    "title": "Avoid Overhydration Right Before Bed",
+    "summary": "Large volumes before sleep disrupt rest.",
+    "details": "Sip fluids through the day and avoid large drinks just before bed to limit night wakings.",
+    "tags": [
+      "sleep"
+    ],
+    "gradient": "linear-gradient(135deg,#fff4e6 0%,#ffd8a8 100%)",
+    "gradientLight": "linear-gradient(135deg,#fff4e6 0%,#ffd8a8 100%)",
+    "gradientDark": "linear-gradient(135deg,#6b4a2d 0%,#47321f 100%)"
+  },
+  {
+    "id": "tip-103",
+    "title": "Practice Short Meditation Sessions",
+    "summary": "Even 2 minutes of meditation helps reduce stress.",
+    "details": "Use short guided meditations during high-stress moments to calm the nervous system quickly.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#fce7f3 0%,#f8d7ef 100%)",
+    "gradientLight": "linear-gradient(135deg,#fce7f3 0%,#f8d7ef 100%)",
+    "gradientDark": "linear-gradient(135deg,#6a3754 0%,#3e2639 100%)"
+  },
+  {
+    "id": "tip-104",
+    "title": "Include Antioxidant-rich Snacks",
+    "summary": "Antioxidant snacks support recovery and reduce inflammation.",
+    "details": "Blueberries, nuts, and dark chocolate (in small amounts) provide antioxidants and pleasurable snacks.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#e8f0ff 0%,#cfe0ff 100%)",
+    "gradientLight": "linear-gradient(135deg,#e8f0ff 0%,#cfe0ff 100%)",
+    "gradientDark": "linear-gradient(135deg,#1d3b66 0%,#122744 100%)"
+  },
+  {
+    "id": "tip-105",
+    "title": "Use Light Resistance to Maintain Strength",
+    "summary": "Short strength sessions preserve muscle mass.",
+    "details": "Two to three short resistance sessions per week maintain strength and support posture during the cycle.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#ffd1e8 0%,#ff9fc3 100%)",
+    "gradientLight": "linear-gradient(135deg,#ffd1e8 0%,#ff9fc3 100%)",
+    "gradientDark": "linear-gradient(135deg,#7a3042 0%,#502232 100%)"
+  },
+  {
+    "id": "tip-106",
+    "title": "Check for Signs of Iron Deficiency",
+    "summary": "Fatigue and paleness can indicate low iron.",
+    "details": "If you experience persistent fatigue or breathlessness, ask your clinician about iron testing and treatment options.",
+    "tags": [
+      "nutrition"
+    ],
+    "gradient": "linear-gradient(135deg,#ffe9c6 0%,#ffb3a7 100%)",
+    "gradientLight": "linear-gradient(135deg,#ffe9c6 0%,#ffb3a7 100%)",
+    "gradientDark": "linear-gradient(135deg,#6b3e2b 0%,#3f2a20 100%)"
+  },
+  {
+    "id": "tip-107",
+    "title": "Practice Gentle Evening Routines",
+    "summary": "A predictable wind-down helps sleep quality.",
+    "details": "Lower lights, gentle stretches, and calming tea support a restful evening and better next-day energy.",
+    "tags": [
+      "sleep"
+    ],
+    "gradient": "linear-gradient(135deg,#e0f7fa 0%,#b3e5fc 100%)",
+    "gradientLight": "linear-gradient(135deg,#e0f7fa 0%,#b3e5fc 100%)",
+    "gradientDark": "linear-gradient(135deg,#0b5260 0%,#063a45 100%)"
+  },
+  {
+    "id": "tip-108",
+    "title": "Use Magnesium-rich Foods",
+    "summary": "Magnesium supports muscle relaxation and mood.",
+    "details": "Include nuts, seeds, whole grains, and leafy greens to support magnesium intake from foods.",
+    "tags": [
+      "mental"
+    ],
+    "gradient": "linear-gradient(135deg,#f3e8ff 0%,#d6bcff 100%)",
+    "gradientLight": "linear-gradient(135deg,#f3e8ff 0%,#d6bcff 100%)",
+    "gradientDark": "linear-gradient(135deg,#5d3b66 0%,#3b2947 100%)"
+  },
+  {
+    "id": "tip-109",
+    "title": "Try Gentle Hydrotherapy",
+    "summary": "Warm baths followed by cool rinse can relax muscles and improve circulation.",
+    "details": "Alternate warm and cool water in the shower or take a warm bath followed by brief cool rinse to stimulate circulation.",
+    "tags": [
+      "hydration"
+    ],
+    "gradient": "linear-gradient(135deg,#e8ffe5 0%,#b7ffdb 100%)",
+    "gradientLight": "linear-gradient(135deg,#e8ffe5 0%,#b7ffdb 100%)",
+    "gradientDark": "linear-gradient(135deg,#184f2f 0%,#0f3622 100%)"
+  },
+  {
+    "id": "tip-110",
+    "title": "Include Natural Mood-boosters",
+    "summary": "Small daily activities lift mood and resilience.",
+    "details": "Short walks, a favourite song, or calling a friend can provide quick emotional relief during low days.",
+    "tags": [
+      "mental"
+    ],
+    "gradient": "linear-gradient(135deg,#fff4e6 0%,#ffd8a8 100%)",
+    "gradientLight": "linear-gradient(135deg,#fff4e6 0%,#ffd8a8 100%)",
+    "gradientDark": "linear-gradient(135deg,#6b4a2d 0%,#47321f 100%)"
+  },
+  {
+    "id": "tip-111",
+    "title": "Avoid Overtraining During Low Energy Phases",
+    "summary": "Overtraining worsens fatigue and symptoms.",
+    "details": "Adjust training intensity across the cycle to match energy and recovery needs for better long-term performance.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#fce7f3 0%,#f8d7ef 100%)",
+    "gradientLight": "linear-gradient(135deg,#fce7f3 0%,#f8d7ef 100%)",
+    "gradientDark": "linear-gradient(135deg,#6a3754 0%,#3e2639 100%)"
+  },
+  {
+    "id": "tip-112",
+    "title": "Use Comfortable Footwear for Back Support",
+    "summary": "Good shoes improve posture and reduce strain.",
+    "details": "Supportive footwear reduces spinal stress and helps with lower back comfort during the period.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#e8f0ff 0%,#cfe0ff 100%)",
+    "gradientLight": "linear-gradient(135deg,#e8f0ff 0%,#cfe0ff 100%)",
+    "gradientDark": "linear-gradient(135deg,#1d3b66 0%,#122744 100%)"
+  },
+  {
+    "id": "tip-113",
+    "title": "Limit Salt in Processed Meals",
+    "summary": "Hidden salt increases bloating and discomfort.",
+    "details": "Opt for fresh meals and request sauces on the side to manage sodium when eating out.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#ffd1e8 0%,#ff9fc3 100%)",
+    "gradientLight": "linear-gradient(135deg,#ffd1e8 0%,#ff9fc3 100%)",
+    "gradientDark": "linear-gradient(135deg,#7a3042 0%,#502232 100%)"
+  },
+  {
+    "id": "tip-114",
+    "title": "Practice Short Bedtime Rituals",
+    "summary": "Wind-down rituals improve sleep onset.",
+    "details": "A short reading session, gentle stretch, or calming tea before bed helps lower arousal for sleep.",
+    "tags": [
+      "sleep"
+    ],
+    "gradient": "linear-gradient(135deg,#ffe9c6 0%,#ffb3a7 100%)",
+    "gradientLight": "linear-gradient(135deg,#ffe9c6 0%,#ffb3a7 100%)",
+    "gradientDark": "linear-gradient(135deg,#6b3e2b 0%,#3f2a20 100%)"
+  },
+  {
+    "id": "tip-115",
+    "title": "Include Healthy Fats Daily",
+    "summary": "Good fats support hormone production and brain health.",
+    "details": "Avocado, nuts, seeds, and olive oil supply essential fats that support overall hormonal function and wellbeing.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#e0f7fa 0%,#b3e5fc 100%)",
+    "gradientLight": "linear-gradient(135deg,#e0f7fa 0%,#b3e5fc 100%)",
+    "gradientDark": "linear-gradient(135deg,#0b5260 0%,#063a45 100%)"
+  },
+  {
+    "id": "tip-116",
+    "title": "Avoid Excessive Salt at Night",
+    "summary": "Salt close to bedtime worsens overnight bloating.",
+    "details": "Limit salty evening snacks to improve morning comfort and reduce fluid retention.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#f3e8ff 0%,#d6bcff 100%)",
+    "gradientLight": "linear-gradient(135deg,#f3e8ff 0%,#d6bcff 100%)",
+    "gradientDark": "linear-gradient(135deg,#5d3b66 0%,#3b2947 100%)"
+  },
+  {
+    "id": "tip-117",
+    "title": "Use Progressive Muscle Relaxation",
+    "summary": "PMR helps release chronic tension that amplifies pain.",
+    "details": "Practice tensing and releasing each major muscle group progressively to reduce whole-body tension and improve sleep.",
+    "tags": [
+      "sleep"
+    ],
+    "gradient": "linear-gradient(135deg,#e8ffe5 0%,#b7ffdb 100%)",
+    "gradientLight": "linear-gradient(135deg,#e8ffe5 0%,#b7ffdb 100%)",
+    "gradientDark": "linear-gradient(135deg,#184f2f 0%,#0f3622 100%)"
+  },
+  {
+    "id": "tip-118",
+    "title": "Try Ginger or Peppermint for Digestive Relief",
+    "summary": "These herbs soothe nausea and digestion.",
+    "details": "Ginger tea or peppermint can help with bloating or nausea during periods—avoid peppermint if reflux-prone.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#fff4e6 0%,#ffd8a8 100%)",
+    "gradientLight": "linear-gradient(135deg,#fff4e6 0%,#ffd8a8 100%)",
+    "gradientDark": "linear-gradient(135deg,#6b4a2d 0%,#47321f 100%)"
+  },
+  {
+    "id": "tip-119",
+    "title": "Practice Supportive Sleep Positions",
+    "summary": "Side sleeping with a pillow between knees improves spinal alignment.",
+    "details": "Use supportive pillows to align the spine and ease lower-back pain during sleep.",
+    "tags": [
+      "sleep"
+    ],
+    "gradient": "linear-gradient(135deg,#fce7f3 0%,#f8d7ef 100%)",
+    "gradientLight": "linear-gradient(135deg,#fce7f3 0%,#f8d7ef 100%)",
+    "gradientDark": "linear-gradient(135deg,#6a3754 0%,#3e2639 100%)"
+  },
+  {
+    "id": "tip-120",
+    "title": "Include Hydrating Vegetables",
+    "summary": "Cucumbers and lettuce are hydrating and gentle foods.",
+    "details": "Hydrating veggies add water and micronutrients while being easy to digest during heavy days.",
+    "tags": [
+      "hydration"
+    ],
+    "gradient": "linear-gradient(135deg,#e8f0ff 0%,#cfe0ff 100%)",
+    "gradientLight": "linear-gradient(135deg,#e8f0ff 0%,#cfe0ff 100%)",
+    "gradientDark": "linear-gradient(135deg,#1d3b66 0%,#122744 100%)"
+  },
+  {
+    "id": "tip-121",
+    "title": "Use Mindfulness to Manage Food Cravings",
+    "summary": "Pause and reflect before reaching for comfort foods.",
+    "details": "Ask if you are physically hungry or emotionally driven and choose a balanced snack or a mindful pause instead.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#ffd1e8 0%,#ff9fc3 100%)",
+    "gradientLight": "linear-gradient(135deg,#ffd1e8 0%,#ff9fc3 100%)",
+    "gradientDark": "linear-gradient(135deg,#7a3042 0%,#502232 100%)"
+  },
+  {
+    "id": "tip-122",
+    "title": "Consider Short Walks for Constipation Relief",
+    "summary": "Movement stimulates bowel activity.",
+    "details": "Gentle walking can encourage bowel movements and reduce bloating during periods.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#ffe9c6 0%,#ffb3a7 100%)",
+    "gradientLight": "linear-gradient(135deg,#ffe9c6 0%,#ffb3a7 100%)",
+    "gradientDark": "linear-gradient(135deg,#6b3e2b 0%,#3f2a20 100%)"
+  },
+  {
+    "id": "tip-123",
+    "title": "Keep a Small Comfort Kit at Work",
+    "summary": "Preparedness reduces stress when symptoms start unexpectedly.",
+    "details": "Store spare products, a heat patch, and a snack for peace of mind during work or school.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#e0f7fa 0%,#b3e5fc 100%)",
+    "gradientLight": "linear-gradient(135deg,#e0f7fa 0%,#b3e5fc 100%)",
+    "gradientDark": "linear-gradient(135deg,#0b5260 0%,#063a45 100%)"
+  },
+  {
+    "id": "tip-124",
+    "title": "Use Anti-inflammatory Foods Regularly",
+    "summary": "Daily anti-inflammatory choices support lowered symptoms.",
+    "details": "Include berries, fatty fish, leafy greens, and nuts to reduce systemic inflammation over time.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#f3e8ff 0%,#d6bcff 100%)",
+    "gradientLight": "linear-gradient(135deg,#f3e8ff 0%,#d6bcff 100%)",
+    "gradientDark": "linear-gradient(135deg,#5d3b66 0%,#3b2947 100%)"
+  },
+  {
+    "id": "tip-125",
+    "title": "Try Mindful Stretch Sets",
+    "summary": "Short stretch sets between tasks reduce pelvic tension.",
+    "details": "Three quick stretches every few hours improve flexibility and relieve tension without major time investment.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#e8ffe5 0%,#b7ffdb 100%)",
+    "gradientLight": "linear-gradient(135deg,#e8ffe5 0%,#b7ffdb 100%)",
+    "gradientDark": "linear-gradient(135deg,#184f2f 0%,#0f3622 100%)"
+  },
+  {
+    "id": "tip-126",
+    "title": "Plan for Easy Meals Post-menses",
+    "summary": "Support recovery with nourishing, easy-to-prepare meals.",
+    "details": "Prepared soups, stews, and salads enable gentle recovery after heavy flow with minimal effort.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#fff4e6 0%,#ffd8a8 100%)",
+    "gradientLight": "linear-gradient(135deg,#fff4e6 0%,#ffd8a8 100%)",
+    "gradientDark": "linear-gradient(135deg,#6b4a2d 0%,#47321f 100%)"
+  },
+  {
+    "id": "tip-127",
+    "title": "Stay Consistent with Gentle Exercise",
+    "summary": "Low-dose regular exercise improves long-term symptoms.",
+    "details": "Consistent walking, yoga, or Pilates supports circulation, mood, and pain reduction across cycles.",
+    "tags": [
+      "exercise",
+      "mental"
+    ],
+    "gradient": "linear-gradient(135deg,#fce7f3 0%,#f8d7ef 100%)",
+    "gradientLight": "linear-gradient(135deg,#fce7f3 0%,#f8d7ef 100%)",
+    "gradientDark": "linear-gradient(135deg,#6a3754 0%,#3e2639 100%)"
+  },
+  {
+    "id": "tip-128",
+    "title": "Use Soothing Tea Rituals",
+    "summary": "A calming tea ritual can signal rest time and relax the body.",
+    "details": "Chamomile or lemon balm tea before bed can help settle digestion and support sleep.",
+    "tags": [
+      "sleep"
+    ],
+    "gradient": "linear-gradient(135deg,#e8f0ff 0%,#cfe0ff 100%)",
+    "gradientLight": "linear-gradient(135deg,#e8f0ff 0%,#cfe0ff 100%)",
+    "gradientDark": "linear-gradient(135deg,#1d3b66 0%,#122744 100%)"
+  },
+  {
+    "id": "tip-129",
+    "title": "Try Light Resistance Bands",
+    "summary": "Resistance bands allow low-impact strength training.",
+    "details": "Use bands for short sessions to maintain strength and avoid high-impact loading on heavy days.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#ffd1e8 0%,#ff9fc3 100%)",
+    "gradientLight": "linear-gradient(135deg,#ffd1e8 0%,#ff9fc3 100%)",
+    "gradientDark": "linear-gradient(135deg,#7a3042 0%,#502232 100%)"
+  },
+  {
+    "id": "tip-130",
+    "title": "Prioritize Quality Rest",
+    "summary": "Sleep quality matters more than quantity sometimes.",
+    "details": "Focus on deep, uninterrupted sleep by limiting caffeine, screens, and bright lights in the evening.",
+    "tags": [
+      "sleep"
+    ],
+    "gradient": "linear-gradient(135deg,#ffe9c6 0%,#ffb3a7 100%)",
+    "gradientLight": "linear-gradient(135deg,#ffe9c6 0%,#ffb3a7 100%)",
+    "gradientDark": "linear-gradient(135deg,#6b3e2b 0%,#3f2a20 100%)"
+  },
+  {
+    "id": "tip-131",
+    "title": "Track Hydration and Electrolytes",
+    "summary": "Hydration supports energy and reduces dizziness.",
+    "details": "Balance water intake with electrolyte-rich foods or drinks if you experience lightheadedness with heavy flow.",
+    "tags": [
+      "hydration"
+    ],
+    "gradient": "linear-gradient(135deg,#e0f7fa 0%,#b3e5fc 100%)",
+    "gradientLight": "linear-gradient(135deg,#e0f7fa 0%,#b3e5fc 100%)",
+    "gradientDark": "linear-gradient(135deg,#0b5260 0%,#063a45 100%)"
+  },
+  {
+    "id": "tip-132",
+    "title": "Use Short Guided Relaxations at Work",
+    "summary": "3-minute guided relaxations reduce stress and improve focus.",
+    "details": "Use available guided relaxation tracks during work breaks to re-center and lower pain sensitivity.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#f3e8ff 0%,#d6bcff 100%)",
+    "gradientLight": "linear-gradient(135deg,#f3e8ff 0%,#d6bcff 100%)",
+    "gradientDark": "linear-gradient(135deg,#5d3b66 0%,#3b2947 100%)"
+  },
+  {
+    "id": "tip-133",
+    "title": "Include Plant-based Proteins",
+    "summary": "Legumes and beans provide sustainable protein and fiber.",
+    "details": "Beans, lentils, and chickpeas are nutrient-dense and support steady energy and iron intake when paired with vitamin C.",
+    "tags": [
+      "nutrition"
+    ],
+    "gradient": "linear-gradient(135deg,#e8ffe5 0%,#b7ffdb 100%)",
+    "gradientLight": "linear-gradient(135deg,#e8ffe5 0%,#b7ffdb 100%)",
+    "gradientDark": "linear-gradient(135deg,#184f2f 0%,#0f3622 100%)"
+  },
+  {
+    "id": "tip-134",
+    "title": "Practice Calm Communication",
+    "summary": "Share needs with loved ones to get practical support.",
+    "details": "Explain how they can help on symptomatic days—clear requests reduce misunderstanding and improve support.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#fff4e6 0%,#ffd8a8 100%)",
+    "gradientLight": "linear-gradient(135deg,#fff4e6 0%,#ffd8a8 100%)",
+    "gradientDark": "linear-gradient(135deg,#6b4a2d 0%,#47321f 100%)"
+  },
+  {
+    "id": "tip-135",
+    "title": "Use Cooling for Inflammation",
+    "summary": "Cooling reduces local swelling and discomfort.",
+    "details": "Short cool compresses on tender areas can lower inflammation and provide relief for headaches or breast soreness.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#fce7f3 0%,#f8d7ef 100%)",
+    "gradientLight": "linear-gradient(135deg,#fce7f3 0%,#f8d7ef 100%)",
+    "gradientDark": "linear-gradient(135deg,#6a3754 0%,#3e2639 100%)"
+  },
+  {
+    "id": "tip-136",
+    "title": "Plan Low-effort Social Plans",
+    "summary": "Gentle social contact lifts mood without draining energy.",
+    "details": "Invite a friend for a quiet coffee or movie rather than high-energy outings during low-energy phases.",
+    "tags": [
+      "mental"
+    ],
+    "gradient": "linear-gradient(135deg,#e8f0ff 0%,#cfe0ff 100%)",
+    "gradientLight": "linear-gradient(135deg,#e8f0ff 0%,#cfe0ff 100%)",
+    "gradientDark": "linear-gradient(135deg,#1d3b66 0%,#122744 100%)"
+  },
+  {
+    "id": "tip-137",
+    "title": "Use Gentle Baths for Relaxation",
+    "summary": "Warm baths with Epsom salts can relax muscles and mind.",
+    "details": "Limit bath temperature and session length; Epsom salts may help muscle relaxation for some people.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#ffd1e8 0%,#ff9fc3 100%)",
+    "gradientLight": "linear-gradient(135deg,#ffd1e8 0%,#ff9fc3 100%)",
+    "gradientDark": "linear-gradient(135deg,#7a3042 0%,#502232 100%)"
+  },
+  {
+    "id": "tip-138",
+    "title": "Include Fiber-rich Snacks",
+    "summary": "Fiber supports digestion and hormone regulation.",
+    "details": "Snack on raw veggies, fruit, or whole-grain crackers to maintain regular digestion and energy.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#ffe9c6 0%,#ffb3a7 100%)",
+    "gradientLight": "linear-gradient(135deg,#ffe9c6 0%,#ffb3a7 100%)",
+    "gradientDark": "linear-gradient(135deg,#6b3e2b 0%,#3f2a20 100%)"
+  },
+  {
+    "id": "tip-139",
+    "title": "Avoid Overuse of Sweetened Drinks",
+    "summary": "High sugar drinks spike insulin and mood swings.",
+    "details": "Replace sugary drinks with water, unsweetened tea, or infused water to maintain stable energy.",
+    "tags": [
+      "hydration",
+      "mental"
+    ],
+    "gradient": "linear-gradient(135deg,#e0f7fa 0%,#b3e5fc 100%)",
+    "gradientLight": "linear-gradient(135deg,#e0f7fa 0%,#b3e5fc 100%)",
+    "gradientDark": "linear-gradient(135deg,#0b5260 0%,#063a45 100%)"
+  },
+  {
+    "id": "tip-140",
+    "title": "Try Mindful Walking",
+    "summary": "Focus on the senses while walking to lower stress.",
+    "details": "Notice sights, sounds, and sensations while walking to reduce rumination and increase presence.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#f3e8ff 0%,#d6bcff 100%)",
+    "gradientLight": "linear-gradient(135deg,#f3e8ff 0%,#d6bcff 100%)",
+    "gradientDark": "linear-gradient(135deg,#5d3b66 0%,#3b2947 100%)"
+  },
+  {
+    "id": "tip-141",
+    "title": "Rotate Period Products to Match Flow",
+    "summary": "Flexibility improves comfort and hygiene.",
+    "details": "Use higher-absorbency products on heavy days and switch to lighter options as flow decreases to stay comfortable.",
+    "tags": [
+      "hygiene"
+    ],
+    "gradient": "linear-gradient(135deg,#e8ffe5 0%,#b7ffdb 100%)",
+    "gradientLight": "linear-gradient(135deg,#e8ffe5 0%,#b7ffdb 100%)",
+    "gradientDark": "linear-gradient(135deg,#184f2f 0%,#0f3622 100%)"
+  },
+  {
+    "id": "tip-142",
+    "title": "Practice Gentle Neck Stretches for Tension",
+    "summary": "Neck stretches reduce headache and upper-back pain.",
+    "details": "Slow neck rolls and side stretches reduce tension associated with menstrual headaches.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#fff4e6 0%,#ffd8a8 100%)",
+    "gradientLight": "linear-gradient(135deg,#fff4e6 0%,#ffd8a8 100%)",
+    "gradientDark": "linear-gradient(135deg,#6b4a2d 0%,#47321f 100%)"
+  },
+  {
+    "id": "tip-143",
+    "title": "Include Vitamin D Supporting Foods",
+    "summary": "Vitamin D supports mood, immunity, and bone health.",
+    "details": "Fatty fish, fortified milks, and safe sunlight exposure help maintain vitamin D levels; test if concerned.",
+    "tags": [
+      "mental"
+    ],
+    "gradient": "linear-gradient(135deg,#fce7f3 0%,#f8d7ef 100%)",
+    "gradientLight": "linear-gradient(135deg,#fce7f3 0%,#f8d7ef 100%)",
+    "gradientDark": "linear-gradient(135deg,#6a3754 0%,#3e2639 100%)"
+  },
+  {
+    "id": "tip-144",
+    "title": "Avoid Alcohol Close to Bedtime",
+    "summary": "Alcohol disrupts sleep cycles and mood.",
+    "details": "If you drink, keep it earlier in the evening and moderate to preserve sleep quality and next-day function.",
+    "tags": [
+      "sleep",
+      "mental"
+    ],
+    "gradient": "linear-gradient(135deg,#e8f0ff 0%,#cfe0ff 100%)",
+    "gradientLight": "linear-gradient(135deg,#e8f0ff 0%,#cfe0ff 100%)",
+    "gradientDark": "linear-gradient(135deg,#1d3b66 0%,#122744 100%)"
+  },
+  {
+    "id": "tip-145",
+    "title": "Use Simple Pain-relief Routines",
+    "summary": "Combine heat, rest, and gentle movement for best results.",
+    "details": "Apply heat, rest, and do light movement—this trio is often more effective than any single action alone.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#ffd1e8 0%,#ff9fc3 100%)",
+    "gradientLight": "linear-gradient(135deg,#ffd1e8 0%,#ff9fc3 100%)",
+    "gradientDark": "linear-gradient(135deg,#7a3042 0%,#502232 100%)"
+  },
+  {
+    "id": "tip-146",
+    "title": "Practice Quick Grounding Techniques",
+    "summary": "Grounding reduces anxiety quickly.",
+    "details": "Name 5 things you can see, 4 you can touch, 3 you can hear, 2 you can smell, 1 you can taste to shift focus from pain.",
+    "tags": [
+      "mental"
+    ],
+    "gradient": "linear-gradient(135deg,#ffe9c6 0%,#ffb3a7 100%)",
+    "gradientLight": "linear-gradient(135deg,#ffe9c6 0%,#ffb3a7 100%)",
+    "gradientDark": "linear-gradient(135deg,#6b3e2b 0%,#3f2a20 100%)"
+  },
+  {
+    "id": "tip-147",
+    "title": "Include Hydrating Foods in Breakfast",
+    "summary": "Morning hydration sets your day up well.",
+    "details": "Start with a hydrating smoothie or fruit to maintain fluid balance and energy throughout the morning.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#e0f7fa 0%,#b3e5fc 100%)",
+    "gradientLight": "linear-gradient(135deg,#e0f7fa 0%,#b3e5fc 100%)",
+    "gradientDark": "linear-gradient(135deg,#0b5260 0%,#063a45 100%)"
+  },
+  {
+    "id": "tip-148",
+    "title": "Use Small Rituals to Reduce Stress",
+    "summary": "Short rituals help stabilize mood.",
+    "details": "A short fixed ritual like lighting a candle, a cup of tea, or a short walk signals your body to relax and reduces unpredictability.",
+    "tags": [
+      "mental"
+    ],
+    "gradient": "linear-gradient(135deg,#f3e8ff 0%,#d6bcff 100%)",
+    "gradientLight": "linear-gradient(135deg,#f3e8ff 0%,#d6bcff 100%)",
+    "gradientDark": "linear-gradient(135deg,#5d3b66 0%,#3b2947 100%)"
+  },
+  {
+    "id": "tip-149",
+    "title": "Try Low-impact Water Exercise",
+    "summary": "Swimming or water aerobics reduce load on joints and relieve cramps.",
+    "details": "Water exercise supports circulation while being gentle on the body—excellent on heavy or painful days.",
+    "tags": [
+      "hydration",
+      "exercise",
+      "pain"
+    ],
+    "gradient": "linear-gradient(135deg,#e8ffe5 0%,#b7ffdb 100%)",
+    "gradientLight": "linear-gradient(135deg,#e8ffe5 0%,#b7ffdb 100%)",
+    "gradientDark": "linear-gradient(135deg,#184f2f 0%,#0f3622 100%)"
+  },
+  {
+    "id": "tip-150",
+    "title": "Practice Short Evening Gratitude",
+    "summary": "Gratitude before bed improves sleep and mood.",
+    "details": "Note 1–3 things you are thankful for each night to foster positive perspective and reduce stress.",
+    "tags": [
+      "sleep",
+      "mental"
+    ],
+    "gradient": "linear-gradient(135deg,#fff4e6 0%,#ffd8a8 100%)",
+    "gradientLight": "linear-gradient(135deg,#fff4e6 0%,#ffd8a8 100%)",
+    "gradientDark": "linear-gradient(135deg,#6b4a2d 0%,#47321f 100%)"
+  },
+  {
+    "id": "tip-151",
+    "title": "Include Anti-inflammatory Snacks Regularly",
+    "summary": "Snack choices influence inflammation.",
+    "details": "Almonds, walnuts, and berries are good anti-inflammatory snacks that provide nutrients and satiety.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#fce7f3 0%,#f8d7ef 100%)",
+    "gradientLight": "linear-gradient(135deg,#fce7f3 0%,#f8d7ef 100%)",
+    "gradientDark": "linear-gradient(135deg,#6a3754 0%,#3e2639 100%)"
+  },
+  {
+    "id": "tip-152",
+    "title": "Limit Processed Cured Meats",
+    "summary": "Cured meats increase inflammation and salt intake.",
+    "details": "Choose fresh or minimally processed protein sources for better inflammation control and overall health.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#e8f0ff 0%,#cfe0ff 100%)",
+    "gradientLight": "linear-gradient(135deg,#e8f0ff 0%,#cfe0ff 100%)",
+    "gradientDark": "linear-gradient(135deg,#1d3b66 0%,#122744 100%)"
+  },
+  {
+    "id": "tip-153",
+    "title": "Practice Gentle Restorative Poses",
+    "summary": "P relieves pelvic tension and supports relaxation.",
+    "details": "Legs-up-the-wall, child's pose, and reclining bound angle are restorative poses that help with pelvic discomfort.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#ffd1e8 0%,#ff9fc3 100%)",
+    "gradientLight": "linear-gradient(135deg,#ffd1e8 0%,#ff9fc3 100%)",
+    "gradientDark": "linear-gradient(135deg,#7a3042 0%,#502232 100%)"
+  },
+  {
+    "id": "tip-154",
+    "title": "Use Mindful Hydration Habits",
+    "summary": "Small, frequent sips of water maintain balance.",
+    "details": "Carry a water bottle and take small sips regularly instead of large infrequent drinks to stay hydrated.",
+    "tags": [
+      "hydration"
+    ],
+    "gradient": "linear-gradient(135deg,#ffe9c6 0%,#ffb3a7 100%)",
+    "gradientLight": "linear-gradient(135deg,#ffe9c6 0%,#ffb3a7 100%)",
+    "gradientDark": "linear-gradient(135deg,#6b3e2b 0%,#3f2a20 100%)"
+  },
+  {
+    "id": "tip-155",
+    "title": "Rotate Products to Avoid Irritation",
+    "summary": "Changing brands/products can prevent contact irritation.",
+    "details": "If irritation occurs, try an alternative product (different brand or fabric) to find what suits your body best.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#e0f7fa 0%,#b3e5fc 100%)",
+    "gradientLight": "linear-gradient(135deg,#e0f7fa 0%,#b3e5fc 100%)",
+    "gradientDark": "linear-gradient(135deg,#0b5260 0%,#063a45 100%)"
+  },
+  {
+    "id": "tip-156",
+    "title": "Use Small Movement Breaks for Focus",
+    "summary": "Short breaks increase productivity and reduce pain.",
+    "details": "Stand, stretch, and move briefly every hour to maintain circulation and reduce cramps while working.",
+    "tags": [
+      "pain"
+    ],
+    "gradient": "linear-gradient(135deg,#f3e8ff 0%,#d6bcff 100%)",
+    "gradientLight": "linear-gradient(135deg,#f3e8ff 0%,#d6bcff 100%)",
+    "gradientDark": "linear-gradient(135deg,#5d3b66 0%,#3b2947 100%)"
+  },
+  {
+    "id": "tip-157",
+    "title": "Include Colorful Vegetables in Meals",
+    "summary": "Variety ensures broad nutrient intake.",
+    "details": "Rotate different vegetables to optimize vitamins, minerals, and fiber for hormonal and digestive support.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#e8ffe5 0%,#b7ffdb 100%)",
+    "gradientLight": "linear-gradient(135deg,#e8ffe5 0%,#b7ffdb 100%)",
+    "gradientDark": "linear-gradient(135deg,#184f2f 0%,#0f3622 100%)"
+  },
+  {
+    "id": "tip-158",
+    "title": "Avoid Excess Caffeine if Anxious",
+    "summary": "Caffeine can heighten anxiety and jitteriness.",
+    "details": "Swap one coffee a day for caffeine-free options if you notice increased anxiety or sleep disruption around your cycle.",
+    "tags": [
+      "sleep",
+      "mental"
+    ],
+    "gradient": "linear-gradient(135deg,#fff4e6 0%,#ffd8a8 100%)",
+    "gradientLight": "linear-gradient(135deg,#fff4e6 0%,#ffd8a8 100%)",
+    "gradientDark": "linear-gradient(135deg,#6b4a2d 0%,#47321f 100%)"
+  },
+  {
+    "id": "tip-159",
+    "title": "Use Short Stretch Routines for Morning Stiffness",
+    "summary": "Quick stretches reduce stiffness and enhance mobility.",
+    "details": "A 5-minute morning routine reduces stiffness and prepares the body for the day with less discomfort.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#fce7f3 0%,#f8d7ef 100%)",
+    "gradientLight": "linear-gradient(135deg,#fce7f3 0%,#f8d7ef 100%)",
+    "gradientDark": "linear-gradient(135deg,#6a3754 0%,#3e2639 100%)"
+  },
+  {
+    "id": "tip-160",
+    "title": "Practice Simple Mindful Pauses",
+    "summary": "Short mindful pauses lower stress levels.",
+    "details": "Set a reminder to take 60 seconds of mindful breathing a few times a day to reset and reduce symptom amplification.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#e8f0ff 0%,#cfe0ff 100%)",
+    "gradientLight": "linear-gradient(135deg,#e8f0ff 0%,#cfe0ff 100%)",
+    "gradientDark": "linear-gradient(135deg,#1d3b66 0%,#122744 100%)"
+  },
+  {
+    "id": "tip-161",
+    "title": "Include Resistance Band Workouts",
+    "summary": "Bands offer flexible strength options.",
+    "details": "Use resistance bands for short strength sessions that protect joints while maintaining muscle strength.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#ffd1e8 0%,#ff9fc3 100%)",
+    "gradientLight": "linear-gradient(135deg,#ffd1e8 0%,#ff9fc3 100%)",
+    "gradientDark": "linear-gradient(135deg,#7a3042 0%,#502232 100%)"
+  },
+  {
+    "id": "tip-162",
+    "title": "Keep Hydrating Soups in the Freezer",
+    "summary": "Ready meals help recovery post-menses.",
+    "details": "Batch-make hydrating soups and freeze portions for easy, nourishing meals when energy is low.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#ffe9c6 0%,#ffb3a7 100%)",
+    "gradientLight": "linear-gradient(135deg,#ffe9c6 0%,#ffb3a7 100%)",
+    "gradientDark": "linear-gradient(135deg,#6b3e2b 0%,#3f2a20 100%)"
+  },
+  {
+    "id": "tip-163",
+    "title": "Practice Short Gratitude Notes",
+    "summary": "Small gratitude notes shift focus to positive experiences.",
+    "details": "Leave yourself brief notes of encouragement to read during low days for positive reinforcement.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#e0f7fa 0%,#b3e5fc 100%)",
+    "gradientLight": "linear-gradient(135deg,#e0f7fa 0%,#b3e5fc 100%)",
+    "gradientDark": "linear-gradient(135deg,#0b5260 0%,#063a45 100%)"
+  },
+  {
+    "id": "tip-164",
+    "title": "Use Magnesium Baths for Muscle Relief",
+    "summary": "Epsom baths may help muscle relaxation.",
+    "details": "A warm bath with Epsom salts can relax muscles and soothe cramps—ensure adequate hydration afterward.",
+    "tags": [
+      "pain"
+    ],
+    "gradient": "linear-gradient(135deg,#f3e8ff 0%,#d6bcff 100%)",
+    "gradientLight": "linear-gradient(135deg,#f3e8ff 0%,#d6bcff 100%)",
+    "gradientDark": "linear-gradient(135deg,#5d3b66 0%,#3b2947 100%)"
+  },
+  {
+    "id": "tip-165",
+    "title": "Include Protein at Every Meal",
+    "summary": "Protein supports recovery and stable energy.",
+    "details": "Aim for a source of protein at each meal to maintain energy and reduce cravings.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#e8ffe5 0%,#b7ffdb 100%)",
+    "gradientLight": "linear-gradient(135deg,#e8ffe5 0%,#b7ffdb 100%)",
+    "gradientDark": "linear-gradient(135deg,#184f2f 0%,#0f3622 100%)"
+  },
+  {
+    "id": "tip-166",
+    "title": "Try Grounding Practices in Nature",
+    "summary": "Outdoor time lowers stress and improves mood.",
+    "details": "Walk barefoot on grass briefly or sit outside to connect with nature and lower stress hormones.",
+    "tags": [
+      "mental"
+    ],
+    "gradient": "linear-gradient(135deg,#fff4e6 0%,#ffd8a8 100%)",
+    "gradientLight": "linear-gradient(135deg,#fff4e6 0%,#ffd8a8 100%)",
+    "gradientDark": "linear-gradient(135deg,#6b4a2d 0%,#47321f 100%)"
+  },
+  {
+    "id": "tip-167",
+    "title": "Use Simple Breath Work for Panic",
+    "summary": "Breath techniques calm acute panic.",
+    "details": "Try box breathing (inhale 4s, hold 4s, exhale 4s, hold 4s) to quickly calm panic or anxiety spikes.",
+    "tags": [
+      "mental"
+    ],
+    "gradient": "linear-gradient(135deg,#fce7f3 0%,#f8d7ef 100%)",
+    "gradientLight": "linear-gradient(135deg,#fce7f3 0%,#f8d7ef 100%)",
+    "gradientDark": "linear-gradient(135deg,#6a3754 0%,#3e2639 100%)"
+  },
+  {
+    "id": "tip-168",
+    "title": "Plan Low-key Entertainment",
+    "summary": "Gentle entertainment lifts mood without draining energy.",
+    "details": "Pick movies, audiobooks, or calming podcasts that provide enjoyment without social pressure.",
+    "tags": [
+      "mental"
+    ],
+    "gradient": "linear-gradient(135deg,#e8f0ff 0%,#cfe0ff 100%)",
+    "gradientLight": "linear-gradient(135deg,#e8f0ff 0%,#cfe0ff 100%)",
+    "gradientDark": "linear-gradient(135deg,#1d3b66 0%,#122744 100%)"
+  },
+  {
+    "id": "tip-169",
+    "title": "Avoid Heavy Lifting During Severe Pain",
+    "summary": "Rest reduces strain and prevents injury.",
+    "details": "If cramps are intense, pause heavy lifting until symptoms ease to prevent further strain.",
+    "tags": [
+      "pain"
+    ],
+    "gradient": "linear-gradient(135deg,#ffd1e8 0%,#ff9fc3 100%)",
+    "gradientLight": "linear-gradient(135deg,#ffd1e8 0%,#ff9fc3 100%)",
+    "gradientDark": "linear-gradient(135deg,#7a3042 0%,#502232 100%)"
+  },
+  {
+    "id": "tip-170",
+    "title": "Use Journaling to Process Emotions",
+    "summary": "Writing helps organize thoughts and reduce stress.",
+    "details": "Daily short journaling can clarify thoughts, reduce rumination, and provide insight about triggers and patterns.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#ffe9c6 0%,#ffb3a7 100%)",
+    "gradientLight": "linear-gradient(135deg,#ffe9c6 0%,#ffb3a7 100%)",
+    "gradientDark": "linear-gradient(135deg,#6b3e2b 0%,#3f2a20 100%)"
+  },
+  {
+    "id": "tip-171",
+    "title": "Try Gentle Yoga for Flow Days",
+    "summary": "Certain poses ease pelvic pressure and cramps.",
+    "details": "Child's pose, gentle twists, and supported forward fold are useful during flow days to relieve discomfort.",
+    "tags": [
+      "exercise",
+      "pain"
+    ],
+    "gradient": "linear-gradient(135deg,#e0f7fa 0%,#b3e5fc 100%)",
+    "gradientLight": "linear-gradient(135deg,#e0f7fa 0%,#b3e5fc 100%)",
+    "gradientDark": "linear-gradient(135deg,#0b5260 0%,#063a45 100%)"
+  },
+  {
+    "id": "tip-172",
+    "title": "Include Fermented Foods Gradually",
+    "summary": "Introduce fermented foods slowly to avoid gas and bloating.",
+    "details": "Start with small servings and increase gradually to let your microbiome adapt and reduce bloating.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#f3e8ff 0%,#d6bcff 100%)",
+    "gradientLight": "linear-gradient(135deg,#f3e8ff 0%,#d6bcff 100%)",
+    "gradientDark": "linear-gradient(135deg,#5d3b66 0%,#3b2947 100%)"
+  },
+  {
+    "id": "tip-173",
+    "title": "Use Short Power Naps",
+    "summary": "A 20–30 minute nap can restore energy without affecting night sleep.",
+    "details": "Short naps boost alertness and mood when feeling drained, but avoid long naps that disrupt nighttime sleep.",
+    "tags": [
+      "sleep",
+      "mental"
+    ],
+    "gradient": "linear-gradient(135deg,#e8ffe5 0%,#b7ffdb 100%)",
+    "gradientLight": "linear-gradient(135deg,#e8ffe5 0%,#b7ffdb 100%)",
+    "gradientDark": "linear-gradient(135deg,#184f2f 0%,#0f3622 100%)"
+  },
+  {
+    "id": "tip-174",
+    "title": "Avoid High-GI Foods if Sensitive",
+    "summary": "Refined carbs can worsen mood swings and bloating.",
+    "details": "Swap sugary snacks for whole-food alternatives with protein and fiber to reduce rapid sugar spikes.",
+    "tags": [
+      "mental"
+    ],
+    "gradient": "linear-gradient(135deg,#fff4e6 0%,#ffd8a8 100%)",
+    "gradientLight": "linear-gradient(135deg,#fff4e6 0%,#ffd8a8 100%)",
+    "gradientDark": "linear-gradient(135deg,#6b4a2d 0%,#47321f 100%)"
+  },
+  {
+    "id": "tip-175",
+    "title": "Practice Gentle Neck and Shoulder Rolls",
+    "summary": "Short rolls relieve upper tension and headaches.",
+    "details": "Slow neck rolls and shoulder shrugs ease tension that can contribute to menstrual headaches.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#fce7f3 0%,#f8d7ef 100%)",
+    "gradientLight": "linear-gradient(135deg,#fce7f3 0%,#f8d7ef 100%)",
+    "gradientDark": "linear-gradient(135deg,#6a3754 0%,#3e2639 100%)"
+  },
+  {
+    "id": "tip-176",
+    "title": "Use Anti-inflammatory Meal Planning",
+    "summary": "Weekly meal planning helps reduce inflammation.",
+    "details": "Plan meals with fish, legumes, vegetables, whole grains, and anti-inflammatory spices to support overall symptom reduction.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#e8f0ff 0%,#cfe0ff 100%)",
+    "gradientLight": "linear-gradient(135deg,#e8f0ff 0%,#cfe0ff 100%)",
+    "gradientDark": "linear-gradient(135deg,#1d3b66 0%,#122744 100%)"
+  },
+  {
+    "id": "tip-177",
+    "title": "Consider Low-dose Exercise During Heavy Days",
+    "summary": "Short, gentle exercise helps circulation without exacerbating fatigue.",
+    "details": "Keep workouts light and short on heavy or low-energy days—this helps mood without overtaxing recovery.",
+    "tags": [
+      "exercise",
+      "mental"
+    ],
+    "gradient": "linear-gradient(135deg,#ffd1e8 0%,#ff9fc3 100%)",
+    "gradientLight": "linear-gradient(135deg,#ffd1e8 0%,#ff9fc3 100%)",
+    "gradientDark": "linear-gradient(135deg,#7a3042 0%,#502232 100%)"
+  },
+  {
+    "id": "tip-178",
+    "title": "Use Breathing to Reduce Cramp Sensitivity",
+    "summary": "Slow exhalations reduce pain perception.",
+    "details": "Try extended exhalations during cramps to activate the parasympathetic system and reduce pain sensitivity.",
+    "tags": [
+      "pain"
+    ],
+    "gradient": "linear-gradient(135deg,#ffe9c6 0%,#ffb3a7 100%)",
+    "gradientLight": "linear-gradient(135deg,#ffe9c6 0%,#ffb3a7 100%)",
+    "gradientDark": "linear-gradient(135deg,#6b3e2b 0%,#3f2a20 100%)"
+  },
+  {
+    "id": "tip-179",
+    "title": "Plan Rest Days Into Your Month",
+    "summary": "Intentionally move lower priority tasks to low-energy windows.",
+    "details": "If your schedule allows, block lower-demand days during expected symptomatic windows to reduce stress and improve recovery.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#e0f7fa 0%,#b3e5fc 100%)",
+    "gradientLight": "linear-gradient(135deg,#e0f7fa 0%,#b3e5fc 100%)",
+    "gradientDark": "linear-gradient(135deg,#0b5260 0%,#063a45 100%)"
+  },
+  {
+    "id": "tip-180",
+    "title": "Use Healthy Comfort Foods",
+    "summary": "Swap sugary comfort foods for nutrient-dense alternatives.",
+    "details": "Try warm oatmeal with fruit and nuts or avocado toast to satisfy comfort cravings while providing nutrients.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#f3e8ff 0%,#d6bcff 100%)",
+    "gradientLight": "linear-gradient(135deg,#f3e8ff 0%,#d6bcff 100%)",
+    "gradientDark": "linear-gradient(135deg,#5d3b66 0%,#3b2947 100%)"
+  },
+  {
+    "id": "tip-181",
+    "title": "Practice Short Grounding Rituals",
+    "summary": "Simple rituals reduce anxiety quickly.",
+    "details": "A 60-second grounding exercise between tasks helps manage acute stress and reduces symptom amplification.",
+    "tags": [
+      "exercise",
+      "mental"
+    ],
+    "gradient": "linear-gradient(135deg,#e8ffe5 0%,#b7ffdb 100%)",
+    "gradientLight": "linear-gradient(135deg,#e8ffe5 0%,#b7ffdb 100%)",
+    "gradientDark": "linear-gradient(135deg,#184f2f 0%,#0f3622 100%)"
+  },
+  {
+    "id": "tip-182",
+    "title": "Include Leafy Greens Regularly",
+    "summary": "Greens provide iron, magnesium, and fiber.",
+    "details": "Spinach, kale, and chard are nutrient-dense supports for cycle health and recovery.",
+    "tags": [
+      "nutrition"
+    ],
+    "gradient": "linear-gradient(135deg,#fff4e6 0%,#ffd8a8 100%)",
+    "gradientLight": "linear-gradient(135deg,#fff4e6 0%,#ffd8a8 100%)",
+    "gradientDark": "linear-gradient(135deg,#6b4a2d 0%,#47321f 100%)"
+  },
+  {
+    "id": "tip-183",
+    "title": "Use Cooling for Inflammation-Related Headaches",
+    "summary": "Cooling and darkness reduce migraine intensity.",
+    "details": "A cool compress and a quiet, dark room can help during menstrual migraines—seek medical care if frequent.",
+    "tags": [
+      "pain"
+    ],
+    "gradient": "linear-gradient(135deg,#fce7f3 0%,#f8d7ef 100%)",
+    "gradientLight": "linear-gradient(135deg,#fce7f3 0%,#f8d7ef 100%)",
+    "gradientDark": "linear-gradient(135deg,#6a3754 0%,#3e2639 100%)"
+  },
+  {
+    "id": "tip-184",
+    "title": "Avoid Overuse of Stimulants",
+    "summary": "Stimulants like excessive caffeine worsen jitteriness and anxiety.",
+    "details": "Keep stimulant use moderate and monitor how they affect mood and sleep through your cycle.",
+    "tags": [
+      "sleep",
+      "mental"
+    ],
+    "gradient": "linear-gradient(135deg,#e8f0ff 0%,#cfe0ff 100%)",
+    "gradientLight": "linear-gradient(135deg,#e8f0ff 0%,#cfe0ff 100%)",
+    "gradientDark": "linear-gradient(135deg,#1d3b66 0%,#122744 100%)"
+  },
+  {
+    "id": "tip-185",
+    "title": "Practice Short Calming Visualizations",
+    "summary": "Imagery can lower stress and pain.",
+    "details": "Imagine a safe, calming place and hold the sensory details for a couple of minutes to reduce stress.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#ffd1e8 0%,#ff9fc3 100%)",
+    "gradientLight": "linear-gradient(135deg,#ffd1e8 0%,#ff9fc3 100%)",
+    "gradientDark": "linear-gradient(135deg,#7a3042 0%,#502232 100%)"
+  },
+  {
+    "id": "tip-186",
+    "title": "Include Whole-food Snacks for Stable Energy",
+    "summary": "Whole foods provide sustained nourishment.",
+    "details": "Pair fruit with nut butter, or whole-grain toast with avocado to prevent energy dips and cravings.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#ffe9c6 0%,#ffb3a7 100%)",
+    "gradientLight": "linear-gradient(135deg,#ffe9c6 0%,#ffb3a7 100%)",
+    "gradientDark": "linear-gradient(135deg,#6b3e2b 0%,#3f2a20 100%)"
+  },
+  {
+    "id": "tip-187",
+    "title": "Use Supportive Sleep Positions",
+    "summary": "A pillow between the knees improves spinal alignment.",
+    "details": "Side-sleeping with knee support reduces lumbar strain and helps night comfort during menstrual days.",
+    "tags": [
+      "sleep"
+    ],
+    "gradient": "linear-gradient(135deg,#e0f7fa 0%,#b3e5fc 100%)",
+    "gradientLight": "linear-gradient(135deg,#e0f7fa 0%,#b3e5fc 100%)",
+    "gradientDark": "linear-gradient(135deg,#0b5260 0%,#063a45 100%)"
+  },
+  {
+    "id": "tip-188",
+    "title": "Practice Brief Mindful Pauses",
+    "summary": "Short, frequent pauses reduce cumulative stress.",
+    "details": "Set a timer for a few mindful breaths every couple of hours to reset and lower pain perception.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#f3e8ff 0%,#d6bcff 100%)",
+    "gradientLight": "linear-gradient(135deg,#f3e8ff 0%,#d6bcff 100%)",
+    "gradientDark": "linear-gradient(135deg,#5d3b66 0%,#3b2947 100%)"
+  },
+  {
+    "id": "tip-189",
+    "title": "Include Hydrating Smoothies",
+    "summary": "Smoothies deliver fluids, nutrients, and easy digestion.",
+    "details": "Blend greens, fruit, protein, and a hydrating base for a nutrient-dense, easy-to-digest meal on low-energy days.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#e8ffe5 0%,#b7ffdb 100%)",
+    "gradientLight": "linear-gradient(135deg,#e8ffe5 0%,#b7ffdb 100%)",
+    "gradientDark": "linear-gradient(135deg,#184f2f 0%,#0f3622 100%)"
+  },
+  {
+    "id": "tip-190",
+    "title": "Use Gentle Self-massage for Soothing",
+    "summary": "Light massage reduces local tension and improves mood.",
+    "details": "Massage hands, feet, or abdomen with gentle pressure to soothe the nervous system and reduce discomfort.",
+    "tags": [
+      "mental",
+      "self-care"
+    ],
+    "gradient": "linear-gradient(135deg,#fff4e6 0%,#ffd8a8 100%)",
+    "gradientLight": "linear-gradient(135deg,#fff4e6 0%,#ffd8a8 100%)",
+    "gradientDark": "linear-gradient(135deg,#6b4a2d 0%,#47321f 100%)"
+  },
+  {
+    "id": "tip-191",
+    "title": "Practice Short Bedtime Rituals",
+    "summary": "Consistent rituals improve sleep onset and quality.",
+    "details": "A tea, a brief stretch, and a light journal before bed cues your body for sleep and promotes rest.",
+    "tags": [
+      "sleep"
+    ],
+    "gradient": "linear-gradient(135deg,#fce7f3 0%,#f8d7ef 100%)",
+    "gradientLight": "linear-gradient(135deg,#fce7f3 0%,#f8d7ef 100%)",
+    "gradientDark": "linear-gradient(135deg,#6a3754 0%,#3e2639 100%)"
+  },
+  {
+    "id": "tip-192",
+    "title": "Consider Professional Support for Severe Symptoms",
+    "summary": "Heavy bleeding or disabling pain needs evaluation.",
+    "details": "If menstrual symptoms are severe or change suddenly, consult a clinician for assessment and tailored treatment.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#e8f0ff 0%,#cfe0ff 100%)",
+    "gradientLight": "linear-gradient(135deg,#e8f0ff 0%,#cfe0ff 100%)",
+    "gradientDark": "linear-gradient(135deg,#1d3b66 0%,#122744 100%)"
+  },
+  {
+    "id": "tip-193",
+    "title": "Use Anti-inflammatory Seasonings",
+    "summary": "Spices like turmeric and black pepper increase bioavailability.",
+    "details": "Combine turmeric with black pepper and healthy fats to increase absorption and anti-inflammatory benefits.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#ffd1e8 0%,#ff9fc3 100%)",
+    "gradientLight": "linear-gradient(135deg,#ffd1e8 0%,#ff9fc3 100%)",
+    "gradientDark": "linear-gradient(135deg,#7a3042 0%,#502232 100%)"
+  },
+  {
+    "id": "tip-194",
+    "title": "Practice Self-checks for Mental Health",
+    "summary": "Monitor mood shifts and seek help when needed.",
+    "details": "If mood changes interfere with daily life, reach out to a mental health professional for support and strategies.",
+    "tags": [
+      "mental"
+    ],
+    "gradient": "linear-gradient(135deg,#ffe9c6 0%,#ffb3a7 100%)",
+    "gradientLight": "linear-gradient(135deg,#ffe9c6 0%,#ffb3a7 100%)",
+    "gradientDark": "linear-gradient(135deg,#6b3e2b 0%,#3f2a20 100%)"
+  },
+  {
+    "id": "tip-195",
+    "title": "Include Light Movement between Tasks",
+    "summary": "Micro-movements reduce tension and improve productivity.",
+    "details": "Stand, walk, and stretch briefly to keep circulation moving and manage pain across a workday.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#e0f7fa 0%,#b3e5fc 100%)",
+    "gradientLight": "linear-gradient(135deg,#e0f7fa 0%,#b3e5fc 100%)",
+    "gradientDark": "linear-gradient(135deg,#0b5260 0%,#063a45 100%)"
+  },
+  {
+    "id": "tip-196",
+    "title": "Practice Gentle Mindful Eating",
+    "summary": "Savoring food supports digestion and reduces overeating.",
+    "details": "Put down utensils between bites, chew slowly, and notice the flavors to enhance digestion and reduce bloating.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#f3e8ff 0%,#d6bcff 100%)",
+    "gradientLight": "linear-gradient(135deg,#f3e8ff 0%,#d6bcff 100%)",
+    "gradientDark": "linear-gradient(135deg,#5d3b66 0%,#3b2947 100%)"
+  },
+  {
+    "id": "tip-197",
+    "title": "Keep a Supportive Social Plan",
+    "summary": "Plan check-ins with friends during hard days.",
+    "details": "A quick call or text with a friend can reduce feelings of isolation and provide emotional support.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#e8ffe5 0%,#b7ffdb 100%)",
+    "gradientLight": "linear-gradient(135deg,#e8ffe5 0%,#b7ffdb 100%)",
+    "gradientDark": "linear-gradient(135deg,#184f2f 0%,#0f3622 100%)"
+  },
+  {
+    "id": "tip-198",
+    "title": "Use Simple Heat and Massage Routine",
+    "summary": "Routine heat and massage reduce recurring pain.",
+    "details": "A 15–20 minute routine with heat and gentle massage daily can reduce chronic cramping over time.",
+    "tags": [
+      "self-care"
+    ],
+    "gradient": "linear-gradient(135deg,#fff4e6 0%,#ffd8a8 100%)",
+    "gradientLight": "linear-gradient(135deg,#fff4e6 0%,#ffd8a8 100%)",
+    "gradientDark": "linear-gradient(135deg,#6b4a2d 0%,#47321f 100%)"
+  },
+  {
+    "id": "tip-199",
+    "title": "Celebrate Small Steps",
+    "summary": "Acknowledge effort to build confidence.",
+    "details": "Recognize small steps you take for self-care—these compound into better long-term outcomes and resilience.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#fce7f3 0%,#f8d7ef 100%)",
+    "gradientLight": "linear-gradient(135deg,#fce7f3 0%,#f8d7ef 100%)",
+    "gradientDark": "linear-gradient(135deg,#6a3754 0%,#3e2639 100%)"
+  },
+  {
+    "id": "tip-200",
+    "title": "Ask for Help When Needed",
+    "summary": "Reaching out for support is a strength, not weakness.",
+    "details": "Friends, family, and healthcare providers can help—ask for what you need and accept support when offered.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#e8f0ff 0%,#cfe0ff 100%)",
+    "gradientLight": "linear-gradient(135deg,#e8f0ff 0%,#cfe0ff 100%)",
+    "gradientDark": "linear-gradient(135deg,#1d3b66 0%,#122744 100%)"
+  },
+  {
+    "id": "tip-201",
+    "title": "Rotate Stress-reducing Techniques",
+    "summary": "Different techniques work on different days.",
+    "details": "Try breathing, walking, stretching, or journaling on different days to find what works best for your current state.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#ffd1e8 0%,#ff9fc3 100%)",
+    "gradientLight": "linear-gradient(135deg,#ffd1e8 0%,#ff9fc3 100%)",
+    "gradientDark": "linear-gradient(135deg,#7a3042 0%,#502232 100%)"
+  },
+  {
+    "id": "tip-202",
+    "title": "Use Low-FODMAP Options If Sensitive",
+    "summary": "Temporary low-FODMAP can reduce bloating for some individuals.",
+    "details": "Under guidance, try a short trial to identify FODMAP triggers and reintroduce foods slowly.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#ffe9c6 0%,#ffb3a7 100%)",
+    "gradientLight": "linear-gradient(135deg,#ffe9c6 0%,#ffb3a7 100%)",
+    "gradientDark": "linear-gradient(135deg,#6b3e2b 0%,#3f2a20 100%)"
+  },
+  {
+    "id": "tip-203",
+    "title": "Include Seeds for Fiber and Omega-3",
+    "summary": "Ground flax and chia are easy additions.",
+    "details": "Add seeds to smoothies, yogurt, or oats to increase fiber and healthy fat intake consistently.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#e0f7fa 0%,#b3e5fc 100%)",
+    "gradientLight": "linear-gradient(135deg,#e0f7fa 0%,#b3e5fc 100%)",
+    "gradientDark": "linear-gradient(135deg,#0b5260 0%,#063a45 100%)"
+  },
+  {
+    "id": "tip-204",
+    "title": "Try Light Resistance for Mood",
+    "summary": "Strength work supports brain health and mood.",
+    "details": "Short resistance sessions release neurochemicals that boost mood—keep them manageable during low-energy windows.",
+    "tags": [
+      "mental"
+    ],
+    "gradient": "linear-gradient(135deg,#f3e8ff 0%,#d6bcff 100%)",
+    "gradientLight": "linear-gradient(135deg,#f3e8ff 0%,#d6bcff 100%)",
+    "gradientDark": "linear-gradient(135deg,#5d3b66 0%,#3b2947 100%)"
+  },
+  {
+    "id": "tip-205",
+    "title": "Plan for Busy Social Periods",
+    "summary": "Schedule buffer time before and after events.",
+    "details": "Build recovery time into your calendar around large social commitments to avoid burnout.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#e8ffe5 0%,#b7ffdb 100%)",
+    "gradientLight": "linear-gradient(135deg,#e8ffe5 0%,#b7ffdb 100%)",
+    "gradientDark": "linear-gradient(135deg,#184f2f 0%,#0f3622 100%)"
+  },
+  {
+    "id": "tip-206",
+    "title": "Use Gentle Aromatherapy at Night",
+    "summary": "Lavender or chamomile can aid sleep.",
+    "details": "A few drops in a diffuser or on your pillow (if tolerated) can support relaxation before sleep.",
+    "tags": [
+      "sleep"
+    ],
+    "gradient": "linear-gradient(135deg,#fff4e6 0%,#ffd8a8 100%)",
+    "gradientLight": "linear-gradient(135deg,#fff4e6 0%,#ffd8a8 100%)",
+    "gradientDark": "linear-gradient(135deg,#6b4a2d 0%,#47321f 100%)"
+  },
+  {
+    "id": "tip-207",
+    "title": "Hydrate with Fruit-infused Water",
+    "summary": "Infused water encourages drinking more fluids.",
+    "details": "Add cucumber, mint, or citrus slices to water for a pleasant hydration boost without sugar.",
+    "tags": [
+      "hydration"
+    ],
+    "gradient": "linear-gradient(135deg,#fce7f3 0%,#f8d7ef 100%)",
+    "gradientLight": "linear-gradient(135deg,#fce7f3 0%,#f8d7ef 100%)",
+    "gradientDark": "linear-gradient(135deg,#6a3754 0%,#3e2639 100%)"
+  },
+  {
+    "id": "tip-208",
+    "title": "Try Gentle Mobility Work",
+    "summary": "Move joints through pain-free range to ease stiffness.",
+    "details": "Ankle circles, hip rolls, and shoulder mobility reduce stiffness and promote circulation.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#e8f0ff 0%,#cfe0ff 100%)",
+    "gradientLight": "linear-gradient(135deg,#e8f0ff 0%,#cfe0ff 100%)",
+    "gradientDark": "linear-gradient(135deg,#1d3b66 0%,#122744 100%)"
+  },
+  {
+    "id": "tip-209",
+    "title": "Plan for Period-friendly Travel",
+    "summary": "Carry a compact kit and plan rest stops.",
+    "details": "Travel with a small kit of supplies and schedule regular breaks to manage comfort on trips.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#ffd1e8 0%,#ff9fc3 100%)",
+    "gradientLight": "linear-gradient(135deg,#ffd1e8 0%,#ff9fc3 100%)",
+    "gradientDark": "linear-gradient(135deg,#7a3042 0%,#502232 100%)"
+  },
+  {
+    "id": "tip-210",
+    "title": "Use Calming Visual Cues",
+    "summary": "Surroundings can change mood quickly.",
+    "details": "Soft lighting, plants, or comforting objects in your environment support relaxation during symptomatic days.",
+    "tags": [
+      "nutrition",
+      "mental"
+    ],
+    "gradient": "linear-gradient(135deg,#ffe9c6 0%,#ffb3a7 100%)",
+    "gradientLight": "linear-gradient(135deg,#ffe9c6 0%,#ffb3a7 100%)",
+    "gradientDark": "linear-gradient(135deg,#6b3e2b 0%,#3f2a20 100%)"
+  },
+  {
+    "id": "tip-211",
+    "title": "Include Anti-inflammatory Breakfasts",
+    "summary": "Start the day with anti-inflammatory foods.",
+    "details": "Berries, oats, nuts, and yogurt make a filling, anti-inflammatory breakfast that supports stable energy.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#e0f7fa 0%,#b3e5fc 100%)",
+    "gradientLight": "linear-gradient(135deg,#e0f7fa 0%,#b3e5fc 100%)",
+    "gradientDark": "linear-gradient(135deg,#0b5260 0%,#063a45 100%)"
+  },
+  {
+    "id": "tip-212",
+    "title": "Try Short Evening Walks",
+    "summary": "A short walk after dinner helps digestion and mood.",
+    "details": "Gentle walks aid digestion and light activity supports sleep onset and mood regulation.",
+    "tags": [
+      "sleep",
+      "mental"
+    ],
+    "gradient": "linear-gradient(135deg,#f3e8ff 0%,#d6bcff 100%)",
+    "gradientLight": "linear-gradient(135deg,#f3e8ff 0%,#d6bcff 100%)",
+    "gradientDark": "linear-gradient(135deg,#5d3b66 0%,#3b2947 100%)"
+  },
+  {
+    "id": "tip-213",
+    "title": "Practice Acceptance-Based Coping",
+    "summary": "Acceptance reduces secondary suffering from resistance.",
+    "details": "Mindfulness exercises that emphasize acceptance help reduce stress caused by trying to control symptoms.",
+    "tags": [
+      "exercise"
+    ],
+    "gradient": "linear-gradient(135deg,#e8ffe5 0%,#b7ffdb 100%)",
+    "gradientLight": "linear-gradient(135deg,#e8ffe5 0%,#b7ffdb 100%)",
+    "gradientDark": "linear-gradient(135deg,#184f2f 0%,#0f3622 100%)"
+  },
+  {
+    "id": "tip-214",
+    "title": "Use Food Prep Shortcuts",
+    "summary": "Canned legumes and pre-washed greens save time.",
+    "details": "When energy is low, these shortcuts still allow nutrient-dense meals without long prep time.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#fff4e6 0%,#ffd8a8 100%)",
+    "gradientLight": "linear-gradient(135deg,#fff4e6 0%,#ffd8a8 100%)",
+    "gradientDark": "linear-gradient(135deg,#6b4a2d 0%,#47321f 100%)"
+  },
+  {
+    "id": "tip-215",
+    "title": "Try Gentle Resistance for Bone Health",
+    "summary": "Short strength helps bone density over time.",
+    "details": "Simple bodyweight movements and light weights support bone health when done consistently.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#fce7f3 0%,#f8d7ef 100%)",
+    "gradientLight": "linear-gradient(135deg,#fce7f3 0%,#f8d7ef 100%)",
+    "gradientDark": "linear-gradient(135deg,#6a3754 0%,#3e2639 100%)"
+  },
+  {
+    "id": "tip-216",
+    "title": "Include Hydrating Fruits",
+    "summary": "Fruit contributes both water and nutrients.",
+    "details": "Oranges, melons, and berries hydrate while providing vitamins and fiber.",
+    "tags": [
+      "hydration"
+    ],
+    "gradient": "linear-gradient(135deg,#e8f0ff 0%,#cfe0ff 100%)",
+    "gradientLight": "linear-gradient(135deg,#e8f0ff 0%,#cfe0ff 100%)",
+    "gradientDark": "linear-gradient(135deg,#1d3b66 0%,#122744 100%)"
+  },
+  {
+    "id": "tip-217",
+    "title": "Use Gentle Foam Rolling",
+    "summary": "Light foam rolling improves circulation and relieves tightness.",
+    "details": "Roll the upper back and glutes gently to release tension contributing to pelvic and back discomfort.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#ffd1e8 0%,#ff9fc3 100%)",
+    "gradientLight": "linear-gradient(135deg,#ffd1e8 0%,#ff9fc3 100%)",
+    "gradientDark": "linear-gradient(135deg,#7a3042 0%,#502232 100%)"
+  },
+  {
+    "id": "tip-218",
+    "title": "Practice Brief Digital Detoxes",
+    "summary": "Short screen breaks reduce mental fatigue.",
+    "details": "A 20–30 minute break from screens can lower stress and improve sleep if done before bed.",
+    "tags": [
+      "sleep"
+    ],
+    "gradient": "linear-gradient(135deg,#ffe9c6 0%,#ffb3a7 100%)",
+    "gradientLight": "linear-gradient(135deg,#ffe9c6 0%,#ffb3a7 100%)",
+    "gradientDark": "linear-gradient(135deg,#6b3e2b 0%,#3f2a20 100%)"
+  },
+  {
+    "id": "tip-219",
+    "title": "Include Aromatic Herbs in Cooking",
+    "summary": "Herbs like basil and mint add flavour and may soothe digestion.",
+    "details": "Fresh herbs enhance meals and can reduce the need for added salt or sugar.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#e0f7fa 0%,#b3e5fc 100%)",
+    "gradientLight": "linear-gradient(135deg,#e0f7fa 0%,#b3e5fc 100%)",
+    "gradientDark": "linear-gradient(135deg,#0b5260 0%,#063a45 100%)"
+  },
+  {
+    "id": "tip-220",
+    "title": "Try Short Strength Circuits",
+    "summary": "Short circuits provide benefits in little time.",
+    "details": "A 10–15 minute circuit of bodyweight moves keeps strength without long workouts.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#f3e8ff 0%,#d6bcff 100%)",
+    "gradientLight": "linear-gradient(135deg,#f3e8ff 0%,#d6bcff 100%)",
+    "gradientDark": "linear-gradient(135deg,#5d3b66 0%,#3b2947 100%)"
+  },
+  {
+    "id": "tip-221",
+    "title": "Keep a Simple Symptom Log",
+    "summary": "A one-line daily log is easier to maintain.",
+    "details": "Record one sentence about mood, pain, and sleep each day to spot trends over months.",
+    "tags": [
+      "sleep",
+      "mental"
+    ],
+    "gradient": "linear-gradient(135deg,#e8ffe5 0%,#b7ffdb 100%)",
+    "gradientLight": "linear-gradient(135deg,#e8ffe5 0%,#b7ffdb 100%)",
+    "gradientDark": "linear-gradient(135deg,#184f2f 0%,#0f3622 100%)"
+  },
+  {
+    "id": "tip-222",
+    "title": "Use Gentle Sauna with Hydration",
+    "summary": "Short sauna sessions can relax muscles but hydrate well.",
+    "details": "Limit time and drink before and after sauna use to avoid dizziness or dehydration.",
+    "tags": [
+      "hydration"
+    ],
+    "gradient": "linear-gradient(135deg,#fff4e6 0%,#ffd8a8 100%)",
+    "gradientLight": "linear-gradient(135deg,#fff4e6 0%,#ffd8a8 100%)",
+    "gradientDark": "linear-gradient(135deg,#6b4a2d 0%,#47321f 100%)"
+  },
+  {
+    "id": "tip-223",
+    "title": "Include Leafy Salads with Protein",
+    "summary": "Salads with protein are filling and nutritious.",
+    "details": "Add beans, chicken, tuna, or tofu to leafy salads for a balanced meal that supports iron and protein needs.",
+    "tags": [
+      "nutrition"
+    ],
+    "gradient": "linear-gradient(135deg,#fce7f3 0%,#f8d7ef 100%)",
+    "gradientLight": "linear-gradient(135deg,#fce7f3 0%,#f8d7ef 100%)",
+    "gradientDark": "linear-gradient(135deg,#6a3754 0%,#3e2639 100%)"
+  },
+  {
+    "id": "tip-224",
+    "title": "Practice Light Mindful Movement in the Morning",
+    "summary": "Gentle movement primes the body for the day.",
+    "details": "Five minutes of slow movement and breath energizes and sets a calm tone for the day.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#e8f0ff 0%,#cfe0ff 100%)",
+    "gradientLight": "linear-gradient(135deg,#e8f0ff 0%,#cfe0ff 100%)",
+    "gradientDark": "linear-gradient(135deg,#1d3b66 0%,#122744 100%)"
+  },
+  {
+    "id": "tip-225",
+    "title": "Try Low-sugar Comfort Desserts",
+    "summary": "Satisfy cravings with less refined sugar.",
+    "details": "Baked fruit with cinnamon or yogurt and honey offer pleasant treats with less impact on blood sugar.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#ffd1e8 0%,#ff9fc3 100%)",
+    "gradientLight": "linear-gradient(135deg,#ffd1e8 0%,#ff9fc3 100%)",
+    "gradientDark": "linear-gradient(135deg,#7a3042 0%,#502232 100%)"
+  },
+  {
+    "id": "tip-226",
+    "title": "Practice Gentle Posture Checks",
+    "summary": "Regular posture checks reduce back tension.",
+    "details": "Every hour, check and correct your posture: shoulders back, chin tucked, feet grounded to reduce strain.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#ffe9c6 0%,#ffb3a7 100%)",
+    "gradientLight": "linear-gradient(135deg,#ffe9c6 0%,#ffb3a7 100%)",
+    "gradientDark": "linear-gradient(135deg,#6b3e2b 0%,#3f2a20 100%)"
+  },
+  {
+    "id": "tip-227",
+    "title": "Include Bone-supporting Nutrients",
+    "summary": "Calcium and vitamin D are important for long-term health.",
+    "details": "Consume calcium-rich foods and safe sun exposure or supplements as recommended to support bone health.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#e0f7fa 0%,#b3e5fc 100%)",
+    "gradientLight": "linear-gradient(135deg,#e0f7fa 0%,#b3e5fc 100%)",
+    "gradientDark": "linear-gradient(135deg,#0b5260 0%,#063a45 100%)"
+  },
+  {
+    "id": "tip-228",
+    "title": "Use Light Guided Meditations for Sleep",
+    "summary": "Short meditations help sleep onset.",
+    "details": "Guided sleep meditations can calm racing thoughts and prepare the body for sleep.",
+    "tags": [
+      "sleep"
+    ],
+    "gradient": "linear-gradient(135deg,#f3e8ff 0%,#d6bcff 100%)",
+    "gradientLight": "linear-gradient(135deg,#f3e8ff 0%,#d6bcff 100%)",
+    "gradientDark": "linear-gradient(135deg,#5d3b66 0%,#3b2947 100%)"
+  },
+  {
+    "id": "tip-229",
+    "title": "Prioritize Protein Post-workout",
+    "summary": "Protein aids recovery and muscle repair.",
+    "details": "A small protein-rich snack after exercise helps recovery and maintains energy balance.",
+    "tags": [
+      "exercise"
+    ],
+    "gradient": "linear-gradient(135deg,#e8ffe5 0%,#b7ffdb 100%)",
+    "gradientLight": "linear-gradient(135deg,#e8ffe5 0%,#b7ffdb 100%)",
+    "gradientDark": "linear-gradient(135deg,#184f2f 0%,#0f3622 100%)"
+  },
+  {
+    "id": "tip-230",
+    "title": "Use Gentle Stretching for Pelvic Comfort",
+    "summary": "Hip openers relieve pelvic tension.",
+    "details": "Moves like butterfly pose and seated hip stretches gently open the hips and relieve pelvic tightness.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#fff4e6 0%,#ffd8a8 100%)",
+    "gradientLight": "linear-gradient(135deg,#fff4e6 0%,#ffd8a8 100%)",
+    "gradientDark": "linear-gradient(135deg,#6b4a2d 0%,#47321f 100%)"
+  },
+  {
+    "id": "tip-231",
+    "title": "Plan Light Meal Prep Days",
+    "summary": "Batch light meals once or twice a week.",
+    "details": "Prep simple components—grains, roasted veggies, proteins—that you can combine quickly on tired days.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#fce7f3 0%,#f8d7ef 100%)",
+    "gradientLight": "linear-gradient(135deg,#fce7f3 0%,#f8d7ef 100%)",
+    "gradientDark": "linear-gradient(135deg,#6a3754 0%,#3e2639 100%)"
+  },
+  {
+    "id": "tip-232",
+    "title": "Try Mindful Tea Rituals",
+    "summary": "A calming tea ritual signals rest and self-care.",
+    "details": "Sipping a warm herbal tea slowly creates a ritual that signals relaxation to your nervous system.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#e8f0ff 0%,#cfe0ff 100%)",
+    "gradientLight": "linear-gradient(135deg,#e8f0ff 0%,#cfe0ff 100%)",
+    "gradientDark": "linear-gradient(135deg,#1d3b66 0%,#122744 100%)"
+  },
+  {
+    "id": "tip-233",
+    "title": "Include Whole-food Carbs for Stable Energy",
+    "summary": "Whole carbs provide sustained fuel.",
+    "details": "Choose oats, sweet potatoes, and brown rice rather than refined carbs to maintain energy and mood.",
+    "tags": [
+      "mental"
+    ],
+    "gradient": "linear-gradient(135deg,#ffd1e8 0%,#ff9fc3 100%)",
+    "gradientLight": "linear-gradient(135deg,#ffd1e8 0%,#ff9fc3 100%)",
+    "gradientDark": "linear-gradient(135deg,#7a3042 0%,#502232 100%)"
+  },
+  {
+    "id": "tip-234",
+    "title": "Use a Quick Relaxation Playlist",
+    "summary": "Create a few-minute playlist that calms you instantly.",
+    "details": "Play it during stressful moments to downshift and reduce symptom amplification.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#ffe9c6 0%,#ffb3a7 100%)",
+    "gradientLight": "linear-gradient(135deg,#ffe9c6 0%,#ffb3a7 100%)",
+    "gradientDark": "linear-gradient(135deg,#6b3e2b 0%,#3f2a20 100%)"
+  },
+  {
+    "id": "tip-235",
+    "title": "Practice Gentle Breath Hold Techniques",
+    "summary": "Short breath holds can calm anxiety when used safely.",
+    "details": "Try holding your breath calmly for a few seconds (after a normal inhale) then exhale slowly—use with caution and not if dizzy.",
+    "tags": [
+      "mental"
+    ],
+    "gradient": "linear-gradient(135deg,#e0f7fa 0%,#b3e5fc 100%)",
+    "gradientLight": "linear-gradient(135deg,#e0f7fa 0%,#b3e5fc 100%)",
+    "gradientDark": "linear-gradient(135deg,#0b5260 0%,#063a45 100%)"
+  },
+  {
+    "id": "tip-236",
+    "title": "Include Iron-boosting Pairings",
+    "summary": "Combine iron sources with vitamin C to enhance absorption.",
+    "details": "Add citrus or bell peppers to iron-rich meals to improve non-heme iron uptake from plant foods.",
+    "tags": [
+      "nutrition"
+    ],
+    "gradient": "linear-gradient(135deg,#f3e8ff 0%,#d6bcff 100%)",
+    "gradientLight": "linear-gradient(135deg,#f3e8ff 0%,#d6bcff 100%)",
+    "gradientDark": "linear-gradient(135deg,#5d3b66 0%,#3b2947 100%)"
+  },
+  {
+    "id": "tip-237",
+    "title": "Use Visual Journaling for Emotions",
+    "summary": "Sketch or use colors to express emotions when words feel hard.",
+    "details": "A simple drawing or color chart can help externalize mood and make patterns easier to notice.",
+    "tags": [
+      "mental"
+    ],
+    "gradient": "linear-gradient(135deg,#e8ffe5 0%,#b7ffdb 100%)",
+    "gradientLight": "linear-gradient(135deg,#e8ffe5 0%,#b7ffdb 100%)",
+    "gradientDark": "linear-gradient(135deg,#184f2f 0%,#0f3622 100%)"
+  },
+  {
+    "id": "tip-238",
+    "title": "Try Short Progressive Muscle Tension Releases",
+    "summary": "Quick releases reduce bodily tension quickly.",
+    "details": "Tense each muscle group for 4–6 seconds then release, moving progressively through the body to calm the nervous system.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#fff4e6 0%,#ffd8a8 100%)",
+    "gradientLight": "linear-gradient(135deg,#fff4e6 0%,#ffd8a8 100%)",
+    "gradientDark": "linear-gradient(135deg,#6b4a2d 0%,#47321f 100%)"
+  },
+  {
+    "id": "tip-239",
+    "title": "Plan Comfortable Workspaces",
+    "summary": "Ergonomics reduce physical strain during long tasks.",
+    "details": "Adjust chair, monitor height, and use lumbar support to reduce back and pelvic tension when working.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#fce7f3 0%,#f8d7ef 100%)",
+    "gradientLight": "linear-gradient(135deg,#fce7f3 0%,#f8d7ef 100%)",
+    "gradientDark": "linear-gradient(135deg,#6a3754 0%,#3e2639 100%)"
+  },
+  {
+    "id": "tip-240",
+    "title": "Use Gentle Aromas for Focus",
+    "summary": "Citrus or mint scents can enhance alertness naturally.",
+    "details": "Diffuse a small amount of invigorating scent during low-energy work sessions to gently boost focus.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#e8f0ff 0%,#cfe0ff 100%)",
+    "gradientLight": "linear-gradient(135deg,#e8f0ff 0%,#cfe0ff 100%)",
+    "gradientDark": "linear-gradient(135deg,#1d3b66 0%,#122744 100%)"
+  },
+  {
+    "id": "tip-241",
+    "title": "Include Protein- and Fiber-rich Breakfasts",
+    "summary": "A filling breakfast stabilizes morning energy.",
+    "details": "Try oats with nuts and fruit or eggs with whole-grain toast to start the day steadily.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#ffd1e8 0%,#ff9fc3 100%)",
+    "gradientLight": "linear-gradient(135deg,#ffd1e8 0%,#ff9fc3 100%)",
+    "gradientDark": "linear-gradient(135deg,#7a3042 0%,#502232 100%)"
+  },
+  {
+    "id": "tip-242",
+    "title": "Practice Desk Yoga",
+    "summary": "Short desk routines reduce tightness and improve blood flow.",
+    "details": "Neck rolls, seated twists, and ankle pumps can be done at your desk to reduce discomfort.",
+    "tags": [
+      "exercise"
+    ],
+    "gradient": "linear-gradient(135deg,#ffe9c6 0%,#ffb3a7 100%)",
+    "gradientLight": "linear-gradient(135deg,#ffe9c6 0%,#ffb3a7 100%)",
+    "gradientDark": "linear-gradient(135deg,#6b3e2b 0%,#3f2a20 100%)"
+  },
+  {
+    "id": "tip-243",
+    "title": "Use Mindful Affirmations",
+    "summary": "Short affirmations can shift mindset during tough days.",
+    "details": "Repeat a few gentle affirmations like ‘I am doing my best’ to combat negative self-talk and increase resilience.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#e0f7fa 0%,#b3e5fc 100%)",
+    "gradientLight": "linear-gradient(135deg,#e0f7fa 0%,#b3e5fc 100%)",
+    "gradientDark": "linear-gradient(135deg,#0b5260 0%,#063a45 100%)"
+  },
+  {
+    "id": "tip-244",
+    "title": "Include Easy-to-digest Meals",
+    "summary": "Soups and stews are gentle on the stomach during cramps.",
+    "details": "Hydrating soups with protein and vegetables offer nourishment without heavy digestion demands.",
+    "tags": [
+      "pain"
+    ],
+    "gradient": "linear-gradient(135deg,#f3e8ff 0%,#d6bcff 100%)",
+    "gradientLight": "linear-gradient(135deg,#f3e8ff 0%,#d6bcff 100%)",
+    "gradientDark": "linear-gradient(135deg,#5d3b66 0%,#3b2947 100%)"
+  },
+  {
+    "id": "tip-245",
+    "title": "Try Short Digital-free Walks",
+    "summary": "Walks without devices reduce rumination and increase well-being.",
+    "details": "Leave your phone behind for a short walk to reset and decompress mentally.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#e8ffe5 0%,#b7ffdb 100%)",
+    "gradientLight": "linear-gradient(135deg,#e8ffe5 0%,#b7ffdb 100%)",
+    "gradientDark": "linear-gradient(135deg,#184f2f 0%,#0f3622 100%)"
+  },
+  {
+    "id": "tip-246",
+    "title": "Use Simple Ergonomic Tools",
+    "summary": "A small lumbar roll or footrest helps posture and comfort.",
+    "details": "Affordable ergonomic supports reduce strain during seated work and improve pelvic/back comfort.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#fff4e6 0%,#ffd8a8 100%)",
+    "gradientLight": "linear-gradient(135deg,#fff4e6 0%,#ffd8a8 100%)",
+    "gradientDark": "linear-gradient(135deg,#6b4a2d 0%,#47321f 100%)"
+  },
+  {
+    "id": "tip-247",
+    "title": "Include Hydrating Snacks During Work",
+    "summary": "Keep water-rich snacks at your desk.",
+    "details": "Cucumber slices, orange wedges, or grapes are hydrating snacks that keep energy stable without heavy eating.",
+    "tags": [
+      "hydration"
+    ],
+    "gradient": "linear-gradient(135deg,#fce7f3 0%,#f8d7ef 100%)",
+    "gradientLight": "linear-gradient(135deg,#fce7f3 0%,#f8d7ef 100%)",
+    "gradientDark": "linear-gradient(135deg,#6a3754 0%,#3e2639 100%)"
+  },
+  {
+    "id": "tip-248",
+    "title": "Practice Short Gratitude Check-ins",
+    "summary": "Brief gratitude moments throughout the day help mood.",
+    "details": "Pause at lunch and note one small positive to shift outlook and reduce stress accumulation.",
+    "tags": [
+      "mental"
+    ],
+    "gradient": "linear-gradient(135deg,#e8f0ff 0%,#cfe0ff 100%)",
+    "gradientLight": "linear-gradient(135deg,#e8f0ff 0%,#cfe0ff 100%)",
+    "gradientDark": "linear-gradient(135deg,#1d3b66 0%,#122744 100%)"
+  },
+  {
+    "id": "tip-249",
+    "title": "Try Gentle Mind-Body Rituals",
+    "summary": "Rituals like tea and breathwork create predictability and calm.",
+    "details": "Design a 5-minute ritual that signals rest or focus depending on your needs and use it consistently.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#ffd1e8 0%,#ff9fc3 100%)",
+    "gradientLight": "linear-gradient(135deg,#ffd1e8 0%,#ff9fc3 100%)",
+    "gradientDark": "linear-gradient(135deg,#7a3042 0%,#502232 100%)"
+  },
+  {
+    "id": "tip-250",
+    "title": "Reflect and Adjust Monthly",
+    "summary": "Review what helps and iterate your self-care plan.",
+    "details": "At the end of each month, note which strategies worked and adjust your plan to better support the next cycle.",
+    "tags": [],
+    "gradient": "linear-gradient(135deg,#ffe9c6 0%,#ffb3a7 100%)",
+    "gradientLight": "linear-gradient(135deg,#ffe9c6 0%,#ffb3a7 100%)",
+    "gradientDark": "linear-gradient(135deg,#6b3e2b 0%,#3f2a20 100%)"
+  }
+]
