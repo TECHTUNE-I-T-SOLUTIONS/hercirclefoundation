@@ -11,6 +11,7 @@ import { Toaster } from '@/components/ui/toaster'
 import "./globals.css"
 import LunaChatWrapper from '@/components/luna-chat-wrapper'
 import HealthModalWrapper from '../components/health-modal-wrapper'
+import SurveyPopup from '@/components/survey-popup-wrapper'
 
 export const metadata: Metadata = {
   title: "HerCircle Foundation - Breaking Period Poverty",
@@ -38,6 +39,7 @@ export default function RootLayout({
           <ScrollToTop />
           <LunaChatWrapper />
           <HealthModalWrapper />
+          <SurveyPopup />
           <Analytics />
         </ThemeProvider>
       </body>

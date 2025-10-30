@@ -1,0 +1,3 @@
+// File replaced by app/api/admin/surveys/record-event/route.ts
+// ...existing code moved to route.ts...
+

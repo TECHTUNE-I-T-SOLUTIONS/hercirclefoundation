@@ -112,6 +112,7 @@ export function AdminSidebarNew({ children, headerTitle = "Admin Dashboard" }: A
     { href: "/admin/partner-requests", label: "Partner Requests", icon: Bell },
     { href: "/admin/notifications", label: "Notifications", icon: Bell, isNotifications: true },
     { href: "/admin/push-subscriptions", label: "Push Subscriptions", icon: Bell },
+    { href: "/admin/surveys", label: "Surveys", icon: Bell },
   ]
 
   const handleLogout = async () => {

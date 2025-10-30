@@ -7,6 +7,21 @@ type Props = { params: Promise<{ id: string }> }
 
 export const revalidate = 10
 
+// helper to detect file types by extension (server-side)
+const isImageUrl = (url?: string | null) => {
+  if (!url) return false
+  try {
+    const p = url.split('?')[0].toLowerCase()
+    return /\.(jpe?g|png|gif|webp|avif|svg|bmp|tiff)$/.test(p)
+  } catch {
+    return false
+  }
+}
+const isPdfUrl = (url?: string | null) => {
+  if (!url) return false
+  try { return /\.pdf($|\?)/i.test(url.split('?')[0]) } catch { return false }
+}
+
 export default async function StoryDetail({ params }: Props) {
   // `params` can be a Promise in the App Router — unwrap it before using.
   const { id } = await params
@@ -33,11 +48,25 @@ export default async function StoryDetail({ params }: Props) {
         <article className="prose dark:prose-invert max-w-3xl mx-auto">
           <h1>{story.title || 'Untitled'}</h1>
           <p className="text-sm text-muted-foreground">By {story.author_name || 'Anonymous'} • {story.created_at ? new Date(story.created_at).toLocaleDateString() : ''}</p>
+
           {story.file_url && (
             <div className="my-4">
-              <a href={story.file_url} target="_blank" rel="noopener noreferrer" className="text-primary">Open attachment</a>
+              {isImageUrl(story.file_url) ? (
+                // render inline image for image attachments
+                // use a responsive / full-width image with rounded corners
+                <img src={story.file_url} alt={story.title || 'Attachment'} className="max-w-full h-auto rounded-md shadow-md" />
+              ) : isPdfUrl(story.file_url) ? (
+                // render a PDF preview iframe for convenience (fallback to link if blocked)
+                <div className="w-full rounded-md overflow-hidden border">
+                  <iframe src={story.file_url} title="Attachment preview" className="w-full h-96" />
+                </div>
+              ) : (
+                // non-image/document: show a download/open link
+                <a href={story.file_url} target="_blank" rel="noopener noreferrer" className="text-primary">Open attachment</a>
+              )}
             </div>
           )}
+
           <div dangerouslySetInnerHTML={{ __html: story.content || '' }} />
 
           {/* Client-only reactions */}
