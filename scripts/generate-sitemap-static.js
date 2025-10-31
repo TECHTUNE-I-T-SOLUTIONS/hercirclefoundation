@@ -4,6 +4,7 @@ const path = require('path')
 
 const APP_DIR = path.join(__dirname, '..', 'app')
 const OUT_FILE = path.join(__dirname, '..', 'sitemap.xml')
+const OUT_PUBLIC_FILE = path.join(__dirname, '..', 'public', 'sitemap.xml')
 
 function isPageFile(name) {
   return /(^|\.)page\.(tsx|ts|jsx|js|mdx)$/.test(name)
@@ -51,7 +52,9 @@ for (const f of files) {
 // dedupe and sort
 const unique = Array.from(new Set(urls)).sort()
 
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'
+// CLI arg takes precedence: node scripts/generate-sitemap-static.js https://example.com
+const cliBase = process.argv[2]
+const baseUrl = (cliBase && cliBase.trim()) || process.env.NEXT_PUBLIC_SITE_URL || process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'
 
 const xmlParts = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
 for (const u of unique) {
@@ -62,5 +65,15 @@ for (const u of unique) {
 }
 xmlParts.push('</urlset>')
 
-fs.writeFileSync(OUT_FILE, xmlParts.join('\n') + '\n', 'utf8')
+const outXml = xmlParts.join('\n') + '\n'
+fs.writeFileSync(OUT_FILE, outXml, 'utf8')
 console.log('Wrote sitemap to', OUT_FILE)
+try {
+  // ensure public dir exists
+  const pubDir = path.dirname(OUT_PUBLIC_FILE)
+  if (!fs.existsSync(pubDir)) fs.mkdirSync(pubDir, { recursive: true })
+  fs.writeFileSync(OUT_PUBLIC_FILE, outXml, 'utf8')
+  console.log('Wrote sitemap to', OUT_PUBLIC_FILE)
+} catch (err) {
+  console.warn('Could not write public sitemap:', err.message)
+}

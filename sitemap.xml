@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>http://localhost:3000/</loc>
+    <loc>https://hercirclefoundation.app/</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/about</loc>
+    <loc>https://hercirclefoundation.app/about</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/blog</loc>
+    <loc>https://hercirclefoundation.app/blog</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/contact</loc>
+    <loc>https://hercirclefoundation.app/contact</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/donate</loc>
+    <loc>https://hercirclefoundation.app/donate</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/events</loc>
+    <loc>https://hercirclefoundation.app/events</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/gallery</loc>
+    <loc>https://hercirclefoundation.app/gallery</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/partner</loc>
+    <loc>https://hercirclefoundation.app/partner</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/stories</loc>
+    <loc>https://hercirclefoundation.app/stories</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/volunteer</loc>
+    <loc>https://hercirclefoundation.app/volunteer</loc>
   </url>
 </urlset>
