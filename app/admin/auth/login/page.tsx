@@ -31,9 +31,13 @@ export default function AdminLoginPage() {
         password,
       })
 
-      if (loginError) throw loginError
+      if (loginError) {
+        setError(loginError.message || 'Login failed')
+        setLoading(false)
+        return
+      }
 
-      router.push("/admin/dashboard")
+      router.push('/admin/dashboard')
     } catch (err) {
       setError(err instanceof Error ? err.message : "Login failed")
     } finally {
@@ -100,6 +104,11 @@ export default function AdminLoginPage() {
                 Need an account?{" "}
                 <Link href="/admin/auth/sign-up" className="text-primary hover:underline font-medium">
                   Sign up
+                </Link>
+              </p>
+              <p className="text-muted-foreground mt-2">
+                <Link href="/admin/auth/forgot-password" className="text-primary hover:underline font-medium">
+                  Forgot password?
                 </Link>
               </p>
             </div>
