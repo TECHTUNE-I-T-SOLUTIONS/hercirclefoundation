@@ -245,7 +245,7 @@ export default function AdminManagementClient() {
           <div className="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
             <div>
               <CardTitle>Registered Admins</CardTitle>
-              <CardDescription>Search, filter, and update every admin and super admin in the system.</CardDescription>
+              <CardDescription>Search, filter, and update every admin and super admin on the platform.</CardDescription>
             </div>
             <div className="flex flex-col gap-3 sm:flex-row">
               <div className="relative w-full sm:w-72">
