@@ -94,16 +94,26 @@ export default function GalleryPage() {
               </div>
             ) : (
               <GalleryGrid
-                  items={items.map((item) => ({
+                items={items.map((item) => {
+                  // Support all image and media types, including HEIC, by passing accurate mediaType and all available URLs
+                  // Optionally, you can handle HEIC conversion at the display level, but here we ensure they're included
+                  const mediaUrls = (item as any).media_urls && Array.isArray((item as any).media_urls)
+                    ? (item as any).media_urls
+                    : item.media_url
+                      ? [item.media_url]
+                      : [];
+                  return {
                     id: item.id,
                     title: item.title,
-                    // prefer the new media_urls array if present
-                    mediaUrl: (item as any).media_urls && Array.isArray((item as any).media_urls) && (item as any).media_urls.length > 0 ? (item as any).media_urls[0] : item.media_url,
-                    mediaUrls: (item as any).media_urls || undefined,
-                    mediaType: item.media_type,
+                    mediaUrl: mediaUrls.length > 0 ? mediaUrls[0] : undefined,
+                    mediaUrls, // pass all available URLs (could include HEIC, JPG, PNG, etc.)
+                    mediaType: item.media_type || (mediaUrls[0]
+                      ? mediaUrls[0].split('.').pop()?.toLowerCase()
+                      : undefined), // fallback: get type from url extension
                     description: item.description,
-                  }))}
-                />
+                  }
+                })}
+              />
             )}
           </div>
         </section>

@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { createClient as createServerHelper } from '@/lib/supabase/server'
 import { createClient } from '@supabase/supabase-js'
+import { sendAdminBroadcast } from '@/lib/email/notify-admins'
 
 export async function DELETE(req: Request, ctx: any) {
   let params = ctx?.params
@@ -26,6 +27,14 @@ export async function DELETE(req: Request, ctx: any) {
   const serverSupabase = createClient(SUPABASE_URL, SERVICE_ROLE)
   const { error } = await serverSupabase.from('partner_requests').delete().eq('id', id)
   if (error) return NextResponse.json({ error: error.message }, { status: 500 })
+  await sendAdminBroadcast({
+    eventType: 'partner',
+    subject: 'Partner request deleted',
+    title: 'Partner Request Deleted',
+    body: 'A partner request was removed from the platform.',
+    ctaLabel: 'Open Partner Requests',
+    ctaHref: '/admin/partner-requests',
+  }).catch(() => {})
   return NextResponse.json({ ok: true })
 }
 
@@ -54,5 +63,13 @@ export async function PATCH(req: Request, ctx: any) {
   const serverSupabase = createClient(SUPABASE_URL, SERVICE_ROLE)
   const { data, error } = await serverSupabase.from('partner_requests').update({ status }).eq('id', id).select().single()
   if (error) return NextResponse.json({ error: error.message }, { status: 500 })
+  await sendAdminBroadcast({
+    eventType: 'partner',
+    subject: 'Partner request updated',
+    title: 'Partner Request Updated',
+    body: `A partner request status was updated to ${status || 'updated'}.`,
+    ctaLabel: 'Open Partner Requests',
+    ctaHref: '/admin/partner-requests',
+  }).catch(() => {})
   return NextResponse.json({ data })
 }

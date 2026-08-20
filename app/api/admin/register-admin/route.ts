@@ -1,10 +1,17 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
+import { createClient as createServerHelper } from '@/lib/supabase/server'
+import { isSuperAdmin } from '@/lib/admin/permissions'
 
 export async function POST(request: NextRequest) {
   try {
+    const helper = await createServerHelper()
+    const { data: userData } = await helper.auth.getUser()
+    if (!userData?.user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    if (!(await isSuperAdmin(userData.user.id))) return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
+
     const body = await request.json()
-    const { userId, email, full_name } = body
+    const { userId, email, full_name, role } = body
     if (!full_name) return NextResponse.json({ error: 'Missing full_name' }, { status: 400 })
 
     if (!process.env.SUPABASE_SERVICE_ROLE_KEY || !process.env.NEXT_PUBLIC_SUPABASE_URL) {
@@ -43,7 +50,7 @@ export async function POST(request: NextRequest) {
     if (!emailToUse) return NextResponse.json({ error: 'Could not determine user email' }, { status: 400 })
 
     // insert into admin_users; ignore conflict
-    const { data, error } = await svc.from('admin_users').upsert({ id: idToUse, email: emailToUse, full_name }, { onConflict: 'id' }).select().limit(1)
+    const { data, error } = await svc.from('admin_users').upsert({ id: idToUse, email: emailToUse, full_name, role: role === 'super_admin' ? 'super_admin' : 'admin' }, { onConflict: 'id' }).select().limit(1)
     if (error) {
       console.error('Failed to upsert admin_users', error)
       return NextResponse.json({ error: error.message }, { status: 500 })

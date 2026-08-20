@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { createClient as createServerClient } from '@supabase/supabase-js'
 import { createClient as createServerHelper } from '@/lib/supabase/server'
+import { notifyAdmins } from '@/lib/email/notify-admins'
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL!
 const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY!
@@ -44,6 +45,18 @@ export async function POST(req: Request) {
 
     const { data, error } = await serverClient.from('events').insert([payload]).select().single()
     if (error) return NextResponse.json({ error: error.message }, { status: 500 })
+
+    // ---- Automated email to admins (best-effort) ----
+    if (data) {
+      notifyAdmins('admin_event', {
+        eventType: 'event',
+        title: payload.title || '',
+        description: payload.description || '',
+        date: payload.date || '',
+        location: payload.location || '',
+      }).catch(() => {})
+    }
+
     return NextResponse.json({ data })
   } catch (err: any) {
     return NextResponse.json({ error: err.message || String(err) }, { status: 500 })

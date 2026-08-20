@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { createClient as createServerClient } from '@supabase/supabase-js'
 import { createClient as createServerHelper } from '@/lib/supabase/server'
 import webpush from 'web-push'
+import { sendAdminBroadcast } from '@/lib/email/notify-admins'
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL!
 const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY!
@@ -59,6 +60,14 @@ export async function POST(req: Request) {
     if (error) return NextResponse.json({ error: error.message }, { status: 500 })
     // If the blog was published, try to send a web-push notification to subscribers.
     if (payload.status === 'published') {
+      sendAdminBroadcast({
+        eventType: 'blog',
+        subject: 'New blog post published',
+        title: 'New Blog Published',
+        body: `A new blog post titled "${payload.title || 'Untitled'}" is now live on the platform.`,
+        ctaLabel: 'View Blog',
+        ctaHref: '/blog',
+      }).catch(() => {})
       ;(async () => {
         try {
           const subject = process.env.VAPID_SUBJECT || ''

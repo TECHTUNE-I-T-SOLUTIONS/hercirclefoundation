@@ -8,7 +8,6 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useState } from "react"
-import { createClient } from "@/lib/supabase/client"
 import { Heart, CheckCircle } from "lucide-react"
 
 export default function VolunteerPage() {
@@ -35,19 +34,20 @@ export default function VolunteerPage() {
     setError(null)
 
     try {
-      const supabase = createClient()
-      const { error: submitError } = await supabase.from("volunteers").insert([
-        {
+      const res = await fetch("/api/volunteers", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
           full_name: formData.fullName,
           email: formData.email,
           phone: formData.phone,
           skills: formData.skills,
           availability: formData.availability,
           motivation: formData.motivation,
-        },
-      ])
-
-      if (submitError) throw submitError
+        }),
+      })
+      const payload = await res.json().catch(() => ({}))
+      if (!res.ok) throw new Error(payload?.error || "Failed to submit application")
 
       setSubmitted(true)
       setFormData({

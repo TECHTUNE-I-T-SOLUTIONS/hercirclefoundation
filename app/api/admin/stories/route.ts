@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { createClient as createServerClient } from '@supabase/supabase-js'
 import { createClient as createServerHelper } from '@/lib/supabase/server'
+import { sendAdminBroadcast } from '@/lib/email/notify-admins'
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL!
 const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY!
@@ -52,6 +53,17 @@ export async function POST(req: Request) {
 
     const { data, error } = await serverClient.from('stories').insert([payload]).select().single()
     if (error) return NextResponse.json({ error: error.message }, { status: 500 })
+
+    if (data) {
+      sendAdminBroadcast({
+        eventType: 'story',
+        subject: 'New story submitted',
+        title: 'New Story Submission',
+        body: `${payload.author_name || 'A community member'} submitted a new story for review.`,
+        ctaLabel: 'Review Stories',
+        ctaHref: '/admin/stories',
+      }).catch(() => {})
+    }
     return NextResponse.json({ data })
   } catch (err: any) {
     return NextResponse.json({ error: err.message || String(err) }, { status: 500 })

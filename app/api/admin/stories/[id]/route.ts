@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { createClient as createServerClient } from '@supabase/supabase-js'
 import { createClient as createServerHelper } from '@/lib/supabase/server'
 import webpush from 'web-push'
+import { sendAdminBroadcast } from '@/lib/email/notify-admins'
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL!
 const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY!
@@ -37,6 +38,14 @@ export async function PATCH(req: Request, ctx: any) {
 
     // If this update approved the story, send push notifications asynchronously.
     if (payload.status === 'approved') {
+      sendAdminBroadcast({
+        eventType: 'story',
+        subject: 'Story approved',
+        title: 'Story Approved',
+        body: `"${data.title || 'A story'}" has been approved and is now live.`,
+        ctaLabel: 'Open Stories',
+        ctaHref: '/admin/stories',
+      }).catch(() => {})
       ;(async () => {
         try {
           const subject = process.env.VAPID_SUBJECT || ''
@@ -96,6 +105,15 @@ export async function DELETE(req: Request, ctx: any) {
 
     const { error } = await serverClient.from('stories').delete().eq('id', id)
     if (error) return NextResponse.json({ error: error.message }, { status: 500 })
+
+    await sendAdminBroadcast({
+      eventType: 'story',
+      subject: 'Story deleted',
+      title: 'Story Deleted',
+      body: 'A story was removed from the platform.',
+      ctaLabel: 'Open Stories',
+      ctaHref: '/admin/stories',
+    }).catch(() => {})
     return NextResponse.json({ success: true })
   } catch (err: any) {
     return NextResponse.json({ error: err.message || String(err) }, { status: 500 })

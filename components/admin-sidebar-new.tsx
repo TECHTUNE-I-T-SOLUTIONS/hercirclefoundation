@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react"
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
-import { LayoutDashboard, Users, Heart, Calendar, ImageIcon, LogOut, Moon, Sun, Bell, BookOpen } from "lucide-react"
+import { LayoutDashboard, Users, Heart, Calendar, ImageIcon, LogOut, Moon, Sun, Bell, BookOpen, Mail, Crown } from "lucide-react"
 import { createClient } from "@/lib/supabase/client"
 import { LogoutConfirmationModal } from "@/components/logout-confirmation-modal"
 
@@ -100,6 +100,7 @@ export function AdminSidebarNew({ children, headerTitle = "Admin Dashboard" }: A
   const menuItems = [
     { href: "/admin/dashboard", label: "Dashboard", icon: LayoutDashboard },
     { href: "/admin/profile", label: "Profile", icon: Users },
+    { href: "/admin/management", label: "Admins", icon: Users, superOnly: true },
     { href: "/admin/volunteers", label: "Volunteers", icon: Users },
     { href: "/admin/donors", label: "Donors", icon: Heart },
     { href: "/admin/stories", label: "Stories", icon: BookOpen },
@@ -112,6 +113,7 @@ export function AdminSidebarNew({ children, headerTitle = "Admin Dashboard" }: A
     { href: "/admin/partner-requests", label: "Partner Requests", icon: Bell },
     { href: "/admin/notifications", label: "Notifications", icon: Bell, isNotifications: true },
     { href: "/admin/push-subscriptions", label: "Push Subscriptions", icon: Bell },
+    { href: "/admin/email", label: "Email Studio", icon: Mail },
     { href: "/admin/surveys", label: "Surveys", icon: Bell },
   ]
 
@@ -128,6 +130,26 @@ export function AdminSidebarNew({ children, headerTitle = "Admin Dashboard" }: A
       setShowLogoutModal(false)
     }
   }
+
+  const [isSuperAdmin, setIsSuperAdmin] = useState(false)
+
+  useEffect(() => {
+    let alive = true
+    const checkRole = async () => {
+      try {
+        const supabase = createClient()
+        const { data: { user } } = await supabase.auth.getUser()
+        if (!user) return
+        const { data } = await supabase.from("admin_users").select("role").eq("id", user.id).limit(1)
+        const role = Array.isArray(data) ? data[0]?.role : (data as any)?.role
+        if (alive) setIsSuperAdmin(role === "super_admin")
+      } catch {
+        if (alive) setIsSuperAdmin(false)
+      }
+    }
+    checkRole()
+    return () => { alive = false }
+  }, [])
 
   function LogoutButtonInsideProvider() {
     const { setOpenMobile, isMobile: sidebarIsMobile } = useSidebar()
@@ -174,6 +196,7 @@ export function AdminSidebarNew({ children, headerTitle = "Admin Dashboard" }: A
           <SidebarContent>
             <SidebarMenu className="gap-4 md:gap-2">
               {menuItems.map((item) => {
+                if ("superOnly" in item && item.superOnly && !isSuperAdmin) return null
                 const Icon = item.icon
                 const isActive = mounted && pathname === item.href
                 return (
@@ -182,6 +205,12 @@ export function AdminSidebarNew({ children, headerTitle = "Admin Dashboard" }: A
                       <Link href={item.href} className="flex items-center gap-4 px-4 py-4 md:py-3">
                         <Icon className="h-6 w-6 md:h-5 md:w-5" />
                         <span className="text-lg md:text-sm font-medium">{item.label}</span>
+                        {item.superOnly && isSuperAdmin && (
+                          <span className="ml-auto inline-flex items-center gap-1 rounded-full bg-amber-100 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-amber-700">
+                            <Crown className="h-3 w-3" />
+                            Super
+                          </span>
+                        )}
                         {item.isNotifications && unreadCount > 0 && (
                           <span className="ml-auto inline-flex items-center justify-center rounded-full bg-destructive px-2 py-0.5 text-xs text-white">{unreadCount}</span>
                         )}

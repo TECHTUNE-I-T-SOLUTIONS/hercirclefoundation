@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { createClient as createServerClient } from '@supabase/supabase-js'
 import { createClient as createServerHelper } from '@/lib/supabase/server'
+import { sendAdminBroadcast } from '@/lib/email/notify-admins'
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL!
 const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY!
@@ -46,6 +47,15 @@ export async function PATCH(req: Request, ctx: any) {
     const { data, error } = await serverClient.from('events').update(updatePayload).eq('id', id).select().single()
     if (error) return NextResponse.json({ error: error.message }, { status: 500 })
 
+    await sendAdminBroadcast({
+      eventType: 'event',
+      subject: updatePayload.status === 'published' ? 'Event published' : 'Event updated',
+      title: updatePayload.status === 'published' ? 'Event Published' : 'Event Updated',
+      body: `"${data.title || 'An event'}" was updated on the platform.`,
+      ctaLabel: 'Open Events',
+      ctaHref: '/admin/events',
+    }).catch(() => {})
+
     return NextResponse.json({ data })
   } catch (err: any) {
     return NextResponse.json({ error: err.message || String(err) }, { status: 500 })
@@ -67,6 +77,15 @@ export async function DELETE(req: Request, ctx: any) {
 
     const { error } = await serverClient.from('events').delete().eq('id', id)
     if (error) return NextResponse.json({ error: error.message }, { status: 500 })
+
+    await sendAdminBroadcast({
+      eventType: 'event',
+      subject: 'Event deleted',
+      title: 'Event Deleted',
+      body: 'An event was removed from the platform.',
+      ctaLabel: 'Open Events',
+      ctaHref: '/admin/events',
+    }).catch(() => {})
 
     return NextResponse.json({ success: true })
   } catch (err: any) {

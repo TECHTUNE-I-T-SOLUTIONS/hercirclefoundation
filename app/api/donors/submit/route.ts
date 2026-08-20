@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
+import { notifyAdmins, sendToPerson } from '@/lib/email/notify-admins'
 
 export async function POST(request: NextRequest) {
   try {
@@ -32,6 +33,29 @@ export async function POST(request: NextRequest) {
     if (error) {
       console.error('Service-role donors insert error', error)
       return NextResponse.json({ error: error.message }, { status: 500 })
+    }
+
+    // ---- Automated emails (best-effort, non-blocking) ----
+    if (data && data[0]) {
+      // Notify admins of the new donation.
+      notifyAdmins('admin_donation', {
+        eventType: 'donation',
+        name: full_name,
+        email: email || '',
+        amount: donation_amount != null ? String(donation_amount) : '0',
+        type: donation_type || 'one-time',
+        message: message || '',
+      }).catch(() => {})
+
+      // Send gratitude email to the donor.
+      if (email) {
+        sendToPerson({
+          template: 'donation_thankyou',
+          to: { address: email, name: full_name },
+          fromKey: 'donations',
+          data: { firstName: full_name, amount: donation_amount != null ? String(donation_amount) : '' },
+        }).catch(() => {})
+      }
     }
 
     return NextResponse.json({ ok: true, inserted: data && data[0] })
