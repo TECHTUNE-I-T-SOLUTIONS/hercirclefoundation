@@ -38,7 +38,7 @@ export default function AboutPage() {
         <section className="py-16 md:py-24 bg-gradient-to-br from-primary/10 to-transparent">
           <div className="container mx-auto px-4 text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">About HerCircle Foundation</h1>
-            <p className="text-lg text-muted-foreground max-w-2xl text-center justify-center">
+            <p className="text-lg text-muted-foreground max-w-auto text-center justify-center">
               Dedicated to empowering young women by addressing critical challenges in menstrual health.
             </p>
           </div>

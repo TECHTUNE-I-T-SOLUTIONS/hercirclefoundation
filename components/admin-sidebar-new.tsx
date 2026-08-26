@@ -188,7 +188,7 @@ export function AdminSidebarNew({ children, headerTitle = "Admin Dashboard" }: A
         <Sidebar collapsible="icon" className="border-r border-sidebar-border w-32 md:w-64 lg:w-64">
           <SidebarHeader className="border-b border-sidebar-border">
             <Link href="/admin/dashboard" className="flex items-center gap-2 group">
-              <img src="/logo.png" alt="HerCircle" className="h-16 w-12 md:h-14 md:w-10" />
+              <img src="/logo.png" alt="HerCircle" className="h-12 w-12 md:h-12 md:w-12" />
               <span className="font-bold text-sidebar-foreground text-base md:text-lg group-data-[state=collapsed]:hidden">Admin</span>
             </Link>
           </SidebarHeader>

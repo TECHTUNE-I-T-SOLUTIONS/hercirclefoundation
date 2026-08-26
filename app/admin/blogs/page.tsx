@@ -44,12 +44,12 @@ export default function AdminBlogsPage() {
   return (
     <>
       <div className="p-6">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-auto mx-auto">
           <h1 className="text-2xl font-bold mb-4">Admin - Blogs</h1>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 w-auto">
             {/* Form column */}
-            <div className="lg:col-span-1 bg-white dark:bg-gray-900 rounded-lg shadow p-6 w-full">
+            <div className="lg:col-span-1 bg-white dark:bg-transparent rounded-lg shadow p-6 w-full border">
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 gap-4">
                   <div>
@@ -95,7 +95,7 @@ export default function AdminBlogsPage() {
 
             {/* List column */}
             <div className="lg:col-span-2">
-              <div className="bg-white dark:bg-gray-900 rounded-lg shadow p-6">
+              <div className="bg-white dark:bg-transparent border rounded-lg shadow p-6">
                 <AdminBlogList />
               </div>
             </div>

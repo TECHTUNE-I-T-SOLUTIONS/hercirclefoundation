@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import { createClient as createServerHelper } from '@/lib/supabase/server'
 import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
@@ -6,6 +7,24 @@ import StoryReactions from '@/components/story-reactions'
 type Props = { params: Promise<{ id: string }> }
 
 export const revalidate = 10
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { id } = await params
+  const supabase = await createServerHelper()
+  const { data: story } = await supabase.from('stories').select('title, content, author_name').eq('id', id).limit(1).single()
+  if (!story) {
+    return {
+      title: "Story Not Found | HerCircle Foundation",
+    }
+  }
+  const cleanDescription = story.content
+    ? story.content.replace(/<[^>]*>/g, '').substring(0, 160) + '...'
+    : `Read this story shared by ${story.author_name || 'Anonymous'} on HerCircle Foundation.`
+  return {
+    title: `${story.title || 'Community Story'} | HerCircle Foundation`,
+    description: cleanDescription,
+  }
+}
 
 // helper to detect file types by extension (server-side)
 const isImageUrl = (url?: string | null) => {

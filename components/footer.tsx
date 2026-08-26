@@ -3,7 +3,7 @@ import { Mail, Phone, MapPin, Facebook, Instagram, Twitter } from "lucide-react"
 
 export function Footer() {
   return (
-  <footer className="site-footer bg-secondary text-secondary-foreground border-t border-border">
+    <footer className="site-footer bg-secondary text-secondary-foreground border-t border-border">
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           {/* About */}
@@ -94,7 +94,7 @@ export function Footer() {
 
         {/* Social Links */}
         <div className="border-t border-border pt-8 flex flex-col md:flex-row items-center justify-between">
-          <p className="text-sm opacity-75 mb-4 md:mb-0">© 2025 HerCircle Foundation. All rights reserved.</p>
+          <p className="text-sm opacity-75 mb-4 md:mb-0">© 2025 - 2026 HerCircle Foundation. All rights reserved.</p>
           <div className="flex gap-4">
             <a
               href="https://instagram.com/hercirclefoundation"

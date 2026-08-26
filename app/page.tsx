@@ -50,7 +50,7 @@ export default function Home() {
                     </Button>
                   </Link>
                   <Link href="/donate">
-                    <Button size="lg" variant="outline" className="w-full sm:w-auto bg-transparent">
+                    <Button size="lg" variant="outline" className="w-full sm:w-auto bg-transparent dark:hover:bg-white">
                       Make a Donation
                     </Button>
                   </Link>

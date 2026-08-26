@@ -1,4 +1,5 @@
 import React from 'react'
+import type { Metadata } from 'next'
 import { createClient as createServerHelper } from '@/lib/supabase/server'
 import BlogCommentsClient from '@/components/blog-comments-client'
 import BlogReactionClient from '@/components/blog-reaction-client'
@@ -9,6 +10,24 @@ import { Footer } from '@/components/footer'
 type Params = { params: Promise<{ slug: string }> }
 
 export const revalidate = 10
+
+export async function generateMetadata({ params }: Params): Promise<Metadata> {
+  const { slug } = await params
+  const supabase = await createServerHelper()
+  const { data: blog } = await supabase.from('blogs').select('title, content').eq('slug', slug).limit(1).single()
+  if (!blog) {
+    return {
+      title: "Post Not Found | HerCircle Foundation",
+    }
+  }
+  const cleanDescription = blog.content
+    ? blog.content.replace(/<[^>]*>/g, '').substring(0, 160) + '...'
+    : 'Read the latest blog post on HerCircle Foundation.'
+  return {
+    title: `${blog.title} | HerCircle Foundation`,
+    description: cleanDescription,
+  }
+}
 
 export default async function BlogPost({ params }: Params) {
   // `params` can be a Promise in the App Router — unwrap it before using.

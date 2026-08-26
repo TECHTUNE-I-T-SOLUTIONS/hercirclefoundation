@@ -1,8 +1,14 @@
+import type { Metadata } from 'next'
 import BlogListClient from '@/components/blog-list-client'
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 
 export const revalidate = 10
+
+export const metadata: Metadata = {
+  title: "Blog & Insights | HerCircle Foundation",
+  description: "Stay updated with articles, health tips, stories, and insights on menstrual health advocacy from HerCircle Foundation.",
+}
 
 export default function BlogPage() {
   return (
