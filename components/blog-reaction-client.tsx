@@ -135,7 +135,7 @@ export default function BlogReactionClient({ blogId }: { blogId: string }) {
 
   return (
     <div className="mt-6 flex items-center gap-3">
-      <input placeholder="Name (optional)" value={name} onChange={(e) => setName(e.target.value)} className="input" />
+      <input placeholder="Name (optional)" value={name} onChange={(e) => setName(e.target.value)} className="input p-2" />
       <button onClick={() => react('like')} disabled={loading} className="btn bg-red-500 text-white hover:bg-red-600 p-1 rounded shadow">
         👍 Like
       </button>

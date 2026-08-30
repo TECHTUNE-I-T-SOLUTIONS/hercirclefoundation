@@ -1,9 +1,10 @@
 "use client"
 import React, { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog'
-import RichTextEditor from '@/components/rich-text-editor'
 import { useToast } from '@/hooks/use-toast'
+import { Eye, Pencil, Trash2 } from 'lucide-react'
 
 type Blog = {
   id: string
@@ -16,36 +17,21 @@ type Blog = {
   published_at?: string | null
   created_at?: string
   author_name?: string | null
+  featured?: boolean
+  tags?: string[]
 }
 
 export default function AdminBlogList() {
+  const router = useRouter()
   const [items, setItems] = useState<Blog[]>([])
   const [loading, setLoading] = useState(true)
   const [selectedIds, setSelectedIds] = useState<string[]>([])
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false)
   const [deleteTargetId, setDeleteTargetId] = useState<string | null>(null)
-  const [editing, setEditing] = useState<Blog | null>(null)
-  const [form, setForm] = useState<any>({})
   const { toast } = useToast()
 
   useEffect(() => {
     fetchList()
-
-    const onCreated = (e: any) => {
-      const b = e.detail
-      if (b) setItems((s) => [b, ...s])
-    }
-    const onUpdated = (e: any) => {
-      const b = e.detail
-      if (b) setItems((s) => s.map((it) => (it.id === b.id ? b : it)))
-    }
-    window.addEventListener('hc:blog-created', onCreated as EventListener)
-    window.addEventListener('hc:blog-updated', onUpdated as EventListener)
-    return () => {
-      window.removeEventListener('hc:blog-created', onCreated as EventListener)
-      window.removeEventListener('hc:blog-updated', onUpdated as EventListener)
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   async function fetchList() {
@@ -67,33 +53,6 @@ export default function AdminBlogList() {
     }
   }
 
-  function openEdit(b: Blog) {
-    setEditing(b)
-    setForm({ ...b })
-  }
-
-  async function saveEdit() {
-    if (!editing) return
-    try {
-      const res = await fetch(`/api/admin/blogs/${editing.id}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(form) })
-      if (!res.ok) {
-        const err = await res.json().catch(() => null)
-        toast({ title: 'Update failed', description: err?.error || 'update failed' })
-        return
-      }
-      const j = await res.json()
-      const updated = j.data
-      setItems((s) => s.map((it) => (it.id === updated.id ? updated : it)))
-      toast({ title: 'Saved', description: 'Blog updated' })
-      try { window.dispatchEvent(new CustomEvent('hc:blog-updated', { detail: updated })) } catch (e) {}
-      setEditing(null)
-      setForm({})
-    } catch (err) {
-      console.error('Save failed', err)
-      toast({ title: 'Save failed', description: String(err) })
-    }
-  }
-
   const toggleSelect = (id: string) => setSelectedIds((s) => (s.includes(id) ? s.filter(x => x !== id) : [...s, id]))
 
   const confirmDelete = async (id?: string) => {
@@ -101,7 +60,6 @@ export default function AdminBlogList() {
     if (!target) return
     setShowDeleteConfirm(false)
     try {
-      // include session token so server endpoint accepts the request
       const { createClient } = await import('@/lib/supabase/client')
       const supabase = createClient()
       const { data: { session } } = await supabase.auth.getSession()
@@ -149,31 +107,73 @@ export default function AdminBlogList() {
     <div className="mt-8">
       <h2 className="text-xl font-semibold mb-4">Posts</h2>
       {loading ? (
-        <div>Loading…</div>
+        <div className="flex items-center justify-center py-8">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+        </div>
+      ) : items.length === 0 ? (
+        <div className="text-center py-12 text-muted-foreground">
+          <p>No blog posts yet. Create your first blog post!</p>
+        </div>
       ) : (
         <div>
           <div className="mb-3 flex justify-end gap-2">
             {selectedIds.length > 0 && (
-              <Button className="bg-destructive text-white" onClick={() => setShowDeleteConfirm(true)}>Delete selected ({selectedIds.length})</Button>
+              <Button className="bg-destructive text-white" onClick={() => setShowDeleteConfirm(true)}>
+                Delete selected ({selectedIds.length})
+              </Button>
             )}
           </div>
           <div className="space-y-3">
             {items.map((b) => (
-              <div key={b.id} className="p-3 border rounded flex items-start justify-between">
-                <div className="flex-1">
-                  <label className="inline-flex items-center mr-3">
-                    <input type="checkbox" className="mr-2" checked={selectedIds.includes(b.id)} onChange={() => toggleSelect(b.id)} />
-                    <div>
-                      <div className="font-medium">{b.title} <span className="text-xs text-muted-foreground">{b.status}</span></div>
-                      <div className="text-xs text-muted-foreground">{b.excerpt}</div>
-                      <div className="text-xs text-muted-foreground">{b.published_at ? new Date(b.published_at).toLocaleString() : ''}</div>
-                      {b.author_name && <div className="text-xs text-muted-foreground">By: {b.author_name}</div>}
+              <div key={b.id} className="p-4 border rounded-lg hover:bg-muted/50 transition-colors">
+                <div className="flex items-start justify-between">
+                  <div className="flex items-start gap-3 flex-1">
+                    <input 
+                      type="checkbox" 
+                      className="mt-1" 
+                      checked={selectedIds.includes(b.id)} 
+                      onChange={() => toggleSelect(b.id)} 
+                    />
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="font-medium">{b.title}</span>
+                        {b.featured && <span className="px-2 py-0.5 text-xs bg-primary text-primary-foreground rounded">Featured</span>}
+                        <span className={`px-2 py-0.5 text-xs rounded ${
+                          b.status === 'published' ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' : 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-200'
+                        }`}>
+                          {b.status}
+                        </span>
+                      </div>
+                      <p className="text-sm text-muted-foreground mb-2">{b.excerpt}</p>
+                      <div className="flex items-center gap-4 text-xs text-muted-foreground">
+                        <span>{b.published_at ? new Date(b.published_at).toLocaleDateString() : 'Not published'}</span>
+                        {b.author_name && <span>By: {b.author_name}</span>}
+                        {b.tags && b.tags.length > 0 && (
+                          <div className="flex gap-1">
+                            {b.tags.slice(0, 3).map(tag => (
+                              <span key={tag} className="px-2 py-0.5 bg-muted rounded text-xs">
+                                {tag}
+                              </span>
+                            ))}
+                            {b.tags.length > 3 && <span className="text-xs">+{b.tags.length - 3}</span>}
+                          </div>
+                        )}
+                      </div>
                     </div>
-                  </label>
-                </div>
-                <div className="flex gap-2">
-                  <Button variant="outline" size="sm" onClick={() => openEdit(b)}>Edit</Button>
-                  <Button variant="ghost" size="sm" className="text-destructive hover:text-destructive" onClick={() => { setDeleteTargetId(b.id); setShowDeleteConfirm(true) }}>Delete</Button>
+                  </div>
+                  <div className="flex gap-2">
+                    {b.status === 'published' && (
+                      <Button variant="ghost" size="sm" onClick={() => router.push(`/blog/${b.slug}`)}>
+                        <Eye className="h-4 w-4" />
+                      </Button>
+                    )}
+                    <Button variant="outline" size="sm" onClick={() => router.push(`/admin/blogs/${b.id}/edit`)}>
+                      <Pencil className="h-4 w-4" />
+                    </Button>
+                    <Button variant="ghost" size="sm" className="text-destructive hover:text-destructive" onClick={() => { setDeleteTargetId(b.id); setShowDeleteConfirm(true) }}>
+                      <Trash2 className="h-4 w-4" />
+                    </Button>
+                  </div>
                 </div>
               </div>
             ))}
@@ -181,52 +181,6 @@ export default function AdminBlogList() {
         </div>
       )}
 
-      <Dialog open={Boolean(editing)} onOpenChange={(open) => { if (!open) setEditing(null) }}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Edit Post</DialogTitle>
-          </DialogHeader>
-          {editing && (
-            <div className="space-y-3 max-h-[70vh] overflow-auto">
-              <div>
-                <label className="block text-sm font-medium">Title</label>
-                <input aria-label="Title" placeholder="Post title" value={form.title || ''} onChange={(e) => setForm({ ...form, title: e.target.value })} className="mt-1 input w-full" />
-              </div>
-              <div>
-                <label className="block text-sm font-medium">Slug</label>
-                <input aria-label="Slug" placeholder="post-slug" value={form.slug || ''} onChange={(e) => setForm({ ...form, slug: e.target.value })} className="mt-1 input w-full" />
-              </div>
-              <div>
-                <label className="block text-sm font-medium">Excerpt</label>
-                <textarea aria-label="Excerpt" placeholder="Short summary" value={form.excerpt || ''} onChange={(e) => setForm({ ...form, excerpt: e.target.value })} className="mt-1 textarea w-full" />
-              </div>
-              <div>
-                <label className="block text-sm font-medium">Author Name (optional)</label>
-                <input aria-label="Author Name" placeholder="Author name if different from admin" value={form.author_name || ''} onChange={(e) => setForm({ ...form, author_name: e.target.value })} className="mt-1 input w-full" />
-              </div>
-              <div>
-                <label className="block text-sm font-medium mb-2">Content</label>
-                <RichTextEditor value={form.content || ''} onChange={(html) => setForm({ ...form, content: html })} />
-              </div>
-              <div>
-                <label className="block text-sm font-medium">Cover image</label>
-                <input aria-label="Cover image" placeholder="https://..." value={form.cover_image || ''} onChange={(e) => setForm({ ...form, cover_image: e.target.value })} className="mt-1 input w-full" />
-              </div>
-              <div>
-                <label className="block text-sm font-medium">Status</label>
-                <select aria-label="Status" value={form.status || 'draft'} onChange={(e) => setForm({ ...form, status: e.target.value })} className="mt-1 select w-full">
-                  <option value="draft">Draft</option>
-                  <option value="published">Published</option>
-                </select>
-              </div>
-            </div>
-          )}
-          <DialogFooter>
-            <Button variant="outline" onClick={() => setEditing(null)}>Cancel</Button>
-            <Button className="bg-primary" onClick={saveEdit}>Save</Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
       <Dialog open={showDeleteConfirm} onOpenChange={(open) => setShowDeleteConfirm(open)}>
         <DialogContent>
           <DialogHeader>

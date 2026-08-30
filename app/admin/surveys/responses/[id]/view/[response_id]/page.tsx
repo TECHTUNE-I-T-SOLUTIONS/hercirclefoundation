@@ -7,7 +7,7 @@ const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL!
 const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY!
 const serverClient = createServerClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY)
 
-type Params = { params: { id: string, response_id: string } }
+type Params = { params: Promise<{ id: string, response_id: string }> }
 
 export default async function ResponseViewPage({ params }: Params) {
   const authClient = await createServerHelper()

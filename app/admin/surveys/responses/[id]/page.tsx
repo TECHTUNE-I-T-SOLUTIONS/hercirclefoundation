@@ -2,7 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 import { createClient as createServerHelper } from '@/lib/supabase/server'
 
-type Params = { params: { id: string } }
+type Params = { params: Promise<{ id: string }> }
 
 export default async function ResponseListPage({ params }: Params) {
   const supabase = await createServerHelper()

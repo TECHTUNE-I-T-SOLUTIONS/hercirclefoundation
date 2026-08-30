@@ -3,8 +3,22 @@ import { createClient as createServerSupabase } from "@/lib/supabase/server"
 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY
 const GEMINI_PROJECT_NUMBER = process.env.GEMINI_PROJECT_NUMBER
+
+// Fallback models in order of preference
+const GEMINI_MODELS = [
+  'gemini-2.5-flash',
+  'gemini-2.5-flash-lite', 
+  'gemini-2.5-pro',
+  'gemini-3-flash-preview',
+  'gemini-3.1-flash-lite',
+  'gemini-3.5-flash',
+  'gemini-3.5-flash-lite',
+  'gemini-3.6-flash',
+  'gemini-3.7-flash',
+]
+
 // Default model: prefer gemini-2.5-flash (flash/free tier). Override with env var if needed
-const GEMINI_MODEL = process.env.GEMINI_MODEL || "gemini-2.5-flash"
+const GEMINI_MODEL = process.env.GEMINI_MODEL || GEMINI_MODELS[0]
 
 async function tryPost(url: string, body: any, headers: Record<string, string> = {}) {
   const res = await fetch(url, {
@@ -20,27 +34,41 @@ async function tryPost(url: string, body: any, headers: Record<string, string> =
 
 async function callGemini(prompt: string) {
   if (!GEMINI_API_KEY) throw new Error("Gemini API key not configured (GEMINI_API_KEY)")
-  if (!GEMINI_MODEL) throw new Error("Gemini model not configured (GEMINI_MODEL)")
 
+  // Try each model in the fallback list
+  for (const model of GEMINI_MODELS) {
+    try {
+      const result = await tryModelWithEndpoints(model, prompt)
+      if (result) return result
+    } catch (error) {
+      console.error(`Failed with model ${model}:`, error)
+      continue
+    }
+  }
+
+  throw new Error("All Gemini models failed")
+}
+
+async function tryModelWithEndpoints(model: string, prompt: string) {
   // Try endpoints in an order that matches the dashboard example first (v1beta generateContent)
   const endpoints = [
     // project-scoped v1beta (some setups require project resource path)
     ...(GEMINI_PROJECT_NUMBER ? [
-      `https://generativelanguage.googleapis.com/v1beta/projects/${encodeURIComponent(GEMINI_PROJECT_NUMBER)}/locations/global/models/${encodeURIComponent(GEMINI_MODEL)}:generateContent`,
-      `https://generativelanguage.googleapis.com/v1/projects/${encodeURIComponent(GEMINI_PROJECT_NUMBER)}/locations/global/models/${encodeURIComponent(GEMINI_MODEL)}:generateContent`,
+      `https://generativelanguage.googleapis.com/v1beta/projects/${encodeURIComponent(GEMINI_PROJECT_NUMBER)}/locations/global/models/${encodeURIComponent(model)}:generateContent`,
+      `https://generativelanguage.googleapis.com/v1/projects/${encodeURIComponent(GEMINI_PROJECT_NUMBER)}/locations/global/models/${encodeURIComponent(model)}:generateContent`,
     ] : []),
     // v1beta generateContent (dashboard curl uses this)
-    `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(GEMINI_MODEL)}:generateContent`,
-    `https://generativelanguage.googleapis.com/v1/models/${encodeURIComponent(GEMINI_MODEL)}:generateContent`,
+    `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent`,
+    `https://generativelanguage.googleapis.com/v1/models/${encodeURIComponent(model)}:generateContent`,
     // fallbacks: older shapes
     ...(GEMINI_PROJECT_NUMBER ? [
-      `https://generativelanguage.googleapis.com/v1/projects/${encodeURIComponent(GEMINI_PROJECT_NUMBER)}/locations/global/models/${encodeURIComponent(GEMINI_MODEL)}:generateText`,
-      `https://generativelanguage.googleapis.com/v1beta/projects/${encodeURIComponent(GEMINI_PROJECT_NUMBER)}/locations/global/models/${encodeURIComponent(GEMINI_MODEL)}:generateText`,
+      `https://generativelanguage.googleapis.com/v1/projects/${encodeURIComponent(GEMINI_PROJECT_NUMBER)}/locations/global/models/${encodeURIComponent(model)}:generateText`,
+      `https://generativelanguage.googleapis.com/v1beta/projects/${encodeURIComponent(GEMINI_PROJECT_NUMBER)}/locations/global/models/${encodeURIComponent(model)}:generateText`,
     ] : []),
-    `https://generativelanguage.googleapis.com/v1/models/${encodeURIComponent(GEMINI_MODEL)}:generateText`,
-    `https://generativelanguage.googleapis.com/v1/models/${encodeURIComponent(GEMINI_MODEL)}:generateMessage`,
-    `https://generativelanguage.googleapis.com/v1beta2/models/${encodeURIComponent(GEMINI_MODEL)}:generateText`,
-    `https://generativelanguage.googleapis.com/v1beta2/models/${encodeURIComponent(GEMINI_MODEL)}:generateMessage`,
+    `https://generativelanguage.googleapis.com/v1/models/${encodeURIComponent(model)}:generateText`,
+    `https://generativelanguage.googleapis.com/v1/models/${encodeURIComponent(model)}:generateMessage`,
+    `https://generativelanguage.googleapis.com/v1beta2/models/${encodeURIComponent(model)}:generateText`,
+    `https://generativelanguage.googleapis.com/v1beta2/models/${encodeURIComponent(model)}:generateMessage`,
   ]
 
   // Body matching the dashboard "generateContent" shape — minimal payload (don't send temperature/maxOutputTokens here)
@@ -113,8 +141,8 @@ async function callGemini(prompt: string) {
     }
   }
 
-  // if we reach here, no success; include attempts for diagnostics
-  const err = new Error("Gemini API error: no successful response from any endpoint; check GEMINI_MODEL and GEMINI_API_KEY permissions") as any
+  // if we reach here, no success for this model
+  const err = new Error(`Gemini API error: no successful response from any endpoint for model ${model}`) as any
   err.attempts = attempts
   throw err
 }

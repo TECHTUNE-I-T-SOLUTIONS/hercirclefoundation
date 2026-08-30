@@ -131,20 +131,13 @@ export default function Home() {
                   products, women resort to unhygienic alternatives, increasing infection risks. Our funding enables
                   distribution of high-quality sanitary pads that are safe and effective.
                 </p>
-                <ul className="space-y-2 text-sm">
-                  <li className="flex items-start gap-2">
-                    <span className="text-primary font-bold">•</span>
-                    <span>Prevents UTIs and RTIs from improper care</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-primary font-bold">•</span>
-                    <span>Reduces risk of Toxic Shock Syndrome (TSS)</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-primary font-bold">•</span>
-                    <span>Improves overall menstrual hygiene practices</span>
-                  </li>
-                </ul>
+                <p className="text-muted-foreground leading-relaxed">
+                  By providing access to proper menstrual hygiene products, we significantly reduce the risk of urinary tract 
+                  infections and reproductive tract infections that often result from improper care. Our initiatives also help 
+                  minimize the occurrence of Toxic Shock Syndrome and other serious health complications. Through consistent 
+                  access to quality sanitary products and education, we establish sustainable menstrual hygiene practices that 
+                  protect women's health and prevent preventable medical conditions.
+                </p>
               </div>
 
               <div className="space-y-4">
@@ -153,20 +146,13 @@ export default function Home() {
                   Many women and girls lack basic knowledge about menstrual hygiene. Our education programs empower them
                   to manage their periods effectively and maintain their health with confidence.
                 </p>
-                <ul className="space-y-2 text-sm">
-                  <li className="flex items-start gap-2">
-                    <span className="text-primary font-bold">•</span>
-                    <span>Increased school attendance and participation</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-primary font-bold">•</span>
-                    <span>Greater confidence and self-esteem</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-primary font-bold">•</span>
-                    <span>Breaking stigma around menstruation</span>
-                  </li>
-                </ul>
+                <p className="text-muted-foreground leading-relaxed">
+                  When girls have reliable access to menstrual products, they no longer miss school during their periods, 
+                  leading to consistent attendance and better academic performance. The confidence gained from proper menstrual 
+                  health management extends beyond the classroom, fostering greater self-esteem and participation in all aspects 
+                  of life. Our programs actively work to dismantle the cultural stigma and silence surrounding menstruation, 
+                  creating supportive environments where women and girls can discuss their health openly and without shame.
+                </p>
               </div>
             </div>
           </div>

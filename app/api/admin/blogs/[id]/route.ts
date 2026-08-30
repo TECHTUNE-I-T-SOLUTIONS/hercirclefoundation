@@ -46,11 +46,18 @@ export async function PATCH(req: Request, ctx: any) {
     if (!admins || admins.length === 0) return NextResponse.json({ error: 'not admin' }, { status: 403 })
 
     const body = await req.json()
-    const allowed = ['title', 'slug', 'excerpt', 'content', 'cover_image', 'status', 'author_name']
+    const allowed = ['title', 'slug', 'excerpt', 'content', 'cover_image', 'coverImage', 'status', 'author_name', 'authorName', 'featured', 'tags', 'seo_title', 'seoTitle', 'seo_description', 'seoDescription', 'schema_type', 'schemaType', 'reading_time']
     const updatePayload: any = {}
     for (const k of Object.keys(body)) {
       if (allowed.includes(k)) {
-        updatePayload[k] = body[k]
+        // Map camelCase to snake_case for database
+        const dbKey = k === 'coverImage' ? 'cover_image' :
+                      k === 'authorName' ? 'author_name' :
+                      k === 'seoTitle' ? 'seo_title' :
+                      k === 'seoDescription' ? 'seo_description' :
+                      k === 'schemaType' ? 'schema_type' :
+                      k === 'readingTime' ? 'reading_time' : k
+        updatePayload[dbKey] = body[k]
       }
     }
 
@@ -66,6 +73,12 @@ export async function PATCH(req: Request, ctx: any) {
       if (existing && !existing.published_at) {
         updatePayload.published_at = new Date().toISOString()
       }
+    }
+    
+    // Update reading time if content changed
+    if (updatePayload.content) {
+      const words = updatePayload.content.split(/\s+/).filter(word => word.length > 0).length
+      updatePayload.reading_time = Math.ceil(words / 200)
     }
 
     if (Object.keys(updatePayload).length === 0) {

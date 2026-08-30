@@ -51,10 +51,16 @@ export async function POST(req: Request) {
       slug,
       excerpt: body.excerpt || null,
       content: body.content || null,
-      cover_image: body.cover_image || null,
+      cover_image: body.coverImage || body.cover_image || null,
       status: body.status || 'draft',
       published_at: body.status === 'published' ? new Date().toISOString() : null,
-      author_name: body.author_name || null,
+      author_name: body.authorName || body.author_name || null,
+      featured: body.featured || false,
+      tags: body.tags || [],
+      seo_title: body.seoTitle || body.seo_title || null,
+      seo_description: body.seoDescription || body.seo_description || null,
+      schema_type: body.schemaType || body.schema_type || 'Article',
+      reading_time: body.reading_time || null,
     }
 
     const { data, error } = await serverClient.from('blogs').insert([payload]).select().single()

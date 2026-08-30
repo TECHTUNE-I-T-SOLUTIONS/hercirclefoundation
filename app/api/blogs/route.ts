@@ -9,9 +9,11 @@ export async function GET(req: Request) {
 
     let query = supabase.from('blogs').select('*')
     if (status) query = query.eq('status', status)
-    // order newest first
+    
+    // Order by published_at (newest first), featured posts will be handled in UI
     // @ts-ignore - Supabase client typing in this project
-    const { data, error } = await query.order('published_at', { ascending: false })
+    const { data, error } = await query.order('published_at', { ascending: false, nullsFirst: false })
+    
     if (error) return NextResponse.json({ error: error.message }, { status: 500 })
 
     return NextResponse.json({ data })

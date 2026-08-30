@@ -106,7 +106,7 @@ export default function BlogShareClient({ blogId }: { blogId: string }) {
   return (
     <div className="mt-4 p-3 border rounded">
       <div className="flex flex-col sm:flex-row gap-2 items-center">
-        <input placeholder="Name (optional)" value={name} onChange={(e) => setName(e.target.value)} className="input" />
+        <input placeholder="Name (optional)" value={name} onChange={(e) => setName(e.target.value)} className="input p-2" />
         <select
           value={platform}
           onChange={(e) => setPlatform(e.target.value)}
