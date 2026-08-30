@@ -51,6 +51,7 @@ export default async function BlogPost({ params }: Params) {
         <article>
           <h1 className="text-3xl font-bold mb-4">{blog.title}</h1>
           <div className="text-sm text-gray-900 dark:text-gray-400 mb-6">{blog.published_at ? new Date(blog.published_at).toLocaleString() : ''}</div>
+          {blog.author_name && <div className="text-sm text-gray-900 dark:text-gray-400 mb-6">By: {blog.author_name}</div>}
           <div className="prose" dangerouslySetInnerHTML={{ __html: blog.content }} />
           <BlogReactionClient blogId={blog.id} />
           {/* share UI collects optional name and caches it in localStorage */}

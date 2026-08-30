@@ -54,6 +54,7 @@ export async function POST(req: Request) {
       cover_image: body.cover_image || null,
       status: body.status || 'draft',
       published_at: body.status === 'published' ? new Date().toISOString() : null,
+      author_name: body.author_name || null,
     }
 
     const { data, error } = await serverClient.from('blogs').insert([payload]).select().single()

@@ -60,6 +60,7 @@ export default function BlogListClient() {
             </Link>
             <p className="text-sm text-black dark:text-white mt-2">{b.excerpt}</p>
             <div className="text-xs text-gray-900 dark:text-gray-400 mt-2">{b.published_at ? new Date(b.published_at).toLocaleString() : ''}</div>
+            {b.author_name && <div className="text-xs text-gray-900 dark:text-gray-400 mt-1">By: {b.author_name}</div>}
           </li>
         ))}
       </ul>

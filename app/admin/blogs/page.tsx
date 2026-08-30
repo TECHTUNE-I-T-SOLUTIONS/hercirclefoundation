@@ -7,7 +7,7 @@ import AdminBlogList from '@/components/admin-blog-list'
 import { FileUploadInput } from '@/components/file-upload-input'
 
 export default function AdminBlogsPage() {
-  const [form, setForm] = useState({ title: '', slug: '', excerpt: '', content: '', cover_image: '', status: 'draft' })
+  const [form, setForm] = useState({ title: '', slug: '', excerpt: '', content: '', cover_image: '', status: 'draft', author_name: '' })
   const [loading, setLoading] = useState(false)
   const { toast } = useToast()
 
@@ -33,7 +33,7 @@ export default function AdminBlogsPage() {
       }
 
       toast({ title: 'Blog created', description: `ID: ${data?.data?.id || 'ok'}` })
-      setForm({ title: '', slug: '', excerpt: '', content: '', cover_image: '', status: 'draft' })
+      setForm({ title: '', slug: '', excerpt: '', content: '', cover_image: '', status: 'draft', author_name: '' })
     } catch (err: any) {
       toast({ title: 'Error creating blog', description: String(err?.message || err) })
     } finally {
@@ -59,6 +59,10 @@ export default function AdminBlogsPage() {
                   <div>
                     <label className="block text-sm font-medium">Slug (optional)</label>
                     <input aria-label="Slug" placeholder="post-slug" value={form.slug} onChange={e => setForm({ ...form, slug: e.target.value })} className="mt-1 input w-full" />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium">Author Name (optional)</label>
+                    <input aria-label="Author Name" placeholder="Author name if different from admin" value={form.author_name} onChange={e => setForm({ ...form, author_name: e.target.value })} className="mt-1 input w-full" />
                   </div>
                 </div>
 

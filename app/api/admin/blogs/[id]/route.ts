@@ -46,7 +46,7 @@ export async function PATCH(req: Request, ctx: any) {
     if (!admins || admins.length === 0) return NextResponse.json({ error: 'not admin' }, { status: 403 })
 
     const body = await req.json()
-    const allowed = ['title', 'slug', 'excerpt', 'content', 'cover_image', 'status']
+    const allowed = ['title', 'slug', 'excerpt', 'content', 'cover_image', 'status', 'author_name']
     const updatePayload: any = {}
     for (const k of Object.keys(body)) {
       if (allowed.includes(k)) {

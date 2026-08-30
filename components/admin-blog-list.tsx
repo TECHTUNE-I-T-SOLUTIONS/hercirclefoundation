@@ -15,6 +15,7 @@ type Blog = {
   status?: string
   published_at?: string | null
   created_at?: string
+  author_name?: string | null
 }
 
 export default function AdminBlogList() {
@@ -166,6 +167,7 @@ export default function AdminBlogList() {
                       <div className="font-medium">{b.title} <span className="text-xs text-muted-foreground">{b.status}</span></div>
                       <div className="text-xs text-muted-foreground">{b.excerpt}</div>
                       <div className="text-xs text-muted-foreground">{b.published_at ? new Date(b.published_at).toLocaleString() : ''}</div>
+                      {b.author_name && <div className="text-xs text-muted-foreground">By: {b.author_name}</div>}
                     </div>
                   </label>
                 </div>
@@ -197,6 +199,10 @@ export default function AdminBlogList() {
               <div>
                 <label className="block text-sm font-medium">Excerpt</label>
                 <textarea aria-label="Excerpt" placeholder="Short summary" value={form.excerpt || ''} onChange={(e) => setForm({ ...form, excerpt: e.target.value })} className="mt-1 textarea w-full" />
+              </div>
+              <div>
+                <label className="block text-sm font-medium">Author Name (optional)</label>
+                <input aria-label="Author Name" placeholder="Author name if different from admin" value={form.author_name || ''} onChange={(e) => setForm({ ...form, author_name: e.target.value })} className="mt-1 input w-full" />
               </div>
               <div>
                 <label className="block text-sm font-medium mb-2">Content</label>
