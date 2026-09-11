@@ -74,7 +74,7 @@ export async function GET(request: NextRequest) {
       try {
         const { notifyAdmins } = await import('@/lib/email/notify-admins')
         
-        const donorName = paymentData.customer_name || paymentData.metadata?.full_name || 'Donor'
+        const donorName = paymentData.metadata?.full_name || paymentData.customer_name || verificationResult.data.customer.email || 'Donor'
         const donorEmail = paymentData.customer_email || verificationResult.data.customer.email
         const donationAmount = paymentData.amount || verificationResult.data.amount / 100
         const donationType = paymentData.metadata?.donation_type || 'one-time'

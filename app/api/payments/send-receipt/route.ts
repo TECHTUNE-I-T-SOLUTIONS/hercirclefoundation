@@ -33,7 +33,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Use database data if available, otherwise use provided data
-    const donorName = paymentData?.customer_name || full_name
+    const donorName = paymentData?.metadata?.full_name || paymentData?.customer_name || full_name
     const donorEmail = paymentData?.customer_email || email
     const donationAmount = paymentData?.amount || amount
     const donationType = paymentData?.metadata?.donation_type || donation_type || 'one-time'
