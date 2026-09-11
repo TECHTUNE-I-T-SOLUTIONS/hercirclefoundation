@@ -33,6 +33,7 @@ export function Header() {
     { href: "/about", label: "About" },
     { href: "/events", label: "Events" },
     { href: "/gallery", label: "Gallery" },
+    { href: "/beneficiary-showcase", label: "Beneficiaries" },
     { href: "/partner", label: "Partner" },
     { href: "/contact", label: "Contact" },
   ]

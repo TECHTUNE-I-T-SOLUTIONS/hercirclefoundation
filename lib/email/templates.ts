@@ -144,10 +144,24 @@ const RENDERS: Record<TemplateKey, (d: TemplateData) => { subject: string; html:
   donation_thankyou: (d) => {
     const subject = "Thank you for your generous donation 💜"
     const amount = d.amount ? String(d.amount) : "Thank you"
+    const reference = d.reference ? String(d.reference) : "N/A"
+    const paymentMethod = d.paymentMethod ? String(d.paymentMethod) : "Bank Transfer"
+    const donationType = d.donationType ? String(d.donationType) : "One-time"
+    const donationDate = d.donationDate ? String(d.donationDate) : new Date().toLocaleDateString()
+    
     const content = `${heroBanner("Thank You!", "Your support makes real change possible")}
       ${greeting(d)}
       ${p("On behalf of everyone at HerCircle Foundation, thank you for your generous donation. Your kindness funds sanitary products, education materials, and empowerment programmes for girls who need them most.")}
-      ${statChips([{ label: "Donation", value: escapeHtml(amount), accent: true }])}
+      ${h1("Donation Details")}
+      ${statChips([
+        { label: "Amount", value: `₦${escapeHtml(amount)}`, accent: true },
+        { label: "Type", value: escapeHtml(donationType) },
+        { label: "Payment Method", value: escapeHtml(paymentMethod) },
+        { label: "Date", value: escapeHtml(donationDate) },
+      ])}
+      ${divider()}
+      ${p(`Transaction Reference: <strong>${escapeHtml(reference)}</strong>`, "#6b7280", 13)}
+      ${p("Please keep this receipt for your records. If you have any questions about your donation, feel free to reach out to us.", "#6b7280", 13)}
       ${button("/", "Visit Our Website")}
       ${signoff()}`
     return render(content, subject)

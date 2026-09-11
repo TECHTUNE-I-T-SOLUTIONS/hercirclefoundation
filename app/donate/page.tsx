@@ -4,15 +4,13 @@ import type React from "react"
 
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
-// Button already imported above
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { useState, useRef } from "react"
-import confetti from 'canvas-confetti'
-import { createClient } from "@/lib/supabase/client"
-import { Heart, CheckCircle, Gift } from "lucide-react"
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogTrigger } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
+import { useState, useRef, useEffect } from "react"
+import confetti from 'canvas-confetti'
+import { Heart, CheckCircle, Gift, CreditCard, Loader2 } from "lucide-react"
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogTrigger, DialogDescription } from "@/components/ui/dialog"
 import { CountUpNumber } from "@/components/count-up-number"
 
 export default function DonatePage() {
@@ -27,6 +25,29 @@ export default function DonatePage() {
   const [loading, setLoading] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [showThanks, setShowThanks] = useState(false)
+
+  useEffect(() => {
+    // Check if user was redirected back with success
+    const urlParams = new URLSearchParams(window.location.search)
+    if (urlParams.get('success') === 'true') {
+      setSubmitted(true)
+      setShowThanks(true)
+      runConfetti()
+      setFormData({
+        fullName: "",
+        email: "",
+        phone: "",
+        donationAmount: "",
+        donationType: "one-time",
+        message: "",
+      })
+      setTimeout(() => setShowThanks(false), 4000)
+      setTimeout(() => setSubmitted(false), 5000)
+      // Clean up URL
+      window.history.replaceState({}, '', '/donate')
+    }
+  }, [])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target
@@ -41,14 +62,16 @@ export default function DonatePage() {
   }
 
   const [showConfirm, setShowConfirm] = useState(false)
-  const [showThanks, setShowThanks] = useState(false)
   const confettiRef = useRef<HTMLCanvasElement | null>(null)
 
   const confirmAndSubmit = async () => {
     setShowConfirm(false)
     setLoading(true)
+    setError(null)
+
     try {
-      const res = await fetch('/api/donors/submit', {
+      // Initialize Paystack payment
+      const res = await fetch('/api/payments/initialize', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -62,26 +85,16 @@ export default function DonatePage() {
       })
 
       const payload = await res.json()
-      if (!res.ok) throw new Error(payload?.error || 'Failed to submit donation')
+      if (!res.ok) throw new Error(payload?.error || 'Failed to initialize payment')
 
-      setSubmitted(true)
-      setFormData({
-        fullName: "",
-        email: "",
-        phone: "",
-        donationAmount: "",
-        donationType: "one-time",
-        message: "",
-      })
+      // Stop loading here - Paystack will handle the rest
+      setLoading(false)
 
-      // show thank you and confetti
-      setShowThanks(true)
-      runConfetti()
-      setTimeout(() => setShowThanks(false), 4000)
-      setTimeout(() => setSubmitted(false), 5000)
+      // Redirect to Paystack checkout page
+      window.location.href = payload.authorization_url
     } catch (err) {
+      console.error('Payment error:', err)
       setError(err instanceof Error ? err.message : "An error occurred")
-    } finally {
       setLoading(false)
     }
   }
@@ -235,13 +248,28 @@ export default function DonatePage() {
                       />
                     </div>
 
+                    <div>
+                      <Label>Payment Method</Label>
+                      <div className="mt-2">
+                        <div className="flex items-center justify-center gap-2 p-4 rounded-lg border-2 border-primary bg-primary/10">
+                          <CreditCard className="h-5 w-5" />
+                          <span className="font-medium">Pay (Secure Payment)</span>
+                        </div>
+                      </div>
+                    </div>
+
                     <Button
                       type="submit"
                       size="lg"
                       className="w-full bg-primary hover:bg-primary/90"
                       disabled={loading}
                     >
-                      {loading ? "Processing..." : "Complete Donation"}
+                      {loading ? (
+                        <>
+                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                          Processing...
+                        </>
+                      ) : "Complete Donation"}
                     </Button>
 
                     {/* Confirmation Dialog */}
@@ -249,28 +277,38 @@ export default function DonatePage() {
                       <Dialog open onOpenChange={(open) => setShowConfirm(open)}>
                         <DialogContent>
                           <DialogHeader>
-                            <DialogTitle>Confirm Bank Transfer</DialogTitle>
+                            <DialogTitle>Confirm Card Payment</DialogTitle>
+                            <DialogDescription>
+                              Review your donation details before proceeding to secure payment
+                            </DialogDescription>
                           </DialogHeader>
                           <div className="py-2">
-                            <p className="font-medium">Bank Details:</p>
-                            <div className="mt-2 text-sm space-y-1">
-                              <div>
-                                <p className="text-muted-foreground">GTB</p>
-                                <p className="font-semibold">0469872050</p>
+                            <div className="space-y-3">
+                              <p className="font-medium">Payment Summary:</p>
+                              <div className="text-sm space-y-1">
+                                <div className="flex justify-between">
+                                  <p className="text-muted-foreground">Amount:</p>
+                                  <p className="font-semibold">₦{Number.parseFloat(formData.donationAmount).toLocaleString()}</p>
+                                </div>
+                                <div className="flex justify-between">
+                                  <p className="text-muted-foreground">Name:</p>
+                                  <p className="font-semibold">{formData.fullName}</p>
+                                </div>
+                                <div className="flex justify-between">
+                                  <p className="text-muted-foreground">Email:</p>
+                                  <p className="font-semibold">{formData.email}</p>
+                                </div>
                               </div>
-                              <div>
-                                <p className="text-muted-foreground">KUDA</p>
-                                <p className="font-semibold">2076587423</p>
-                              </div>
-                              <div>
-                                <p className="text-muted-foreground">Account Name</p>
-                                <p className="font-semibold">SANNI KANYINSOLA JOY</p>
-                              </div>
+                              <p className="text-xs text-muted-foreground mt-4">
+                                You will be redirected to Paystack's secure payment page to complete your donation.
+                              </p>
                             </div>
                           </div>
                           <DialogFooter>
                             <Button variant="outline" onClick={() => setShowConfirm(false)}>Cancel</Button>
-                            <Button onClick={confirmAndSubmit}>I have transferred — Confirm</Button>
+                            <Button onClick={confirmAndSubmit} disabled={loading}>
+                              {loading ? "Processing..." : 'Proceed to Payment'}
+                            </Button>
                           </DialogFooter>
                         </DialogContent>
                       </Dialog>
@@ -310,27 +348,6 @@ export default function DonatePage() {
                         <p className="text-sm text-muted-foreground">{example.description}</p>
                       </div>
                     ))}
-                  </div>
-                </div>
-
-                <div className="bg-card rounded-lg p-6 border border-border">
-                  <h3 className="font-bold text-lg mb-4 flex items-center gap-2">
-                    <Heart className="h-5 w-5 text-primary" />
-                    Bank Details
-                  </h3>
-                  <div className="space-y-3 text-sm">
-                    <div>
-                      <p className="text-muted-foreground">GTB</p>
-                      <p className="font-semibold">0469872050</p>
-                    </div>
-                    <div>
-                      <p className="text-muted-foreground">KUDA</p>
-                      <p className="font-semibold">2076587423</p>
-                    </div>
-                    <div>
-                      <p className="text-muted-foreground">Account Name</p>
-                      <p className="font-semibold">SANNI KANYINSOLA JOY</p>
-                    </div>
                   </div>
                 </div>
               </div>

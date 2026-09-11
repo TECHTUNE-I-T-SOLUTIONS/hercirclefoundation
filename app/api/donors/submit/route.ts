@@ -37,6 +37,9 @@ export async function POST(request: NextRequest) {
 
     // ---- Automated emails (best-effort, non-blocking) ----
     if (data && data[0]) {
+      const donorId = data[0].id
+      const bankReference = `BANK-${donorId.toString().substring(0, 8).toUpperCase()}`
+
       // Notify admins of the new donation.
       notifyAdmins('admin_donation', {
         eventType: 'donation',
@@ -47,13 +50,20 @@ export async function POST(request: NextRequest) {
         message: message || '',
       }).catch(() => {})
 
-      // Send gratitude email to the donor.
+      // Send gratitude email to the donor with enhanced details.
       if (email) {
         sendToPerson({
           template: 'donation_thankyou',
           to: { address: email, name: full_name },
           fromKey: 'donations',
-          data: { firstName: full_name, amount: donation_amount != null ? String(donation_amount) : '' },
+          data: { 
+            firstName: full_name, 
+            amount: donation_amount != null ? String(donation_amount) : '',
+            reference: bankReference,
+            paymentMethod: 'Bank Transfer',
+            donationType: donation_type || 'one-time',
+            donationDate: new Date().toLocaleDateString(),
+          },
         }).catch(() => {})
       }
     }

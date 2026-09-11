@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react"
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
-import { LayoutDashboard, Users, Heart, Calendar, ImageIcon, LogOut, Moon, Sun, Bell, BookOpen, Mail, Crown } from "lucide-react"
+import { LayoutDashboard, Users, Heart, Calendar, ImageIcon, LogOut, Moon, Sun, Bell, BookOpen, Mail, Crown, CreditCard, UsersRound } from "lucide-react"
 import { createClient } from "@/lib/supabase/client"
 import { LogoutConfirmationModal } from "@/components/logout-confirmation-modal"
 
@@ -103,6 +103,8 @@ export function AdminSidebarNew({ children, headerTitle = "Admin Dashboard" }: A
     { href: "/admin/management", label: "Admins", icon: Users, superOnly: true },
     { href: "/admin/volunteers", label: "Volunteers", icon: Users },
     { href: "/admin/donors", label: "Donors", icon: Heart },
+    { href: "/admin/payments", label: "Payments", icon: CreditCard },
+    { href: "/admin/beneficiary-showcase", label: "Beneficiary Showcase", icon: UsersRound },
     { href: "/admin/stories", label: "Stories", icon: BookOpen },
     { href: "/admin/events", label: "Events", icon: Calendar },
     { href: "/admin/blogs", label: "Blogs", icon: ImageIcon },

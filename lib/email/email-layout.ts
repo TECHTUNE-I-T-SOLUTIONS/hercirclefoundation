@@ -75,8 +75,8 @@ export function renderFooter(): string {
     .join("")
 
   const mailboxes = [
-    "info", "hello", "support", "finance", "donations", "programs",
-    "partnerships", "media", "careers", "contact",
+    "support", "finance", "donations", "programs",
+    "partnerships",
   ]
     .map(
       (k) =>
