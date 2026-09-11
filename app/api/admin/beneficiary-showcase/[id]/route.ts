@@ -4,9 +4,10 @@ import { createClient } from '@supabase/supabase-js'
 
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params
     const body = await request.json()
     const { name, description, link, image_url, image_type, is_active, display_order, metadata } = body
 
@@ -34,7 +35,7 @@ export async function PATCH(
     const { data, error } = await svc
       .from('beneficiary_showcase')
       .update(updateObj)
-      .eq('id', params.id)
+      .eq('id', id)
       .select()
       .limit(1)
 
@@ -59,9 +60,11 @@ export async function PATCH(
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params
+
     // Check environment variables
     if (!process.env.SUPABASE_SERVICE_ROLE_KEY || !process.env.NEXT_PUBLIC_SUPABASE_URL) {
       console.error('Missing SUPABASE_SERVICE_ROLE_KEY or NEXT_PUBLIC_SUPABASE_URL')
@@ -73,7 +76,7 @@ export async function DELETE(
     const { error } = await svc
       .from('beneficiary_showcase')
       .delete()
-      .eq('id', params.id)
+      .eq('id', id)
 
     if (error) {
       console.error('Error deleting beneficiary showcase item:', error)
