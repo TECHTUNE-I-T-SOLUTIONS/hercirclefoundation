@@ -9,7 +9,7 @@ import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
 import { useState, useRef, useEffect } from "react"
 import confetti from 'canvas-confetti'
-import { Heart, CheckCircle, Gift, CreditCard, Loader2 } from "lucide-react"
+import { Heart, CheckCircle, Gift, Loader2 } from "lucide-react"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogTrigger, DialogDescription } from "@/components/ui/dialog"
 import { CountUpNumber } from "@/components/count-up-number"
 
@@ -113,9 +113,8 @@ export default function DonatePage() {
 
   const impactExamples = [
     { amount: 1000, description: "Provides 1 month of sanitary supplies (10 pads) for a school girl" },
-    { amount: 1800, description: "Provides 2 months of sanitary supplies (25 pads) for a woman" },
-    { amount: 5000, description: "Supplies menstrual products for 5 girls for 3 months" },
-    { amount: 10000, description: "Funds a complete menstrual health workshop for 50 girls" },
+    { amount: 2500, description: "Provides 2 months of sanitary supplies (25 pads) for a woman" },
+    { amount: 8000, description: "Provides a day supply for 50 girls" },
   ]
 
   return (
@@ -249,16 +248,6 @@ export default function DonatePage() {
                       />
                     </div>
 
-                    <div>
-                      <Label>Payment Method</Label>
-                      <div className="mt-2">
-                        <div className="flex items-center justify-center gap-2 p-4 rounded-lg border-2 border-primary bg-primary/10">
-                          <CreditCard className="h-5 w-5" />
-                          <span className="font-medium">Pay (Secure Payment)</span>
-                        </div>
-                      </div>
-                    </div>
-
                     <Button
                       type="submit"
                       size="lg"
@@ -335,18 +324,18 @@ export default function DonatePage() {
 
               {/* Sidebar */}
               <div className="space-y-6">
-                <div className="bg-primary/10 rounded-lg p-6 border border-primary/20">
-                  <h3 className="font-bold text-lg mb-4 flex items-center gap-2">
-                    <Gift className="h-5 w-5 text-primary" />
+                <div className="bg-primary/10 dark:bg-background rounded-lg p-6 border border-primary/20 dark:border-white">
+                  <h3 className="font-bold text-lg mb-4 flex items-center gap-2 text-black dark:text-white">
+                    <Gift className="h-5 w-5 text-black dark:text-white" />
                     Your Impact
                   </h3>
                   <div className="space-y-4">
                     {impactExamples.map((example, index) => (
-                      <div key={index} className="pb-4 border-b border-primary/20 last:border-0 last:pb-0">
-                        <p className="font-semibold text-primary">
+                      <div key={index} className="pb-4 border-b border-primary/20 last:border-0 last:pb-0 dark:text-white">
+                        <p className="font-semibold text-black dark:text-white">
                           ₦<CountUpNumber value={example.amount} duration={1500} />
                         </p>
-                        <p className="text-sm text-muted-foreground">{example.description}</p>
+                        <p className="text-sm text-black dark:text-white">{example.description}</p>
                       </div>
                     ))}
                   </div>

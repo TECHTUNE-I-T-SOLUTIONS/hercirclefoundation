@@ -103,10 +103,10 @@ export default function AboutPage() {
                     <div className="w-24 h-24 bg-primary/20 rounded-full mx-auto mb-4 flex items-center justify-center">
                       <Users className="h-12 w-12 text-primary" />
                     </div>
-                    <h3 className="text-xl font-bold mb-2">Sanni Kanyinsola Joy</h3>
+                    <h3 className="text-xl font-bold mb-2">Kanyinsola Joy Sanni</h3>
                     <p className="text-muted-foreground mb-4">Founder & Executive Director</p>
                     <p className="text-sm leading-relaxed">
-                      With a passion for women's health and social justice, Sanni founded HerCircle Foundation to
+                      With a passion for women's health and social justice, Kanyinsola founded HerCircle Foundation to
                       create lasting change in menstrual health advocacy and access.
                     </p>
                   </div>

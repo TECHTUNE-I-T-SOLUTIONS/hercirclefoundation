@@ -2,11 +2,13 @@
 import React, { useEffect, useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { useToast } from '@/hooks/use-toast'
+import { Heart } from 'lucide-react'
 
 export default function BlogReactionClient({ blogId }: { blogId: string }) {
   const [counts, setCounts] = useState<{ [k: string]: number } | null>(null)
   const [loading, setLoading] = useState(false)
   const [name, setName] = useState('')
+  const [hasLiked, setHasLiked] = useState(false)
   const { toast } = useToast()
 
   async function fetchClientIp(): Promise<string | null> {
@@ -79,11 +81,31 @@ export default function BlogReactionClient({ blogId }: { blogId: string }) {
         setName('')
       }
     } catch {}
-  }, [])
+
+    // Load like state for this blog
+    try {
+      const likedBlogs = JSON.parse(localStorage.getItem('hc_liked_blogs') || '[]')
+      setHasLiked(likedBlogs.includes(blogId))
+    } catch {}
+  }, [blogId])
 
   async function react(type = 'like') {
     setLoading(true)
     try {
+      // Toggle like state
+      if (type === 'like' && hasLiked) {
+        // Unlike - remove from localStorage
+        try {
+          const likedBlogs = JSON.parse(localStorage.getItem('hc_liked_blogs') || '[]')
+          const updated = likedBlogs.filter((id: string) => id !== blogId)
+          localStorage.setItem('hc_liked_blogs', JSON.stringify(updated))
+          setHasLiked(false)
+          toast({ title: 'Unliked', description: 'Your like has been removed.' })
+        } catch {}
+        setLoading(false)
+        return
+      }
+
       // Determine the user_name to send. If the user entered a name, use
       // and persist that under `hc_user_name`. If they did not, generate a
       // fallback (IP-prefixed or anonymous) and persist it under
@@ -123,6 +145,18 @@ export default function BlogReactionClient({ blogId }: { blogId: string }) {
         return
       }
 
+      // Save like state to localStorage only after successful API call
+      if (type === 'like') {
+        try {
+          const likedBlogs = JSON.parse(localStorage.getItem('hc_liked_blogs') || '[]')
+          if (!likedBlogs.includes(blogId)) {
+            likedBlogs.push(blogId)
+            localStorage.setItem('hc_liked_blogs', JSON.stringify(likedBlogs))
+            setHasLiked(true)
+          }
+        } catch {}
+      }
+
       // optimistic feedback
       toast({ title: 'Thanks!', description: 'Your reaction was recorded.' })
     } catch (err) {
@@ -136,11 +170,13 @@ export default function BlogReactionClient({ blogId }: { blogId: string }) {
   return (
     <div className="mt-6 flex items-center gap-3">
       <input placeholder="Name (optional)" value={name} onChange={(e) => setName(e.target.value)} className="input p-2" />
-      <button onClick={() => react('like')} disabled={loading} className="btn bg-red-500 text-white hover:bg-red-600 p-1 rounded shadow">
-        👍 Like
-      </button>
-      <button onClick={() => react('love')} disabled={loading} className="btn bg-yellow-500 text-white hover:bg-yellow-600 p-1 rounded shadow">
-        ❤️ Love
+      <button 
+        onClick={() => react('like')} 
+        disabled={loading}
+        className="btn bg-red-500 text-white hover:bg-red-600 p-2 rounded shadow flex items-center gap-2"
+      >
+        {hasLiked ? <Heart fill="currentColor" /> : <Heart />}
+        Like
       </button>
       {counts && <div className="text-sm text-gray-500 dark:text-gray-400">{Object.values(counts).reduce((s, n) => s + n, 0)} reactions</div>}
     </div>

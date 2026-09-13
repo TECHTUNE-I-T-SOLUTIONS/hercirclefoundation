@@ -1,3 +1,6 @@
+-- Complete setup for beneficiary_showcase table
+-- Run this in Supabase SQL Editor to create/update the table and fix RLS policies
+
 -- Create beneficiary_showcase table for showcasing beneficiary logos/images
 -- This table stores information about beneficiaries and places visited by the foundation
 
@@ -37,33 +40,40 @@ ALTER TABLE public.beneficiary_showcase ENABLE ROW LEVEL SECURITY;
 
 -- Create policies for beneficiary_showcase table
 -- Allow service role to read/write all beneficiary_showcase records
+DROP POLICY IF EXISTS "Service role can read all beneficiary_showcase" ON public.beneficiary_showcase;
 CREATE POLICY "Service role can read all beneficiary_showcase"
   ON public.beneficiary_showcase FOR SELECT
   TO service_role
   USING (true);
 
+DROP POLICY IF EXISTS "Service role can insert beneficiary_showcase" ON public.beneficiary_showcase;
 CREATE POLICY "Service role can insert beneficiary_showcase"
   ON public.beneficiary_showcase FOR INSERT
   TO service_role
   WITH CHECK (true);
 
+DROP POLICY IF EXISTS "Service role can update beneficiary_showcase" ON public.beneficiary_showcase;
 CREATE POLICY "Service role can update beneficiary_showcase"
   ON public.beneficiary_showcase FOR UPDATE
   TO service_role
   USING (true);
 
+DROP POLICY IF EXISTS "Service role can delete beneficiary_showcase" ON public.beneficiary_showcase;
 CREATE POLICY "Service role can delete beneficiary_showcase"
   ON public.beneficiary_showcase FOR DELETE
   TO service_role
   USING (true);
 
 -- Allow authenticated users to read active beneficiary_showcase records
+DROP POLICY IF EXISTS "Users can read active beneficiary_showcase" ON public.beneficiary_showcase;
 CREATE POLICY "Users can read active beneficiary_showcase"
   ON public.beneficiary_showcase FOR SELECT
   TO authenticated
   USING (is_active = true);
 
 -- Allow public (anonymous) users to read active beneficiary_showcase records
+-- This is crucial for the public showcase page to work
+DROP POLICY IF EXISTS "Public can read active beneficiary_showcase" ON public.beneficiary_showcase;
 CREATE POLICY "Public can read active beneficiary_showcase"
   ON public.beneficiary_showcase FOR SELECT
   TO anon
