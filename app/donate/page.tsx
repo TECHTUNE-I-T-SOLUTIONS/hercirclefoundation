@@ -57,20 +57,46 @@ export default function DonatePage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // show confirmation modal instead of immediate submit
-    setError(null)
-    setShowConfirm(true)
+    console.log('Form submitted', formData)
+    console.log('Is mobile:', isMobile)
+    
+    // For mobile, skip dialog and go directly to payment
+    if (isMobile) {
+      console.log('Mobile detected, skipping dialog')
+      await confirmAndSubmit()
+    } else {
+      // show confirmation modal instead of immediate submit
+      setError(null)
+      setShowConfirm(true)
+      console.log('Dialog should show now', showConfirm)
+    }
   }
 
   const [showConfirm, setShowConfirm] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
   const confettiRef = useRef<HTMLCanvasElement | null>(null)
 
+  useEffect(() => {
+    // Detect mobile device
+    const checkMobile = () => {
+      const userAgent = navigator.userAgent || navigator.vendor || (window as any).opera
+      setIsMobile(/android|ipad|iphone|ipod/i.test(userAgent) || window.innerWidth < 768)
+    }
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
+
   const confirmAndSubmit = async () => {
-    setShowConfirm(false)
+    if (!isMobile) {
+      setShowConfirm(false)
+    }
     setLoading(true)
     setError(null)
 
     try {
+      console.log('Submitting payment with data:', formData)
+      
       // Initialize Paystack payment
       const res = await fetch('/api/payments/initialize', {
         method: 'POST',
@@ -85,12 +111,16 @@ export default function DonatePage() {
         }),
       })
 
+      console.log('Payment API response status:', res.status)
       const payload = await res.json()
+      console.log('Payment API response:', payload)
+      
       if (!res.ok) throw new Error(payload?.error || 'Failed to initialize payment')
 
       // Stop loading here - Paystack will handle the rest
       setLoading(false)
 
+      console.log('Redirecting to:', payload.authorization_url)
       // Redirect to Paystack checkout page
       window.location.href = payload.authorization_url
     } catch (err) {
@@ -265,7 +295,7 @@ export default function DonatePage() {
                     {/* Confirmation Dialog */}
                     {showConfirm && (
                       <Dialog open onOpenChange={(open) => setShowConfirm(open)}>
-                        <DialogContent>
+                        <DialogContent className={isMobile ? "max-w-[95vw] mx-auto" : ""}>
                           <DialogHeader>
                             <DialogTitle>Confirm Card Payment</DialogTitle>
                             <DialogDescription>
@@ -294,9 +324,9 @@ export default function DonatePage() {
                               </p>
                             </div>
                           </div>
-                          <DialogFooter>
-                            <Button variant="outline" onClick={() => setShowConfirm(false)}>Cancel</Button>
-                            <Button onClick={confirmAndSubmit} disabled={loading}>
+                          <DialogFooter className={isMobile ? "flex-col gap-2" : ""}>
+                            <Button variant="outline" onClick={() => setShowConfirm(false)} className={isMobile ? "w-full" : ""}>Cancel</Button>
+                            <Button onClick={confirmAndSubmit} disabled={loading} className={isMobile ? "w-full" : ""}>
                               {loading ? "Processing..." : 'Proceed to Payment'}
                             </Button>
                           </DialogFooter>
@@ -324,7 +354,7 @@ export default function DonatePage() {
 
               {/* Sidebar */}
               <div className="space-y-6">
-                <div className="bg-primary/10 dark:bg-background rounded-lg p-6 border border-primary/20 dark:border-white">
+                <div className="bg-white/10 dark:bg-background rounded-lg p-6 border border-primary/20 dark:border-white">
                   <h3 className="font-bold text-lg mb-4 flex items-center gap-2 text-black dark:text-white">
                     <Gift className="h-5 w-5 text-black dark:text-white" />
                     Your Impact
