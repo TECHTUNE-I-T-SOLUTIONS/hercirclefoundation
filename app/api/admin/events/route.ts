@@ -31,16 +31,18 @@ export async function POST(req: Request) {
         }
       }
     }
+    
+    console.log('Event creation payload:', body)
 
     const payload: any = {
       title: body.title,
       description: body.description || null,
       date: body.date || null,
       location: body.location || null,
-      image_urls: body.image_urls && Array.isArray(body.image_urls) ? body.image_urls : (body.image_urls ? JSON.parse(String(body.image_urls)) : null),
       image_url: body.image_url || null,
       event_type: body.event_type || 'workshop',
       status: body.status || 'draft',
+      created_by: user.id,
     }
 
     const { data, error } = await serverClient.from('events').insert([payload]).select().single()

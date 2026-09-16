@@ -55,9 +55,14 @@ export default function VolunteersPage() {
     setShowConfirm(false)
     try {
       const supabase = createClient()
-      const { error } = await supabase.from("volunteers").delete().eq("id", id)
-
-      if (error) throw error
+      const { data: { session } } = await supabase.auth.getSession()
+      const token = session?.access_token
+      const res = await fetch(`/api/admin/volunteers/${id}`, { method: 'DELETE', headers: token ? { Authorization: `Bearer ${token}` } : undefined })
+      if (!res.ok) {
+        const err = await res.json().catch(() => null)
+        toast({ title: 'Delete failed', description: err?.error || 'delete failed' })
+        return
+      }
       setVolunteers((prev) => prev.filter((v) => v.id !== id))
       toast({ title: 'Deleted', description: 'Volunteer removed' })
     } catch (error) {

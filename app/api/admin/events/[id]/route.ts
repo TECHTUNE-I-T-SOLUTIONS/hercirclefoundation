@@ -36,11 +36,9 @@ export async function PATCH(req: Request, ctx: any) {
       }
     }
 
-    const allowed = ['title', 'description', 'date', 'location', 'image_url', 'image_urls', 'event_type', 'status']
+    const allowed = ['title', 'description', 'date', 'location', 'image_url', 'event_type', 'status']
     const updatePayload: any = {}
     for (const k of Object.keys(body)) if (allowed.includes(k)) updatePayload[k] = body[k]
-
-    if (updatePayload.image_urls && Array.isArray(updatePayload.image_urls) && updatePayload.image_urls.length > 0) updatePayload.image_url = updatePayload.image_urls[0]
 
     if (Object.keys(updatePayload).length === 0) return NextResponse.json({ error: 'nothing to update' }, { status: 400 })
 

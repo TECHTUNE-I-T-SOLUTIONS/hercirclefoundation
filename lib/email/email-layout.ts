@@ -5,10 +5,10 @@
 // ---------------------------------------------------------------------------
 import { EMAIL_BRAND, PUBLIC_LINKS } from "./constants"
 
-export const BRAND_COLOR = "#c2185b" // primary pink
-export const BRAND_DARK = "#880e4f"
-export const INK = "#1f2937"
-export const MUTED = "#6b7280"
+export const BRAND_COLOR = "#B00000" // primary pink
+export const BRAND_DARK = "#B00000"
+export const INK = "#611600"
+export const MUTED = "#611700c4"
 export const BORDER = "#e5e7eb"
 export const BG_LIGHT = "#f8f5f2"
 export const BG_WHITE = "#ffffff"
@@ -62,8 +62,6 @@ export function renderHeader(): string {
 export function renderFooter(): string {
   const quickLinks = [
     "https://hercirclefoundation.app/about",
-    "https://hercirclefoundation.app/gallery",
-    "https://hercirclefoundation.app/partner",
     "https://hercirclefoundation.app/blog",
     "https://hercirclefoundation.app/events",
     "https://hercirclefoundation.app/donate",
@@ -75,7 +73,7 @@ export function renderFooter(): string {
     .join("")
 
   const mailboxes = [
-    "support", "finance", "donations", "programs",
+    "support", "donations",
     "partnerships",
   ]
     .map(

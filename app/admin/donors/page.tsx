@@ -78,9 +78,14 @@ export default function DonorsPage() {
     setShowConfirm(false)
     try {
       const supabase = createClient()
-      const { error } = await supabase.from("donors").delete().eq("id", id)
-
-      if (error) throw error
+      const { data: { session } } = await supabase.auth.getSession()
+      const token = session?.access_token
+      const res = await fetch(`/api/admin/donors/${id}`, { method: 'DELETE', headers: token ? { Authorization: `Bearer ${token}` } : undefined })
+      if (!res.ok) {
+        const err = await res.json().catch(() => null)
+        toast({ title: 'Delete failed', description: err?.error || 'delete failed' })
+        return
+      }
       setDonors((prev) => prev.filter((d) => d.id !== id))
       toast({ title: 'Deleted', description: 'Donor removed' })
     } catch (error) {

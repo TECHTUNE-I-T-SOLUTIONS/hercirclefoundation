@@ -12,7 +12,7 @@ import { Label } from "@/components/ui/label"
 import { Dialog, DialogContent, DialogTitle, DialogDescription, DialogClose } from '@/components/ui/dialog'
 import { useEffect, useState } from "react"
 import { createClient } from "@/lib/supabase/client"
-import { Trash2, Plus, X } from "lucide-react"
+import { Trash2, Plus, X, Loader2 } from "lucide-react"
 import { FileUploadInput } from "@/components/file-upload-input"
 
 interface Event {
@@ -21,12 +21,11 @@ interface Event {
   description: string
   date: string
   location: string
-  image_urls?: string[]
-  // legacy single-image field (some rows may still have this)
   image_url?: string
   event_type: string
   status: string
   created_at: string
+  created_by?: string
 }
 
 export default function EventsPage() {
@@ -38,12 +37,23 @@ export default function EventsPage() {
     description: "",
     date: "",
     location: "",
-    image_urls: [] as string[],
+    image_url: "",
     event_type: "workshop",
+    status: "draft",
   })
+  const [isCreating, setIsCreating] = useState(false)
 
   const [editingId, setEditingId] = useState<string | null>(null)
-  const [editForm, setEditForm] = useState<any>(null)
+  const [editForm, setEditForm] = useState<any>({
+    title: "",
+    description: "",
+    date: "",
+    location: "",
+    image_url: "",
+    event_type: "workshop",
+    status: "draft",
+  })
+  const [isUpdating, setIsUpdating] = useState(false)
   const { toast } = useToast()
   const [showConfirm, setShowConfirm] = useState(false)
   const [selectedId, setSelectedId] = useState<string | null>(null)
@@ -75,6 +85,7 @@ export default function EventsPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    setIsCreating(true)
 
     try {
       // Use server-side create endpoint to avoid RLS issues
@@ -88,7 +99,10 @@ export default function EventsPage() {
       form.append('date', formData.date)
       form.append('location', formData.location)
       form.append('event_type', formData.event_type)
-      form.append('image_urls', JSON.stringify(formData.image_urls || []))
+      form.append('status', formData.status)
+      if (formData.image_url) {
+        form.append('image_url', formData.image_url)
+      }
 
       const res = await fetch('/api/admin/events', {
         method: 'POST',
@@ -107,11 +121,14 @@ export default function EventsPage() {
         description: "",
         date: "",
         location: "",
-        image_urls: [],
+        image_url: "",
         event_type: "workshop",
+        status: "draft",
       })
       setShowForm(false)
       fetchEvents()
+      toast({ title: 'Success', description: 'Event created successfully' })
+      
       // send push notifications to subscribers
       try {
         await fetch('/api/push/send', {
@@ -128,6 +145,9 @@ export default function EventsPage() {
       }
     } catch (error) {
       console.error("Error creating event:", error)
+      toast({ title: 'Create failed', description: String(error) })
+    } finally {
+      setIsCreating(false)
     }
   }
 
@@ -276,42 +296,62 @@ export default function EventsPage() {
                 </div>
 
                 <div>
-                  <Label>Event Images</Label>
+                  <Label>Event Image</Label>
                   <div className="space-y-2 mt-2">
-                    {(formData.image_urls || []).map((url: string, i: number) => (
-                      <div key={i} className="flex items-center gap-2">
-                        <img src={url} alt={`event-${i}`} className="h-12 w-12 object-cover rounded" />
+                    {formData.image_url && (
+                      <div className="flex items-center gap-2">
+                        <img src={formData.image_url} alt="event-image" className="h-12 w-12 object-cover rounded" />
                         <Input
-                          value={url}
-                          onChange={(e) => {
-                            const next = [...formData.image_urls]
-                            next[i] = e.target.value
-                            setFormData({ ...formData, image_urls: next })
-                          }}
+                          value={formData.image_url}
+                          onChange={(e) => setFormData({ ...formData, image_url: e.target.value })}
                         />
                         <Button
                           variant="ghost"
-                          onClick={() => setFormData({ ...formData, image_urls: (formData.image_urls || []).filter((_: any, idx: number) => idx !== i) })}
+                          onClick={() => setFormData({ ...formData, image_url: '' })}
                         >
                           <Trash2 className="h-4 w-4" />
                         </Button>
                       </div>
-                    ))}
+                    )}
 
                     <FileUploadInput
                       label="Add Image"
-                      onFileUrlChange={(url) => setFormData({ ...formData, image_urls: [...(formData.image_urls || []), url] })}
+                      onFileUrlChange={(url) => setFormData({ ...formData, image_url: url })}
                       bucket="events"
                       accept="image/*"
                     />
                   </div>
                 </div>
 
+                <div>
+                  <Label htmlFor="status">Status</Label>
+                  <select
+                    id="status"
+                    aria-label="Event Status"
+                    value={formData.status}
+                    onChange={(e) => setFormData({ ...formData, status: e.target.value })}
+                    className="mt-2 w-full px-3 py-2 border border-input rounded-md bg-background"
+                  >
+                    <option value="draft">Draft</option>
+                    <option value="published">Published</option>
+                  </select>
+                  <p className="text-xs text-muted-foreground mt-1">
+                    {formData.status === 'draft' ? 'Draft events are only visible to admins' : 'Published events are visible to all users'}
+                  </p>
+                </div>
+
                 <div className="flex gap-2">
-                  <Button type="submit" className="bg-primary hover:bg-primary/90">
-                    Create Event
+                  <Button type="submit" className="bg-primary hover:bg-primary/90" disabled={isCreating}>
+                    {isCreating ? (
+                      <>
+                        <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                        Creating...
+                      </>
+                    ) : (
+                      "Create Event"
+                    )}
                   </Button>
-                  <Button type="button" variant="outline" onClick={() => setShowForm(false)}>
+                  <Button type="button" variant="outline" onClick={() => setShowForm(false)} disabled={isCreating}>
                     Cancel
                   </Button>
                 </div>
@@ -348,24 +388,21 @@ export default function EventsPage() {
                 <CardContent className="pt-6">
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
-                      {(() => {
-                        const imgs: string[] = event.image_urls && event.image_urls.length > 0
-                          ? event.image_urls
-                          : event.image_url
-                            ? [event.image_url]
-                            : []
-                        if (imgs.length === 0) return null
-                        return (
-                          <div className="flex gap-2 mb-3">
-                            {imgs.slice(0, 3).map((img, i) => (
-                              <img key={i} src={img} alt={`event-thumb-${i}`} className="h-20 w-28 object-cover rounded" />
-                            ))}
-                          </div>
-                        )
-                      })()}
+                      {event.image_url && (
+                        <div className="flex gap-2 mb-3">
+                          <img src={event.image_url} alt="event-thumb" className="h-20 w-28 object-cover rounded" />
+                        </div>
+                      )}
                       <div className="flex items-center gap-3 mb-2">
                         <h3 className="font-bold text-lg">{event.title}</h3>
                         <span className="text-xs bg-primary/20 text-primary px-2 py-1 rounded">{event.event_type}</span>
+                        <span className={`px-2 py-1 rounded-full text-xs font-semibold ${
+                          event.status === 'published' 
+                            ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-100' 
+                            : 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-100'
+                        }`}>
+                          {event.status || 'draft'}
+                        </span>
                       </div>
                       <p className="text-sm text-muted-foreground mb-3">{event.description}</p>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
@@ -400,11 +437,7 @@ export default function EventsPage() {
                             description: event.description,
                             date: dt ? toLocalDatetime(dt) : '',
                             location: event.location,
-                            image_urls: event.image_urls && event.image_urls.length > 0
-                              ? [...event.image_urls]
-                              : event.image_url
-                                ? [event.image_url]
-                                : [],
+                            image_url: event.image_url || '',
                             event_type: event.event_type,
                           })
                         }}
@@ -456,25 +489,57 @@ export default function EventsPage() {
               </div>
 
               <div className="flex flex-wrap gap-2">
-                {(editForm.image_urls || []).map((u: string, idx: number) => (
-                  <div key={idx} className="relative">
-                    <img src={u} alt={`edit-image-${idx}`} className="h-20 w-28 object-cover rounded" />
+                {editForm.image_url && (
+                  <div className="relative">
+                    <img src={editForm.image_url} alt="edit-image" className="h-20 w-28 object-cover rounded" />
                     <button
                       type="button"
-                      aria-label={`Remove image ${idx + 1}`}
+                      aria-label="Remove image"
                       className="absolute -top-2 -right-2 bg-white rounded-full p-1 shadow"
-                      onClick={() => setEditForm({ ...editForm, image_urls: (editForm.image_urls || []).filter((_: any, i: number) => i !== idx) })}
+                      onClick={() => setEditForm({ ...editForm, image_url: '' })}
                     >
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-destructive" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"/></svg>
                     </button>
                   </div>
-                ))}
+                )}
               </div>
 
-              <FileUploadInput label="Add Image" bucket="events" accept="image/*" onFileUrlChange={(url) => setEditForm({ ...editForm, image_urls: [...(editForm.image_urls || []), url] })} />
+              <FileUploadInput label="Add Image" bucket="events" accept="image/*" onFileUrlChange={(url) => setEditForm({ ...editForm, image_url: url })} />
+
+              <div>
+                <label className="sr-only">Event Type</label>
+                <select
+                  aria-label="Event Type"
+                  value={editForm.event_type}
+                  onChange={(e) => setEditForm({ ...editForm, event_type: e.target.value })}
+                  className="w-full px-3 py-2 border border-input rounded-md bg-background"
+                >
+                  <option value="workshop">Workshop</option>
+                  <option value="awareness">Awareness Campaign</option>
+                  <option value="distribution">Distribution</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="sr-only">Status</label>
+                <select
+                  aria-label="Event Status"
+                  value={editForm.status}
+                  onChange={(e) => setEditForm({ ...editForm, status: e.target.value })}
+                  className="w-full px-3 py-2 border border-input rounded-md bg-background"
+                >
+                  <option value="draft">Draft</option>
+                  <option value="published">Published</option>
+                </select>
+                <p className="text-xs text-muted-foreground mt-1">
+                  {editForm.status === 'draft' ? 'Draft events are only visible to admins' : 'Published events are visible to all users'}
+                </p>
+              </div>
 
               <div className="flex flex-col sm:flex-row sm:justify-end gap-2 mt-4">
                 <Button onClick={async () => {
+                  setIsUpdating(true)
                   try {
                     const supabase = createClient()
                     const { data: { session } } = await supabase.auth.getSession()
@@ -482,8 +547,7 @@ export default function EventsPage() {
                     const form = new FormData()
                     for (const k of Object.keys(editForm)) {
                       const val = editForm[k]
-                      if (Array.isArray(val)) form.append(`${k}[]`, JSON.stringify(val))
-                      else form.append(k, val)
+                      form.append(k, val)
                     }
                     const res = await fetch(`/api/admin/events/${editingId}`, {
                       method: 'PATCH',
@@ -498,11 +562,24 @@ export default function EventsPage() {
                     setEditingId(null)
                     setEditForm(null)
                     fetchEvents()
+                    toast({ title: 'Success', description: 'Event updated successfully' })
                   } catch (err) {
                     console.error('Edit save failed', err)
+                    toast({ title: 'Update failed', description: String(err) })
+                  } finally {
+                    setIsUpdating(false)
                   }
-                }} className="bg-primary">Save</Button>
-                <Button variant="outline" onClick={() => { setEditingId(null); setEditForm(null) }}>Cancel</Button>
+                }} className="bg-primary" disabled={isUpdating}>
+                  {isUpdating ? (
+                    <>
+                      <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                      Saving...
+                    </>
+                  ) : (
+                    "Save"
+                  )}
+                </Button>
+                <Button variant="outline" onClick={() => { setEditingId(null); setEditForm(null) }} disabled={isUpdating}>Cancel</Button>
               </div>
             </div>
           )}

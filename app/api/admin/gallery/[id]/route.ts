@@ -36,14 +36,9 @@ export async function PATCH(req: Request, ctx: any) {
       }
     }
 
-    const allowed = ['title', 'description', 'media_url', 'media_urls', 'media_type', 'category']
+    const allowed = ['title', 'description', 'media_url', 'media_type', 'category']
     const updatePayload: any = {}
     for (const k of Object.keys(body)) if (allowed.includes(k)) updatePayload[k] = body[k]
-
-    // keep legacy media_url column in sync if media_urls provided
-    if (updatePayload.media_urls && Array.isArray(updatePayload.media_urls) && updatePayload.media_urls.length > 0) {
-      updatePayload.media_url = updatePayload.media_urls[0]
-    }
 
     if (Object.keys(updatePayload).length === 0) return NextResponse.json({ error: 'nothing to update' }, { status: 400 })
 

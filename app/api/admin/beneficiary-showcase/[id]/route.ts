@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
+import { createClient as createServerHelper } from '@/lib/supabase/server'
 
 export async function PATCH(
   request: NextRequest,
@@ -8,6 +9,15 @@ export async function PATCH(
 ) {
   try {
     const { id } = await params
+    
+    // Auth check
+    const authClient = await createServerHelper()
+    const { data: { user }, error: userErr } = await authClient.auth.getUser()
+    if (userErr || !user) return NextResponse.json({ error: 'invalid token' }, { status: 401 })
+
+    const { data: admins } = await authClient.from('admin_users').select('id').eq('id', user.id).limit(1)
+    if (!admins || admins.length === 0) return NextResponse.json({ error: 'not admin' }, { status: 403 })
+
     const body = await request.json()
     const { name, description, link, image_url, image_type, is_active, display_order, metadata } = body
 
@@ -64,6 +74,14 @@ export async function DELETE(
 ) {
   try {
     const { id } = await params
+    
+    // Auth check
+    const authClient = await createServerHelper()
+    const { data: { user }, error: userErr } = await authClient.auth.getUser()
+    if (userErr || !user) return NextResponse.json({ error: 'invalid token' }, { status: 401 })
+
+    const { data: admins } = await authClient.from('admin_users').select('id').eq('id', user.id).limit(1)
+    if (!admins || admins.length === 0) return NextResponse.json({ error: 'not admin' }, { status: 403 })
 
     // Check environment variables
     if (!process.env.SUPABASE_SERVICE_ROLE_KEY || !process.env.NEXT_PUBLIC_SUPABASE_URL) {
