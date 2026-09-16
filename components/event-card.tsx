@@ -26,20 +26,21 @@ export function EventCard({ id, title, date, location, description, imageUrl, ev
   const [isAdded, setIsAdded] = useState(false)
   const [selectedCalendar, setSelectedCalendar] = useState<string | null>(null)
 
-  const eventDate = new Date(date)
-  const formattedDate = eventDate.toLocaleDateString("en-US", { 
+  const eventDate = date ? new Date(date) : null
+  const formattedDate = eventDate ? eventDate.toLocaleDateString("en-US", { 
     weekday: "long", 
     month: "long", 
     day: "numeric", 
     year: "numeric" 
-  })
-  const formattedTime = eventDate.toLocaleTimeString("en-US", { 
+  }) : "Date TBD"
+  const formattedTime = eventDate ? eventDate.toLocaleTimeString("en-US", { 
     hour: "numeric", 
     minute: "2-digit",
     hour12: true 
-  })
+  }) : ""
 
   const formatDateForCalendar = (date: Date) => {
+    if (!date) return ""
     return date.toISOString().replace(/-|:|\.\d\d\d/g, "")
   }
 
@@ -216,6 +217,7 @@ END:VCALENDAR`
                 variant={isAdded ? "default" : "outline"} 
                 size="sm" 
                 className={onViewDetails ? "flex-1" : "w-full group-hover:primary transition-colors"}
+                disabled={!eventDate}
               >
                 {isAdded ? (
                   <>
@@ -232,22 +234,27 @@ END:VCALENDAR`
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-56">
-              <DropdownMenuItem onClick={() => handleCalendarClick("google")} className="cursor-pointer">
+              <DropdownMenuItem onClick={() => handleCalendarClick("google")} className="cursor-pointer" disabled={!eventDate}>
                 <ExternalLink className="h-4 w-4 mr-2 text-blue-500" />
                 Google Calendar
               </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => handleCalendarClick("outlook")} className="cursor-pointer">
+              <DropdownMenuItem onClick={() => handleCalendarClick("outlook")} className="cursor-pointer" disabled={!eventDate}>
                 <ExternalLink className="h-4 w-4 mr-2 text-blue-600" />
                 Outlook Calendar
               </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => handleCalendarClick("yahoo")} className="cursor-pointer">
+              <DropdownMenuItem onClick={() => handleCalendarClick("yahoo")} className="cursor-pointer" disabled={!eventDate}>
                 <ExternalLink className="h-4 w-4 mr-2 text-purple-600" />
                 Yahoo Calendar
               </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => handleCalendarClick("ics")} className="cursor-pointer">
+              <DropdownMenuItem onClick={() => handleCalendarClick("ics")} className="cursor-pointer" disabled={!eventDate}>
                 <Download className="h-4 w-4 mr-2 text-green-600" />
                 Download ICS File
               </DropdownMenuItem>
+              {!eventDate && (
+                <DropdownMenuItem disabled className="cursor-pointer text-muted-foreground">
+                  Date required for calendar
+                </DropdownMenuItem>
+              )}
             </DropdownMenuContent>
           </DropdownMenu>
         </div>

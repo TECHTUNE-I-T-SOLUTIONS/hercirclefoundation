@@ -273,15 +273,15 @@ export default function EventsPage() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <Label htmlFor="date">Date & Time</Label>
+                    <Label htmlFor="date">Date & Time (Optional)</Label>
                     <Input
                       id="date"
                       type="datetime-local"
                       value={formData.date}
                       onChange={(e) => setFormData({ ...formData, date: e.target.value })}
-                      required
                       className="mt-2"
                     />
+                    <p className="text-xs text-muted-foreground mt-1">Leave empty if date is not yet determined</p>
                   </div>
                   <div>
                     <Label htmlFor="location">Location</Label>
@@ -408,7 +408,7 @@ export default function EventsPage() {
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
                         <div>
                           <p className="text-xs font-semibold text-muted-foreground">Date</p>
-                          <p>{new Date(event.date).toLocaleString()}</p>
+                          <p>{event.date ? new Date(event.date).toLocaleString() : 'Date TBD'}</p>
                         </div>
                         <div>
                           <p className="text-xs font-semibold text-muted-foreground">Location</p>
@@ -484,7 +484,11 @@ export default function EventsPage() {
               <textarea aria-label="Edit description" value={editForm.description} onChange={(e) => setEditForm({ ...editForm, description: e.target.value })} className="w-full p-2 border rounded" />
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <Input aria-label="Edit date" type="datetime-local" value={editForm.date} onChange={(e) => setEditForm({ ...editForm, date: e.target.value })} />
+                <div>
+                  <label className="sr-only">Date & Time (Optional)</label>
+                  <Input aria-label="Edit date" type="datetime-local" value={editForm.date} onChange={(e) => setEditForm({ ...editForm, date: e.target.value })} />
+                  <p className="text-xs text-muted-foreground mt-1">Leave empty if date is not yet determined</p>
+                </div>
                 <Input aria-label="Edit location" value={editForm.location} onChange={(e) => setEditForm({ ...editForm, location: e.target.value })} />
               </div>
 

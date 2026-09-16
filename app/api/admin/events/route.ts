@@ -37,7 +37,7 @@ export async function POST(req: Request) {
     const payload: any = {
       title: body.title,
       description: body.description || null,
-      date: body.date || null,
+      date: body.date && body.date.trim() !== '' ? body.date : null,
       location: body.location || null,
       image_url: body.image_url || null,
       event_type: body.event_type || 'workshop',

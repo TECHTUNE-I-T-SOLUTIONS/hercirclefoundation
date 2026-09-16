@@ -36,15 +36,17 @@ export default function EventsPage() {
 
         const now = new Date()
         const publishedEvents = data?.filter((e) => e.status === 'published') || []
-        const upcoming = publishedEvents.filter((e) => new Date(e.date) >= now) || []
-        const past = publishedEvents.filter((e) => new Date(e.date) < now) || []
+        const eventsWithDates = publishedEvents.filter((e) => e.date) || []
+        const upcoming = eventsWithDates.filter((e) => new Date(e.date) >= now) || []
+        const past = eventsWithDates.filter((e) => new Date(e.date) < now) || []
+        const eventsWithoutDates = publishedEvents.filter((e) => !e.date) || []
 
         if (filter === "upcoming") {
-          setEvents(upcoming)
+          setEvents([...upcoming, ...eventsWithoutDates])
         } else if (filter === "past") {
           setEvents(past)
         } else {
-          setEvents(publishedEvents)
+          setEvents([...publishedEvents])
         }
       } catch (error) {
         console.error("Error fetching events:", error)
@@ -211,21 +213,27 @@ export default function EventsPage() {
                     <Calendar className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
                     <div>
                       <p className="font-medium">Date & Time</p>
-                      <p className="text-muted-foreground">
-                        {new Date(selectedEvent.date).toLocaleDateString("en-US", { 
-                          weekday: "long", 
-                          month: "long", 
-                          day: "numeric", 
-                          year: "numeric" 
-                        })}
-                      </p>
-                      <p className="text-muted-foreground">
-                        {new Date(selectedEvent.date).toLocaleTimeString("en-US", { 
-                          hour: "numeric", 
-                          minute: "2-digit",
-                          hour12: true 
-                        })}
-                      </p>
+                      {selectedEvent.date ? (
+                        <>
+                          <p className="text-muted-foreground">
+                            {new Date(selectedEvent.date).toLocaleDateString("en-US", { 
+                              weekday: "long", 
+                              month: "long", 
+                              day: "numeric", 
+                              year: "numeric" 
+                            })}
+                          </p>
+                          <p className="text-muted-foreground">
+                            {new Date(selectedEvent.date).toLocaleTimeString("en-US", { 
+                              hour: "numeric", 
+                              minute: "2-digit",
+                              hour12: true 
+                            })}
+                          </p>
+                        </>
+                      ) : (
+                        <p className="text-muted-foreground">Date to be determined</p>
+                      )}
                     </div>
                   </div>
 
