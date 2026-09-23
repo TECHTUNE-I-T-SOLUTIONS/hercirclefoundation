@@ -104,8 +104,8 @@ export default function AdminBlogList() {
   }
 
   return (
-    <div className="mt-8">
-      <h2 className="text-xl font-semibold mb-4">Posts</h2>
+    <div className="mt-6 sm:mt-8">
+      <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">Posts</h2>
       {loading ? (
         <div className="flex items-center justify-center py-8">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
@@ -118,59 +118,59 @@ export default function AdminBlogList() {
         <div>
           <div className="mb-3 flex justify-end gap-2">
             {selectedIds.length > 0 && (
-              <Button className="bg-destructive text-white" onClick={() => setShowDeleteConfirm(true)}>
+              <Button className="bg-destructive text-white text-sm" onClick={() => setShowDeleteConfirm(true)}>
                 Delete selected ({selectedIds.length})
               </Button>
             )}
           </div>
           <div className="space-y-3">
             {items.map((b) => (
-              <div key={b.id} className="p-4 border rounded-lg hover:bg-muted/50 transition-colors">
-                <div className="flex items-start justify-between">
-                  <div className="flex items-start gap-3 flex-1">
+              <div key={b.id} className="p-3 sm:p-4 border rounded-lg hover:bg-muted/50 transition-colors">
+                <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
+                  <div className="flex items-start gap-3 flex-1 w-full">
                     <input 
                       type="checkbox" 
-                      className="mt-1" 
+                      className="mt-1 flex-shrink-0" 
                       checked={selectedIds.includes(b.id)} 
                       onChange={() => toggleSelect(b.id)} 
                     />
-                    <div className="flex-1">
-                      <div className="flex items-center gap-2 mb-1">
-                        <span className="font-medium">{b.title}</span>
-                        {b.featured && <span className="px-2 py-0.5 text-xs bg-primary text-primary-foreground rounded">Featured</span>}
-                        <span className={`px-2 py-0.5 text-xs rounded ${
+                    <div className="flex-1 min-w-0">
+                      <div className="flex flex-wrap items-center gap-1 sm:gap-2 mb-1">
+                        <span className="font-medium text-sm sm:text-base truncate">{b.title}</span>
+                        {b.featured && <span className="px-2 py-0.5 text-xs bg-primary text-primary-foreground rounded flex-shrink-0">Featured</span>}
+                        <span className={`px-2 py-0.5 text-xs rounded flex-shrink-0 ${
                           b.status === 'published' ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' : 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-200'
                         }`}>
                           {b.status}
                         </span>
                       </div>
-                      <p className="text-sm text-muted-foreground mb-2">{b.excerpt}</p>
-                      <div className="flex items-center gap-4 text-xs text-muted-foreground">
-                        <span>{b.published_at ? new Date(b.published_at).toLocaleDateString() : 'Not published'}</span>
-                        {b.author_name && <span>By: {b.author_name}</span>}
+                      <p className="text-xs sm:text-sm text-muted-foreground mb-2 line-clamp-2">{b.excerpt}</p>
+                      <div className="flex flex-wrap items-center gap-2 sm:gap-4 text-xs text-muted-foreground">
+                        <span className="flex-shrink-0">{b.published_at ? new Date(b.published_at).toLocaleDateString() : 'Not published'}</span>
+                        {b.author_name && <span className="flex-shrink-0">By: {b.author_name}</span>}
                         {b.tags && b.tags.length > 0 && (
-                          <div className="flex gap-1">
-                            {b.tags.slice(0, 3).map(tag => (
+                          <div className="flex flex-wrap gap-1">
+                            {b.tags.slice(0, 2).map(tag => (
                               <span key={tag} className="px-2 py-0.5 bg-muted rounded text-xs">
                                 {tag}
                               </span>
                             ))}
-                            {b.tags.length > 3 && <span className="text-xs">+{b.tags.length - 3}</span>}
+                            {b.tags.length > 2 && <span className="text-xs">+{b.tags.length - 2}</span>}
                           </div>
                         )}
                       </div>
                     </div>
                   </div>
-                  <div className="flex gap-2">
+                  <div className="flex gap-2 sm:flex-row">
                     {b.status === 'published' && (
-                      <Button variant="ghost" size="sm" onClick={() => router.push(`/blog/${b.slug}`)}>
+                      <Button variant="ghost" size="sm" onClick={() => router.push(`/blog/${b.slug}`)} className="flex-shrink-0">
                         <Eye className="h-4 w-4" />
                       </Button>
                     )}
-                    <Button variant="outline" size="sm" onClick={() => router.push(`/admin/blogs/${b.id}/edit`)}>
+                    <Button variant="outline" size="sm" onClick={() => router.push(`/admin/blogs/${b.id}/edit`)} className="flex-shrink-0">
                       <Pencil className="h-4 w-4" />
                     </Button>
-                    <Button variant="ghost" size="sm" className="text-destructive hover:text-destructive" onClick={() => { setDeleteTargetId(b.id); setShowDeleteConfirm(true) }}>
+                    <Button variant="ghost" size="sm" className="text-destructive hover:text-destructive flex-shrink-0" onClick={() => { setDeleteTargetId(b.id); setShowDeleteConfirm(true) }}>
                       <Trash2 className="h-4 w-4" />
                     </Button>
                   </div>

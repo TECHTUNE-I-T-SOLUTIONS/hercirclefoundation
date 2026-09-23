@@ -1,7 +1,7 @@
 "use client"
 
-import { Header } from "@/components/header"
-import { Footer } from "@/components/footer"
+// import { Header } from "@/components/header"
+// import { Footer } from "@/components/footer"
 import { EventCard } from "@/components/event-card"
 import { Button } from "@/components/ui/button"
 import { useEffect, useState } from "react"
@@ -60,7 +60,7 @@ export default function EventsPage() {
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
-      <Header />
+      {/* <Header /> */}
 
       <main className="flex-1">
         {/* Hero */}
@@ -137,7 +137,7 @@ export default function EventsPage() {
         </section>
       </main>
 
-      <Footer />
+      {/* <Footer /> */}
 
       {/* Event Details Modal */}
       <Dialog open={!!selectedEvent} onOpenChange={(open) => !open && setSelectedEvent(null)}>

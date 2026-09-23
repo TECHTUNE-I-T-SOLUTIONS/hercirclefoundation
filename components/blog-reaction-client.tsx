@@ -168,17 +168,28 @@ export default function BlogReactionClient({ blogId }: { blogId: string }) {
   }
 
   return (
-    <div className="mt-6 flex items-center gap-3">
-      <input placeholder="Name (optional)" value={name} onChange={(e) => setName(e.target.value)} className="input p-2" />
-      <button 
-        onClick={() => react('like')} 
-        disabled={loading}
-        className="btn bg-red-500 text-white hover:bg-red-600 p-2 rounded shadow flex items-center gap-2"
-      >
-        {hasLiked ? <Heart fill="currentColor" /> : <Heart />}
-        Like
-      </button>
-      {counts && <div className="text-sm text-gray-500 dark:text-gray-400">{Object.values(counts).reduce((s, n) => s + n, 0)} reactions</div>}
+    <div className="mt-4 sm:mt-6 flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-3">
+      <input 
+        placeholder="Name (optional)" 
+        value={name} 
+        onChange={(e) => setName(e.target.value)} 
+        className="input p-2 w-full sm:w-auto text-sm" 
+      />
+      <div className="flex items-center gap-2 w-full sm:w-auto">
+        <button 
+          onClick={() => react('like')} 
+          disabled={loading}
+          className="btn bg-red-500 text-white hover:bg-red-600 p-2 rounded shadow flex items-center gap-2 text-sm whitespace-nowrap"
+        >
+          {hasLiked ? <Heart fill="currentColor" className="h-4 w-4" /> : <Heart className="h-4 w-4" />}
+          Like
+        </button>
+        {counts && (
+          <div className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 whitespace-nowrap">
+            {Object.values(counts).reduce((s, n) => s + n, 0)} reactions
+          </div>
+        )}
+      </div>
     </div>
   )
 }

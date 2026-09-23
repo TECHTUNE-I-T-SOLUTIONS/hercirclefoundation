@@ -1,8 +1,8 @@
 "use client"
 
 import { useEffect, useState } from 'react'
-import { Header } from '@/components/header'
-import { Footer } from '@/components/footer'
+// import { Header } from '@/components/header'
+// import { Footer } from '@/components/footer'
 import StoryCard from '@/components/story-card'
 import { FileUploadInput } from '@/components/file-upload-input'
 
@@ -43,7 +43,7 @@ export default function StoriesPage() {
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
-      <Header />
+      {/* <Header /> */}
       <main className="flex-1 container mx-auto px-4 py-12">
         <h1 className="text-3xl font-bold mb-6">Stories</h1>
         <p className="text-muted-foreground mb-6">Read real stories from our community or share your own.</p>
@@ -77,7 +77,7 @@ export default function StoriesPage() {
           </aside>
         </section>
       </main>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   )
 }

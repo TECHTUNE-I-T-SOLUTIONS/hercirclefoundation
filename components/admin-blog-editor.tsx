@@ -33,6 +33,8 @@ import {
   ArrowLeft,
   Sparkles,
   Lightbulb,
+  Type,
+  Palette,
 } from 'lucide-react'
 import { useToast } from '@/hooks/use-toast'
 import { FileUploadInput } from '@/components/file-upload-input'
@@ -93,6 +95,9 @@ export default function BlogEditor({ blogId, initialData }: BlogEditorProps) {
   const [aiSuggestions, setAiSuggestions] = useState<any>(null)
   const [isCached, setIsCached] = useState(false)
   const [modelUsed, setModelUsed] = useState<string | null>(null)
+  const [selectedFontFamily, setSelectedFontFamily] = useState<string>('default')
+  const [selectedFontSize, setSelectedFontSize] = useState<string>('default')
+  const [selectedTextColor, setSelectedTextColor] = useState<string>('#000000')
   
   const contentRef = useRef<HTMLDivElement>(null)
   const savedSelectionRef = useRef<Range | null>(null)
@@ -107,6 +112,121 @@ export default function BlogEditor({ blogId, initialData }: BlogEditorProps) {
     } catch (e) {
       console.error('Command failed:', command, e)
     }
+    updateContent()
+  }
+
+  // Apply font family
+  const applyFontFamily = (fontFamily: string) => {
+    contentRef.current?.focus()
+    restoreSelection()
+    
+    const fontMap: { [key: string]: string } = {
+      'default': 'inherit',
+      'sans-serif': 'Arial, Helvetica, sans-serif',
+      'serif': 'Georgia, Times New Roman, serif',
+      'monospace': 'Courier New, monospace',
+      'georgia': 'Georgia, serif',
+      'times': 'Times New Roman, serif',
+      'arial': 'Arial, sans-serif',
+      'verdana': 'Verdana, sans-serif',
+      'courier': 'Courier New, monospace',
+    }
+    
+    const font = fontMap[fontFamily] || fontFamily
+    
+    // Use inline style for better compatibility
+    const selection = window.getSelection()
+    if (selection && selection.rangeCount > 0) {
+      const range = selection.getRangeAt(0)
+      
+      // Check if text is selected
+      if (range.toString().length > 0) {
+        // Wrap selected text in span with font family
+        const span = document.createElement('span')
+        span.style.fontFamily = font
+        span.style.setProperty('--inline-font', font)
+        range.surroundContents(span)
+      } else {
+        // If no selection, apply font family using execCommand
+        document.execCommand('fontName', false, font)
+      }
+    } else {
+      // Fallback to execCommand
+      document.execCommand('fontName', false, font)
+    }
+    
+    setSelectedFontFamily(fontFamily)
+    updateContent()
+  }
+
+  // Apply font size
+  const applyFontSize = (size: string) => {
+    contentRef.current?.focus()
+    restoreSelection()
+    
+    const sizeMap: { [key: string]: { size: string, css: string } } = {
+      'default': { size: '3', css: 'inherit' },
+      'small': { size: '2', css: '0.875rem' },
+      'normal': { size: '3', css: '1rem' },
+      'large': { size: '4', css: '1.25rem' },
+      'xlarge': { size: '5', css: '1.5rem' },
+      'xxlarge': { size: '6', css: '2rem' },
+    }
+    
+    const fontSize = sizeMap[size] || { size: '3', css: '1rem' }
+    
+    // Use inline style for better compatibility
+    const selection = window.getSelection()
+    if (selection && selection.rangeCount > 0) {
+      const range = selection.getRangeAt(0)
+      
+      // Check if text is selected
+      if (range.toString().length > 0) {
+        // Wrap selected text in span with font size
+        const span = document.createElement('span')
+        span.style.fontSize = fontSize.css
+        span.style.setProperty('--inline-size', fontSize.css)
+        range.surroundContents(span)
+      } else {
+        // If no selection, apply font size using execCommand
+        document.execCommand('fontSize', false, fontSize.size)
+      }
+    } else {
+      // Fallback to execCommand
+      document.execCommand('fontSize', false, fontSize.size)
+    }
+    
+    setSelectedFontSize(size)
+    updateContent()
+  }
+
+  // Apply text color
+  const applyTextColor = (color: string) => {
+    contentRef.current?.focus()
+    restoreSelection()
+    
+    // Use inline style for better compatibility
+    const selection = window.getSelection()
+    if (selection && selection.rangeCount > 0) {
+      const range = selection.getRangeAt(0)
+      
+      // Check if text is selected
+      if (range.toString().length > 0) {
+        // Wrap selected text in span with color
+        const span = document.createElement('span')
+        span.style.color = color
+        span.style.setProperty('--inline-color', color)
+        range.surroundContents(span)
+      } else {
+        // If no selection, apply color to current caret position
+        document.execCommand('foreColor', false, color)
+      }
+    } else {
+      // Fallback to execCommand
+      document.execCommand('foreColor', false, color)
+    }
+    
+    setSelectedTextColor(color)
     updateContent()
   }
 
@@ -374,6 +494,20 @@ export default function BlogEditor({ blogId, initialData }: BlogEditorProps) {
     }
   }, [initialData])
 
+  // Paste cleanup function to strip inline styles and neutralize formatting
+  const handlePaste = (e: React.ClipboardEvent) => {
+    e.preventDefault()
+    
+    // Get the plain text from clipboard
+    const text = e.clipboardData.getData('text/plain')
+    
+    // Clean up the text and insert it
+    document.execCommand('insertText', false, text)
+    
+    // Force update to ensure content is synced
+    updateContent()
+  }
+
   // Keyboard shortcuts
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -425,26 +559,27 @@ export default function BlogEditor({ blogId, initialData }: BlogEditorProps) {
   }, [])
 
   return (
-    <div className="max-w-6xl mx-auto space-y-8">
+    <div className="max-w-6xl mx-auto space-y-8 px-4 sm:px-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
-        <Button variant="outline" onClick={() => router.back()}>
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <Button variant="outline" onClick={() => router.back()} className="w-full sm:w-auto">
           <ArrowLeft className="h-4 w-4 mr-2" />
           Back
         </Button>
-        <div>
-          <h1 className="text-3xl font-bold font-serif">
+        <div className="text-center sm:text-left">
+          <h1 className="text-2xl sm:text-3xl font-bold font-serif">
             {blogId ? 'Edit Blog Post' : 'Create New Blog Post'}
           </h1>
-          <p className="text-muted-foreground">
+          <p className="text-muted-foreground text-sm sm:text-base">
             {blogId ? 'Update your blog post' : 'Write and publish a new blog post'}
           </p>
         </div>
-        <div className="flex gap-2">
+        <div className="flex gap-2 w-full sm:w-auto">
           <Button
             variant="outline"
             onClick={() => handleSubmit('draft')}
             disabled={isLoading}
+            className="flex-1 sm:flex-none"
           >
             {isLoading ? <Loader2 className="h-4 w-4 mr-2 animate-spin" /> : <Save className="h-4 w-4 mr-2" />}
             Save Draft
@@ -452,6 +587,7 @@ export default function BlogEditor({ blogId, initialData }: BlogEditorProps) {
           <Button
             onClick={() => handleSubmit('published')}
             disabled={isLoading}
+            className="flex-1 sm:flex-none"
           >
             {isLoading ? <Loader2 className="h-4 w-4 mr-2 animate-spin" /> : <Eye className="h-4 w-4 mr-2" />}
             Publish
@@ -459,9 +595,9 @@ export default function BlogEditor({ blogId, initialData }: BlogEditorProps) {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
         {/* Main Content Area */}
-        <div className="lg:col-span-2 space-y-4">
+        <div className="lg:col-span-2 space-y-4 order-1">
           <Card>
             <CardHeader>
               <CardTitle>Content</CardTitle>
@@ -512,50 +648,103 @@ export default function BlogEditor({ blogId, initialData }: BlogEditorProps) {
               </div>
 
               {/* Formatting Toolbar */}
-              <div className="flex flex-wrap gap-1 p-2 border rounded-lg bg-muted/30">
-                <Button type="button" variant="ghost" size="sm" onClick={() => exec('bold')} title="Bold (Ctrl+B)">
+              <div className="flex flex-wrap gap-1 p-2 border rounded-lg bg-muted/30 overflow-x-auto">
+                <Button type="button" variant="ghost" size="sm" onClick={() => exec('bold')} title="Bold (Ctrl+B)" className="flex-shrink-0">
                   <Bold className="h-4 w-4" />
                 </Button>
-                <Button type="button" variant="ghost" size="sm" onClick={() => exec('italic')} title="Italic (Ctrl+I)">
+                <Button type="button" variant="ghost" size="sm" onClick={() => exec('italic')} title="Italic (Ctrl+I)" className="flex-shrink-0">
                   <Italic className="h-4 w-4" />
                 </Button>
-                <Button type="button" variant="ghost" size="sm" onClick={() => exec('underline')} title="Underline (Ctrl+U)">
+                <Button type="button" variant="ghost" size="sm" onClick={() => exec('underline')} title="Underline (Ctrl+U)" className="flex-shrink-0">
                   <Underline className="h-4 w-4" />
                 </Button>
-                <span className="w-px h-6 bg-border mx-1" />
-                <Button type="button" variant="ghost" size="sm" onMouseDown={e => { e.preventDefault(); saveSelection(); setShowImageDialog(true); }} title="Insert Image">
+                <span className="w-px h-6 bg-border mx-1 flex-shrink-0" />
+                
+                {/* Font Family Selector */}
+                <div className="relative flex-shrink-0">
+                  <Select value={selectedFontFamily} onValueChange={applyFontFamily}>
+                    <SelectTrigger className="h-8 w-[100px] sm:w-[140px] text-xs">
+                      <Type className="h-3 w-3 mr-1" />
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="default">Default</SelectItem>
+                      <SelectItem value="sans-serif">Sans Serif</SelectItem>
+                      <SelectItem value="serif">Serif</SelectItem>
+                      <SelectItem value="monospace">Monospace</SelectItem>
+                      <SelectItem value="georgia">Georgia</SelectItem>
+                      <SelectItem value="times">Times New Roman</SelectItem>
+                      <SelectItem value="arial">Arial</SelectItem>
+                      <SelectItem value="verdana">Verdana</SelectItem>
+                      <SelectItem value="courier">Courier New</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                
+                {/* Font Size Selector */}
+                <div className="relative flex-shrink-0">
+                  <Select value={selectedFontSize} onValueChange={applyFontSize}>
+                    <SelectTrigger className="h-8 w-[80px] sm:w-[100px] text-xs">
+                      <span className="text-xs">Size</span>
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="default">Default</SelectItem>
+                      <SelectItem value="small">Small</SelectItem>
+                      <SelectItem value="normal">Normal</SelectItem>
+                      <SelectItem value="large">Large</SelectItem>
+                      <SelectItem value="xlarge">X-Large</SelectItem>
+                      <SelectItem value="xxlarge">XX-Large</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                
+                {/* Text Color Picker */}
+                <div className="relative flex items-center flex-shrink-0">
+                  <input
+                    type="color"
+                    value={selectedTextColor}
+                    onChange={(e) => applyTextColor(e.target.value)}
+                    className="w-8 h-8 rounded cursor-pointer border-0 p-0"
+                    title="Text Color"
+                  />
+                  <Palette className="h-4 w-4 absolute pointer-events-none text-foreground" />
+                </div>
+                
+                <span className="w-px h-6 bg-border mx-1 flex-shrink-0" />
+                <Button type="button" variant="ghost" size="sm" onMouseDown={e => { e.preventDefault(); saveSelection(); setShowImageDialog(true); }} title="Insert Image" className="flex-shrink-0">
                   <Image className="h-4 w-4" />
                 </Button>
-                <Button type="button" variant="ghost" size="sm" onMouseDown={e => { e.preventDefault(); saveSelection(); setShowLinkDialog(true); setLinkUrl(''); setLinkText(''); }} title="Insert Link (Ctrl+K)">
+                <Button type="button" variant="ghost" size="sm" onMouseDown={e => { e.preventDefault(); saveSelection(); setShowLinkDialog(true); setLinkUrl(''); setLinkText(''); }} title="Insert Link (Ctrl+K)" className="flex-shrink-0">
                   <LinkIcon className="h-4 w-4" />
                 </Button>
-                <Button type="button" variant="ghost" size="sm" onMouseDown={e => { e.preventDefault(); saveSelection(); setShowCtaDialog(true); setCtaText(''); setCtaUrl(''); }} title="Insert CTA Button">
+                <Button type="button" variant="ghost" size="sm" onMouseDown={e => { e.preventDefault(); saveSelection(); setShowCtaDialog(true); setCtaText(''); setCtaUrl(''); }} title="Insert CTA Button" className="flex-shrink-0">
                   <MousePointer2 className="h-4 w-4" />
                 </Button>
-                <span className="w-px h-6 bg-border mx-1" />
-                <Button type="button" variant="ghost" size="sm" onClick={() => exec('formatBlock', 'H1')} title="Heading 1 (Ctrl+1)">
+                <span className="w-px h-6 bg-border mx-1 flex-shrink-0" />
+                <Button type="button" variant="ghost" size="sm" onClick={() => exec('formatBlock', 'H1')} title="Heading 1 (Ctrl+1)" className="flex-shrink-0">
                   <Heading className="h-4 w-4" /><span className="text-[10px]">1</span>
                 </Button>
-                <Button type="button" variant="ghost" size="sm" onClick={() => exec('formatBlock', 'H2')} title="Heading 2 (Ctrl+2)">
+                <Button type="button" variant="ghost" size="sm" onClick={() => exec('formatBlock', 'H2')} title="Heading 2 (Ctrl+2)" className="flex-shrink-0">
                   <Heading className="h-4 w-4" /><span className="text-[10px]">2</span>
                 </Button>
-                <Button type="button" variant="ghost" size="sm" onClick={() => exec('formatBlock', 'H3')} title="Heading 3 (Ctrl+3)">
+                <Button type="button" variant="ghost" size="sm" onClick={() => exec('formatBlock', 'H3')} title="Heading 3 (Ctrl+3)" className="flex-shrink-0">
                   <Heading className="h-4 w-4" /><span className="text-[10px]">3</span>
                 </Button>
-                <span className="w-px h-6 bg-border mx-1" />
-                <Button type="button" variant="ghost" size="sm" onClick={() => exec('justifyLeft')} title="Align Left">
+                <span className="w-px h-6 bg-border mx-1 flex-shrink-0" />
+                <Button type="button" variant="ghost" size="sm" onClick={() => exec('justifyLeft')} title="Align Left" className="flex-shrink-0">
                   <AlignLeft className="h-4 w-4" />
                 </Button>
-                <Button type="button" variant="ghost" size="sm" onClick={() => exec('justifyCenter')} title="Align Center">
+                <Button type="button" variant="ghost" size="sm" onClick={() => exec('justifyCenter')} title="Align Center" className="flex-shrink-0">
                   <AlignCenter className="h-4 w-4" />
                 </Button>
-                <Button type="button" variant="ghost" size="sm" onClick={() => exec('justifyRight')} title="Align Right">
+                <Button type="button" variant="ghost" size="sm" onClick={() => exec('justifyRight')} title="Align Right" className="flex-shrink-0">
                   <AlignRight className="h-4 w-4" />
                 </Button>
-                <Button type="button" variant="ghost" size="sm" onClick={() => exec('justifyFull')} title="Justify">
+                <Button type="button" variant="ghost" size="sm" onClick={() => exec('justifyFull')} title="Justify" className="flex-shrink-0">
                   <AlignJustify className="h-4 w-4" />
                 </Button>
-                <span className="w-px h-6 bg-border mx-1" />
+                <span className="w-px h-6 bg-border mx-1 flex-shrink-0" />
                 <Button 
                   type="button" 
                   variant="ghost" 
@@ -563,7 +752,7 @@ export default function BlogEditor({ blogId, initialData }: BlogEditorProps) {
                   onClick={generateAISuggestions} 
                   disabled={aiLoading}
                   title="Generate AI Suggestions"
-                  className="text-primary"
+                  className="text-primary flex-shrink-0"
                 >
                   {aiLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Sparkles className="h-4 w-4" />}
                 </Button>
@@ -579,10 +768,11 @@ export default function BlogEditor({ blogId, initialData }: BlogEditorProps) {
                     suppressContentEditableWarning
                     onInput={updateContent}
                     onKeyUp={updateContent}
-                    className="min-h-[400px] p-4 text-foreground dark:text-white prose dark:prose-invert max-w-none focus:outline-none focus:ring-1 focus:ring-primary"
+                    onPaste={handlePaste}
+                    className="min-h-[300px] sm:min-h-[400px] p-3 sm:p-4 text-foreground dark:text-white prose dark:prose-invert max-w-none focus:outline-none focus:ring-1 focus:ring-primary text-sm sm:text-base"
                   />
                   {contentIsEmpty && (
-                    <div className="absolute top-4 left-4 text-muted-foreground pointer-events-none select-none">
+                    <div className="absolute top-3 sm:top-4 left-3 sm:left-4 text-muted-foreground pointer-events-none select-none text-sm">
                       Write your blog post content here...
                     </div>
                   )}
@@ -605,7 +795,7 @@ export default function BlogEditor({ blogId, initialData }: BlogEditorProps) {
         </div>
 
         {/* Sidebar */}
-        <div className="space-y-6 lg:sticky lg:top-20 lg:self-start">
+        <div className="space-y-4 lg:space-y-6 lg:sticky lg:top-20 lg:self-start order-2">
           {/* Blog Settings */}
           <Card>
             <CardHeader>

@@ -105,12 +105,17 @@ export default function BlogShareClient({ blogId }: { blogId: string }) {
 
   return (
     <div className="mt-4 p-3 border rounded">
-      <div className="flex flex-col sm:flex-row gap-2 items-center">
-        <input placeholder="Name (optional)" value={name} onChange={(e) => setName(e.target.value)} className="input p-2" />
+      <div className="flex flex-col sm:flex-row gap-2 items-stretch sm:items-center">
+        <input 
+          placeholder="Name (optional)" 
+          value={name} 
+          onChange={(e) => setName(e.target.value)} 
+          className="input p-2 w-full sm:w-auto text-sm" 
+        />
         <select
           value={platform}
           onChange={(e) => setPlatform(e.target.value)}
-          className="select"
+          className="select w-full sm:w-auto text-sm"
           aria-label="Platform to share to"
           title="Platform to share to"
         >
@@ -120,7 +125,11 @@ export default function BlogShareClient({ blogId }: { blogId: string }) {
           <option value="whatsapp">WhatsApp</option>
           <option value="other">Other</option>
         </select>
-        <button onClick={share} disabled={loading} className="btn">
+        <button 
+          onClick={share} 
+          disabled={loading} 
+          className="btn w-full sm:w-auto text-sm whitespace-nowrap"
+        >
           {loading ? 'Sharing…' : 'Share'}
         </button>
       </div>

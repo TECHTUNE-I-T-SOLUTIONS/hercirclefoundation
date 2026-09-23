@@ -2,8 +2,8 @@
 
 import type React from "react"
 
-import { Header } from "@/components/header"
-import { Footer } from "@/components/footer"
+// import { Header } from "@/components/header"
+// import { Footer } from "@/components/footer"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
@@ -149,7 +149,7 @@ export default function DonatePage() {
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
-      <Header />
+      {/* <Header /> */}
 
       <main className="flex-1">
         {/* Hero */}
@@ -376,7 +376,7 @@ export default function DonatePage() {
         </section>
       </main>
 
-      <Footer />
+      {/* <Footer /> */}
     </div>
   )
 }

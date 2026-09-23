@@ -1,7 +1,7 @@
 "use client"
 
-import { Header } from "@/components/header"
-import { Footer } from "@/components/footer"
+// import { Header } from "@/components/header"
+// import { Footer } from "@/components/footer"
 import { Card, CardContent } from "@/components/ui/card"
 import { Users, Target, Heart, Globe } from "lucide-react"
 
@@ -31,7 +31,7 @@ export default function AboutPage() {
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
-      <Header />
+      {/* <Header /> */}
 
       <main className="flex-1">
         {/* Hero */}
@@ -117,7 +117,7 @@ export default function AboutPage() {
         </section>
       </main>
 
-      <Footer />
+      {/* <Footer /> */}
     </div>
   )
 }

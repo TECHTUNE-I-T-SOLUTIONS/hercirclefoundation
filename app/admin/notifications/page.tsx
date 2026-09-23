@@ -87,17 +87,29 @@ export default function AdminNotificationsPage() {
   // Subscribe to realtime notifications once on mount. Handlers use filterRef
   useEffect(() => {
     let mounted = true
-    ;(async () => {
-      const supabase = createClient()
-      const { data: { session } } = await supabase.auth.getSession()
-      if (!session) {
-        routerRef.current.replace('/admin/auth/login')
-        return
-      }
+    let channel: any = null
+    
+    const setupSubscription = async () => {
+      try {
+        const supabase = createClient()
+        const sessionData = await supabase.auth.getSession()
+        const session = sessionData?.data?.session
+        
+        if (!session) {
+          routerRef.current.replace('/admin/auth/login')
+          return
+        }
 
-      const channel = supabase
-        .channel('public:notifications')
-        .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'notifications' }, (payload) => {
+        // Use a unique channel name to avoid conflicts
+        const channelName = `admin-notifications-${Date.now()}`
+        channel = supabase.channel(channelName)
+        
+        // Add the callback before subscribing
+        channel.on('postgres_changes', { 
+          event: 'INSERT', 
+          schema: 'public', 
+          table: 'notifications' 
+        }, (payload: any) => {
           if (!mounted) return
           const n = payload.new
           const f = filterRef.current
@@ -109,13 +121,29 @@ export default function AdminNotificationsPage() {
             })
           }
         })
-        .subscribe()
-
-      return () => {
-        mounted = false
-        try { supabase.removeChannel(channel) } catch {}
+        
+        // Subscribe after adding the callback
+        channel.subscribe()
+        
+        console.log('Notifications subscription setup complete')
+      } catch (error) {
+        console.error('Failed to setup notifications subscription:', error)
       }
-    })()
+    }
+    
+    setupSubscription()
+    
+    return () => {
+      mounted = false
+      if (channel) {
+        try { 
+          const supabase = createClient()
+          supabase.removeChannel(channel)
+        } catch (e) {
+          console.warn('Failed to cleanup notifications channel:', e)
+        }
+      }
+    }
   }, [])
 
   const markRead = async (id: string) => {

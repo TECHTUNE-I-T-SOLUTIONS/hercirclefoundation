@@ -1,8 +1,8 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Header } from "@/components/header"
-import { Footer } from "@/components/footer"
+// import { Header } from "@/components/header"
+// import { Footer } from "@/components/footer"
 import { Heart, Loader2, ExternalLink, Sparkles } from "lucide-react"
 
 interface BeneficiaryItem {
@@ -65,21 +65,21 @@ export default function BeneficiaryShowcasePage() {
   if (loading) {
     return (
       <div className="min-h-screen flex flex-col bg-background dark:bg-background">
-        <Header />
+        {/* <Header /> */}
         <main className="flex-1 flex items-center justify-center">
           <div className="text-center">
             <Loader2 className="h-8 w-8 animate-spin mx-auto mb-4 text-primary" />
             <p className="text-muted-foreground">Loading our network...</p>
           </div>
         </main>
-        <Footer />
+        {/* <Footer /> */}
       </div>
     )
   }
 
   return (
     <div className="min-h-screen flex flex-col bg-background dark:bg-background">
-      <Header />
+      {/* <Header /> */}
 
       <main className="flex-1">
         {/* Hero Section */}
@@ -234,7 +234,7 @@ export default function BeneficiaryShowcasePage() {
         </section>
       </main>
 
-      <Footer />
+      {/* <Footer /> */}
     </div>
   )
 }

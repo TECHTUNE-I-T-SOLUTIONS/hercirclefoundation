@@ -1,7 +1,7 @@
 "use client"
 
-import { Header } from "@/components/header"
-import { Footer } from "@/components/footer"
+// import { Header } from "@/components/header"
+// import { Footer } from "@/components/footer"
 import { GalleryGrid } from "@/components/gallery-grid"
 import { useEffect, useState } from "react"
 import { createClient } from "@/lib/supabase/client"
@@ -47,7 +47,7 @@ export default function GalleryPage() {
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
-      <Header />
+      {/* <Header /> */}
 
       <main className="flex-1">
         {/* Hero */}
@@ -119,7 +119,7 @@ export default function GalleryPage() {
         </section>
       </main>
 
-      <Footer />
+      {/* <Footer /> */}
     </div>
   )
 }

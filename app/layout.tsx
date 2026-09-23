@@ -5,8 +5,8 @@ import { ThemeProvider } from "@/components/theme-provider"
 import { ScrollToTop } from "@/components/scroll-to-top"
 import NotificationBell from "@/components/notification-bell"
 import HelpModal from "@/components/help-modal"
-// import { Header } from '@/components/header'
-// import { Footer } from '@/components/footer'
+import { Header } from '@/components/header'
+import { Footer } from '@/components/footer'
 import { Toaster } from '@/components/ui/toaster'
 import "./globals.css"
 import LunaChatWrapper from '@/components/luna-chat-wrapper'
@@ -28,9 +28,9 @@ export default function RootLayout({
       <body className={`font-sans antialiased`}>
         <ThemeProvider>
           <div className="min-h-screen flex flex-col">
-            {/* <Header /> */}
+            <Header />
             <main className="flex-1">{children}</main>
-            {/* <Footer /> */}
+            <Footer />
           </div>
 
           <NotificationBell />

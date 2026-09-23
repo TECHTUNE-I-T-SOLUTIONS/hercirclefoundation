@@ -2,8 +2,8 @@
 
 import type React from "react"
 
-import { Header } from "@/components/header"
-import { Footer } from "@/components/footer"
+// import { Header } from "@/components/header"
+// import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -88,14 +88,14 @@ export default function PartnerPage() {
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
-      <Header />
+      {/* <Header /> */}
 
       <main className="flex-1">
         {/* Hero */}
         <section className="py-16 md:py-24 bg-gradient-to-br from-primary/10 to-transparent">
           <div className="container mx-auto px-4 text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-4 justify-center">Partner With Us</h1>
-            <p className="text-lg text-muted-foreground max-w-2xl">
+            <p className="text-lg text-muted-foreground max-w-auto">
               Together, we can create a greater impact. Join HerCircle Foundation in our mission to break period
               poverty and empower women.
             </p>
@@ -250,7 +250,7 @@ export default function PartnerPage() {
         </section>
       </main>
 
-      <Footer />
+      {/* <Footer /> */}
     </div>
   )
 }

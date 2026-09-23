@@ -84,6 +84,18 @@ export function Footer() {
                   hercirclefoundation@gmail.com
                 </a>
               </li>
+              <li className="flex items-center gap-2">
+                <Mail className="h-4 w-4" />
+                <a href="mailto:hello@hercirclefoundation.app" className="hover:text-primary transition-colors">
+                  Say "Hello" to Us
+                </a>
+              </li>
+              <li className="flex items-center gap-2">
+                <Mail className="h-4 w-4" />
+                <a href="mailto:partnerships@hercirclefoundation.app" className="hover:text-primary transition-colors">
+                  Partnership Enquiries
+                </a>
+              </li>
               <li className="flex items-start gap-2">
                 <MapPin className="h-4 w-4 mt-1" />
                 <span>Nigeria</span>

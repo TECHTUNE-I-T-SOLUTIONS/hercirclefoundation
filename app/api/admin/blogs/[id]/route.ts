@@ -77,7 +77,7 @@ export async function PATCH(req: Request, ctx: any) {
     
     // Update reading time if content changed
     if (updatePayload.content) {
-      const words = updatePayload.content.split(/\s+/).filter(word => word.length > 0).length
+      const words = updatePayload.content.split(/\s+/).filter((word: any) => word.length > 0).length
       updatePayload.reading_time = Math.ceil(words / 200)
     }
 

@@ -126,9 +126,9 @@ export default function BlogCommentsClient({ blogId }: { blogId: string }) {
   }
 
   return (
-    <section className="mt-8">
-      <h3 className="text-lg font-semibold">Comments</h3>
-      <div className="mt-4 space-y-3">
+    <section className="mt-6 sm:mt-8">
+      <h3 className="text-base sm:text-lg font-semibold">Comments</h3>
+      <div className="mt-3 sm:mt-4 space-y-3">
         {(() => {
           // build tree
           const map: Record<string, Comment[]> = {}
@@ -141,54 +141,66 @@ export default function BlogCommentsClient({ blogId }: { blogId: string }) {
           const renderNodes = (nodes: Comment[], level = 0) => {
             return nodes.map((n) => (
               <div key={n.id}>
-                <div className="p-3 border rounded" style={{ marginLeft: level * 16 }}>
-                  <div className="text-sm text-gray-900 dark:text-gray-100">
+                <div className="p-2 sm:p-3 border rounded" style={{ marginLeft: level > 0 ? `${Math.min(level * 8, 24)}px` : '0' }}>
+                  <div className="text-xs sm:text-sm text-gray-900 dark:text-gray-100">
                     {new Date(n.created_at).toLocaleString()} • <span className="font-medium">{(n.user_name && !n.user_name.startsWith('ip:') && !n.user_name.startsWith('anonymous_')) ? n.user_name : 'Anonymous'}</span>
                   </div>
-                  <div className="mt-1">{n.content}</div>
+                  <div className="mt-1 text-sm">{n.content}</div>
                   <div className="mt-2">
-                    <button className="text-sm text-blue-600" onClick={() => { setReplyingTo(n.id); setReplyContent('') }}>Reply</button>
+                    <button className="text-xs sm:text-sm text-blue-600" onClick={() => { setReplyingTo(n.id); setReplyContent('') }}>Reply</button>
                   </div>
                   {replyingTo === n.id && (
                     <div className="mt-3">
-                      <textarea aria-label="Reply" value={replyContent} onChange={(e) => setReplyContent(e.target.value)} className="textarea w-full border rounded p-2" rows={3} />
+                      <textarea 
+                        aria-label="Reply" 
+                        value={replyContent} 
+                        onChange={(e) => setReplyContent(e.target.value)} 
+                        className="textarea w-full border rounded p-2 text-sm" 
+                        rows={3} 
+                      />
                       <div className="flex gap-2 mt-2">
-                        <button disabled={replyLoading} onClick={async () => {
-                          if (!replyContent.trim()) return
-                          setReplyLoading(true)
-                          try {
-                            // Determine user_name similar to submit()
-                            const provided = (name || '').trim()
-                            let userNameToSend = undefined as string | undefined
-                            if (provided) {
-                              userNameToSend = provided
-                              try { localStorage.setItem('hc_user_name', provided) } catch {}
-                            } else {
-                              const existingFallback = (() => { try { return localStorage.getItem('hc_user_fallback') } catch { return null } })()
-                              if (existingFallback) {
-                                userNameToSend = existingFallback
+                        <button 
+                          disabled={replyLoading} 
+                          onClick={async () => {
+                            if (!replyContent.trim()) return
+                            setReplyLoading(true)
+                            try {
+                              // Determine user_name similar to submit()
+                              const provided = (name || '').trim()
+                              let userNameToSend = undefined as string | undefined
+                              if (provided) {
+                                userNameToSend = provided
+                                try { localStorage.setItem('hc_user_name', provided) } catch {}
                               } else {
-                                const ip = await fetchClientIp()
-                                const fallback = ip ? `ip:${ip}` : `anonymous_${Date.now()}`
-                                try { localStorage.setItem('hc_user_fallback', fallback) } catch {}
-                                userNameToSend = fallback
+                                const existingFallback = (() => { try { return localStorage.getItem('hc_user_fallback') } catch { return null } })()
+                                if (existingFallback) {
+                                  userNameToSend = existingFallback
+                                } else {
+                                  const ip = await fetchClientIp()
+                                  const fallback = ip ? `ip:${ip}` : `anonymous_${Date.now()}`
+                                  try { localStorage.setItem('hc_user_fallback', fallback) } catch {}
+                                  userNameToSend = fallback
+                                }
                               }
-                            }
 
-                            const res = await fetch(`/api/blogs/${blogId}/comments`, {
-                              method: 'POST',
-                              headers: { 'Content-Type': 'application/json' },
-                              body: JSON.stringify({ content: replyContent, parent_id: n.id, user_name: userNameToSend }),
-                            })
-                            if (!res.ok) throw new Error('reply failed')
-                            setReplyingTo(null)
-                            setReplyContent('')
-                          } catch (err) {
-                            console.error(err)
-                            try { toast({ title: 'Failed to post reply', description: String(err) }) } catch {}
-                          } finally { setReplyLoading(false) }
-                        }} className="btn">{replyLoading ? 'Replying…' : 'Reply'}</button>
-                        <button className="btn-ghost" onClick={() => setReplyingTo(null)}>Cancel</button>
+                              const res = await fetch(`/api/blogs/${blogId}/comments`, {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ content: replyContent, parent_id: n.id, user_name: userNameToSend }),
+                              })
+                              if (!res.ok) throw new Error('reply failed')
+                              setReplyingTo(null)
+                              setReplyContent('')
+                            } catch (err) {
+                              console.error(err)
+                              try { toast({ title: 'Failed to post reply', description: String(err) }) } catch {}
+                            } finally { setReplyLoading(false) }
+                          }} 
+                          className="btn text-sm whitespace-nowrap"
+                        >
+                          {replyLoading ? 'Replying…' : 'Reply'}
+                        </button>
+                        <button className="btn-ghost text-sm" onClick={() => setReplyingTo(null)}>Cancel</button>
                       </div>
                     </div>
                   )}
@@ -204,13 +216,25 @@ export default function BlogCommentsClient({ blogId }: { blogId: string }) {
 
       <div className="mt-4 space-y-2">
         <label className="sr-only">Comment</label>
-        <textarea aria-label="Comment" value={content} onChange={e => setContent(e.target.value)} className="textarea w-full border rounded p-3 focus:outline-red-500" placeholder="Leave a comment here" rows={4} />
-        <div className="flex gap-2 items-center">
-          <input placeholder="Name (optional)" value={name} onChange={(e) => setName(e.target.value)} className="input w-auto border rounded p-3 focus:outline-red-500" />
-          <div className="text-sm text-gray-900 dark:text-gray-100">(saved in this browser)</div>
+        <textarea 
+          aria-label="Comment" 
+          value={content} 
+          onChange={e => setContent(e.target.value)} 
+          className="textarea w-full border rounded p-2 sm:p-3 focus:outline-red-500 text-sm" 
+          placeholder="Leave a comment here" 
+          rows={3} 
+        />
+        <div className="flex flex-col sm:flex-row gap-2 items-start sm:items-center">
+          <input 
+            placeholder="Name (optional)" 
+            value={name} 
+            onChange={(e) => setName(e.target.value)} 
+            className="input w-full sm:w-auto border rounded p-2 sm:p-3 focus:outline-red-500 text-sm" 
+          />
+          <div className="text-xs sm:text-sm text-gray-900 dark:text-gray-100">(saved in this browser)</div>
         </div>
         <div>
-          <button disabled={loading} onClick={submit} className="btn">
+          <button disabled={loading} onClick={submit} className="btn text-sm whitespace-nowrap">
             {loading ? 'Posting...' : 'Post Comment'}
           </button>
         </div>
